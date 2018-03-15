@@ -1,0 +1,10 @@
+<div class="dashboard-header">
+  <div class="block">
+    <h1>Welcome, <span style="display: block; font-size: 70%;">{{userName$ | async}}!</span></h1>
+  </div>
+  <div class="block">
+    <div *ngFor="let balance of balanceData">
+      {{balance.asset}}: {{balance.balance | currency:balance.asset}} available, {{balance.frozenBalance | currency:balance.asset}} is frozen
+    </div>
+  </div>
+</div>

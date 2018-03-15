@@ -1,0 +1,21 @@
+$block-padding-top: 20px;
+
+.content {
+  position: absolute;
+  top: 74px;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15% 0 15%;
+}
+
+.transaction-history {
+  width: 100%;
+  padding-top: $block-padding-top;
+}

@@ -1,0 +1,95 @@
+<div [formGroup]="form">
+  <h2 style="text-align: center">Verify Your Identity</h2>
+  <div>
+    Some description must be here
+  </div>
+  <h3 style="text-align: center">Personal Particulars</h3>
+  <div formGroupName="personalParticularsModel">
+    <mat-form-field>
+      <input matInput
+             type="text"
+             placeholder="First Name"
+             formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             type="text"
+             placeholder="Middle Name"
+             formControlName="middleName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             type="text"
+             placeholder="Last Name"
+             formControlName="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="birthdayDp" placeholder="Birthday" formControlName="bitrthday">
+      <mat-datepicker-toggle matSuffix [for]="birthdayDp"></mat-datepicker-toggle>
+      <mat-datepicker #birthdayDp></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             type="text"
+             placeholder="Profession"
+             formControlName="profession">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             type="text"
+             placeholder="SSN"
+             formControlName="ssn">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput
+             type="text"
+             placeholder="Passport Number"
+             formControlName="passportNumber">
+    </mat-form-field>
+  </div>
+  <h3 style="text-align: center">Home Address</h3>
+  <div formGroupName="clientAddressModel">
+    <div formGroupName="addressData">
+      <mat-form-field>
+        <input matInput
+               type="text"
+               placeholder="Line 1"
+               formControlName="line1">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               type="text"
+               placeholder="Line2"
+               formControlName="line2">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               type="text"
+               placeholder="City"
+               formControlName="city">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               type="text"
+               placeholder="Postal Code"
+               formControlName="postalCode">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               type="text"
+               placeholder="State/Providence"
+               formControlName="stateProvidence">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="countryId" placeholder="Country">
+          <mat-option *ngFor="let country of countries" [value]="country.id">
+            <span>{{ country.countryName }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="onVerifyIdentity()" [disabled]="form.invalid">Submit</button>
+  </div>
+</div>

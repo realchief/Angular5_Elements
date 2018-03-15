@@ -1,0 +1,51 @@
+<div>
+  <h2 style="text-align: center">Verify Your Identity</h2>
+  <mat-grid-list [cols]="2">
+    <mat-grid-tile>
+      <mat-grid-tile-header>
+        <h3 style="text-align: center">Upload passport</h3>
+      </mat-grid-tile-header>
+      <div *ngIf="hasPassport">
+        passport uploaded
+      </div>
+      <div *ngIf="showWebcam">
+        <webcam [trigger]="triggerObservable" (imageCapture)="getPassportFromWebcam($event)"></webcam>
+        <button mat-button (click)="toggleWebcam()">Hide Webcam</button>
+        <button mat-raised-button color="primary" (click)="triggerSnapshot()">Take A Snapshot</button>
+      </div>
+      <mat-grid-tile-footer *ngIf="!hasPassport">
+          <button mat-raised-button color="primary" (click)="passportInput.click()">Open File</button>
+          <input hidden type="file" #passportInput
+                 (change)="getPassportFromFile($event)"
+                 accept="application/pdf, image/png, image/jpeg"/>
+          <button mat-raised-button
+                  *ngIf="!showWebcam"
+                  color="accent"
+                  (click)="toggleWebcam()">Upload From Webcam</button>
+        <button mat-raised-button color="primary"
+                [disabled]="!(passport && passport.base64)"
+                (click)="uploadDocument(passport)">Start Uploading</button>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-grid-tile-header>
+        <h3 style="text-align: center">Upload address proof</h3>
+      </mat-grid-tile-header>
+    <div *ngIf="hasAddressProof">
+      address proof uploaded
+    </div>
+    <mat-grid-tile-footer *ngIf="!hasAddressProof">
+      <button mat-raised-button color="primary" (click)="addressProofInput.click()">Open File</button>
+      <input hidden type="file" #addressProofInput
+             (change)="getAddressProof($event)"
+             accept="application/pdf, image/png, image/jpeg"/>
+      <button mat-raised-button color="accent"
+              [disabled]="!(addressProof && addressProof.base64)"
+              (click)="uploadDocument(addressProof)">Start Uploading</button>
+    </mat-grid-tile-footer>
+  </mat-grid-tile>
+  </mat-grid-list>
+  <button mat-raised-button color="primary"
+          (click)="onStartCheck()"
+          [disabled]="!(hasPassport && hasAddressProof)">Start Check</button>
+</div>

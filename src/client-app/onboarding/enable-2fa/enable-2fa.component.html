@@ -1,0 +1,64 @@
+<div *ngIf="step === 1">
+<h2 style="text-align: center">Welcome!</h2>
+<div style="margin: 20px;">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lobortis a risus nec feugiat.
+  Integer sagittis dignissim ante, vitae placerat mi congue a.
+  Nunc vel nibh interdum, lobortis augue sit amet, finibus tortor. Sed elementum mi vitae elit efficitur ultrices.
+  Vestibulum facilisis efficitur nibh eget maximus. Proin blandit non nunc vitae suscipit.
+  Suspendisse non laoreet orci. Integer bibendum lobortis ipsum sit amet consectetur.
+  Sed imperdiet nec elit non laoreet. Maecenas a erat et lectus mattis eleifend congue quis turpis. Aliquam.
+</div>
+
+<button mat-raised-button color="primary" (click)="incrimentStep()">Get started</button>
+<button mat-raised-button color="primary" (click)="completeRegistration()">No thanks, I'm developer</button>
+</div>
+
+<div *ngIf="step === 2" [formGroup]="addPhoneForm">
+  <h2 style="text-align: center">Set your phone number!</h2>
+  <div style="margin: 20px;">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lobortis a risus nec feugiat.
+    Integer sagittis dignissim ante, vitae placerat mi congue a.
+    Nunc vel nibh interdum, lobortis augue sit amet, finibus tortor. Sed elementum mi vitae elit efficitur ultrices.
+    Vestibulum facilisis efficitur nibh eget maximus. Proin blandit non nunc vitae suscipit.
+    Suspendisse non laoreet orci. Integer bibendum lobortis ipsum sit amet consectetur.
+    Sed imperdiet nec elit non laoreet. Maecenas a erat et lectus mattis eleifend congue quis turpis. Aliquam.
+  </div>
+
+  <mat-form-field>
+    <mat-select formControlName="countryCode">
+          <mat-option *ngFor="let country of countries" [value]="country.isdCode">
+            <span>{{ country.countryName }} (+{{ country.isdCode}})</span>
+          </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <!--<span matPrefix>+1</span>-->
+    <input type="tel"
+           formControlName="number"
+           matInput
+           placeholder="Phone Number">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="setPhone()" [disabled]="addPhoneForm.invalid">Continue</button>
+</div>
+
+<div *ngIf="step === 3">
+  <h2 style="text-align: center">Verify Phone Number</h2>
+  <div style="margin: 20px;">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lobortis a risus nec feugiat.
+    Integer sagittis dignissim ante, vitae placerat mi congue a.
+    Nunc vel nibh interdum, lobortis augue sit amet, finibus tortor. Sed elementum mi vitae elit efficitur ultrices.
+    Vestibulum facilisis efficitur nibh eget maximus. Proin blandit non nunc vitae suscipit.
+    Suspendisse non laoreet orci. Integer bibendum lobortis ipsum sit amet consectetur.
+    Sed imperdiet nec elit non laoreet. Maecenas a erat et lectus mattis eleifend congue quis turpis. Aliquam.
+  </div>
+  <div [formGroup]="verifyPhoneForm">
+    <mat-form-field>
+      <input matInput placeholder="Phone Number" formControlName="number">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone Code" formControlName="code">
+    </mat-form-field>
+  </div>
+  <button mat-button (click)="decrimentStep()">Go Back</button>
+  <button mat-raised-button color="primary" (click)="onVerifyPhone()" [disabled]="verifyPhoneForm.invalid">Verify</button>
+</div>

@@ -1,0 +1,12 @@
+<h2>Orders</h2>
+<mat-tab-group class="tab-container">
+  <mat-tab label="Active">
+    <app-orders-table [dataSource]="notFilledOrdersDataSource"></app-orders-table>
+  </mat-tab>
+  <mat-tab label="Filled">
+    <app-orders-table [dataSource]="filledOrdersDataSource"></app-orders-table>
+  </mat-tab>
+  <mat-tab label="Rejected">
+    <app-orders-table [dataSource]="rejectedOrdersDataSource"></app-orders-table>
+  </mat-tab>
+</mat-tab-group>

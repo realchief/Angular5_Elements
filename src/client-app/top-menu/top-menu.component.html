@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <nav>
+    <a class="logo" mat-button routerLink="/">Elements</a>
+    <button mat-button (click)="openBuyDialog()">Buy</button>
+    <button mat-button (click)="openSellDialog()">Sell</button>
+    <button mat-button (click)="getRich()">Get rich</button>
+    <app-currency-selector></app-currency-selector>
+    <button mat-button>Profile (not working)</button>
+    <button mat-button (click)="logout()">Logout</button>
+  </nav>
+</mat-toolbar>

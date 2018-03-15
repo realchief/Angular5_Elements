@@ -1,0 +1,32 @@
+
+
+mat-list {
+  width: 480px;
+  height: unset;
+  margin: 0 auto;
+  background-color: #fff;
+padding: 25px;
+  border-radius: 3px;
+  box-shadow: 0 5px 9px rgba(0,0,0,0.40);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-list-item.align-center {
+  display: flex;
+  justify-content: center;
+}
+mat-list-item{
+  margin-bottom: 20px;
+}
+
+.canvas-center {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  background-color: #3f51b5;
+}

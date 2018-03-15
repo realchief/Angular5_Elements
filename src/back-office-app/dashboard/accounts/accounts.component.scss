@@ -1,0 +1,22 @@
+mat-grid-tile {
+  background: linen;
+}
+.accounts-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav-div{
+  text-align: center;
+  margin-bottom: 5px;
+  a{
+    width: 100%;
+  }
+
+  a.active {
+    background: #fafafa;
+  }
+}

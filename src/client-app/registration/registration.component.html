@@ -1,0 +1,33 @@
+<div class="canvas-center" [formGroup]="form">
+    <mat-list>
+      <mat-list-item class="align-center">
+        <h3>Elements</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-form-field>
+          <input matInput
+                 placeholder="Email"
+                 formControlName="email">
+        </mat-form-field>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-form-field>
+          <input matInput
+                 placeholder="Name"
+                 formControlName="name">
+        </mat-form-field>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-form-field>
+          <input matInput
+                 type="password"
+                 placeholder="Password"
+                 formControlName="password">
+        </mat-form-field>
+      </mat-list-item>
+      <div style="margin-bottom: 20px;">
+        <a style="margin-right: 25px;" color="primary" routerLink="/">Cancel</a>
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">Register</button>
+      </div>
+    </mat-list>
+</div>

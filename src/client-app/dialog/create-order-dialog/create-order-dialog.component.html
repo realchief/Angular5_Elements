@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>{{orderTypeName}} dialog</h2>
+<mat-dialog-content>
+  <div class="dialog-content" [formGroup]="form">
+    <div class="wrapper">
+      <span class="text-field">Currency pair: BTC_USD</span>
+      <app-order-class-selector formControlName="orderClass"></app-order-class-selector>
+      <mat-form-field class="short-form-field">
+        <input matInput type="number" placeholder="Quantity" formControlName="quantity">
+        <span matSuffix>BTC</span>
+      </mat-form-field>
+      <mat-form-field class="short-form-field" *ngIf="this.form.get('price')">
+        <input matInput type="number" placeholder="Price" formControlName="price">
+        <span matSuffix>USD</span>
+      </mat-form-field>
+      <span class="text-field">Total: {{total}} $</span>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="submit()">{{orderTypeName}}</button>
+</mat-dialog-actions>
