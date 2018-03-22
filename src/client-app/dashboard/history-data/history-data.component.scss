@@ -1,80 +1,38 @@
 $block-padding-top: 20px;
-
-.market-data {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  width: 100%;
-  padding-top: $block-padding-top;
-
-  .history-data {
-    flex-grow: 5;
-    max-width: 75%;
-    display: flex;
-    flex-direction: column;
-
-    .stats {
-      display: flex;
-      flex-direction: row;
-
-      div {
-        flex-grow: 1;
-
-        .stat-header {
-          display: block;
-          font-weight: bold;
-          font-size: 16px;
-        }
-
-        .stat-content {
-          display: block;
-        }
-      }
-    }
-  }
-
-  .recent-trades {
+.recent-trades {
     flex-grow: 4;
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
-
-    .qty-header, .price-header, .time-header {
-      flex-grow: 1;
-    }
-
-    .price-header, .time-header {
-      text-align: right;
-    }
-
-    .trade-item {
-      border-bottom: 1px solid darkgray;
-      display: flex;
-      flex-direction: row;
-      padding: 5px 0;
-      margin-bottom: 5px;
-
-      .quantity, .price, .time {
-        display: inline-block;
+    .qty-header,
+    .price-header,
+    .time-header {
         flex-grow: 1;
-      }
-
-      .price, .time {
-        text-align: right;
-      }
-
-      .buy {
-        color: green;
-      }
-
-      .sell {
-        color: red;
-      }
     }
-  }
-
-  .chart-container {
-    margin-top: 20px;
-    position: relative;
-  }
+    .price-header,
+    .time-header {
+        text-align: right;
+    }
+    .trade-item {
+        border-bottom: 1px solid darkgray;
+        display: flex;
+        flex-direction: row;
+        padding: 5px 0;
+        margin-bottom: 5px;
+        .quantity,
+        .price,
+        .time {
+            display: inline-block;
+            flex-grow: 1;
+        }
+        .price,
+        .time {
+            text-align: right;
+        }
+        .buy {
+            color: green;
+        }
+        .sell {
+            color: red;
+        }
+    }
 }

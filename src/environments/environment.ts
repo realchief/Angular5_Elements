@@ -4,9 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  backendEndpoint: "http://localhost:5010",
-  apiEndpoint: "http://localhost:5010/api",
-  transactionRouterEndpoint: "http://localhost:5011/hubs/transaction-router",
-  marketDataHub: "hubs/market-data",
-  production: false
+    backendEndpoint: "http://172.28.228.12",
+    apiEndpoint: "http://172.28.228.12/api",
+    transactionRouterEndpoint: "http://172.28.225.157/hubs/transaction-router",
+    marketDataHub: "hubs/market-data",
+    production: false
 };

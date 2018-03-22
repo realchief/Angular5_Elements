@@ -1,0 +1,27 @@
+<div class="row historical-widget-subpanel-row">
+    <div class="col-md-4">
+        <span class="historical-widget-subpanel-title">Last Price</span>
+        <span class="historical-widget-subpanel-price">${{lastPrice}}</span>
+    </div>
+    <div class="col-md-4">
+        <span class="historical-widget-subpanel-title">24-Hour Change</span>
+        <span class="historical-widget-subpanel-price">${{priceRange.min - priceRange.max}}</span>
+    </div>
+    <div class="col-md-4 history-chart-widget-last-col">
+        <span class="historical-widget-subpanel-title">Order Book Display</span>
+        <span class="historical-widget-subpanel-tool"><mat-icon>show_chart</mat-icon> Chart: Zoom</span>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<div class="row historical-widget-subpanel-row">
+    <div class="col-md-8">
+        <span class="historical-widget-subpanel-title">24-Hour Range</span>
+        <span class="historical-widget-subpanel-price">${{priceRange.min}} ~ ${{priceRange.max}}</span>
+    </div>
+    <div class="col-md-4 history-chart-widget-last-col">
+        <span class="historical-widget-subpanel-title">Refresh</span>
+        <span class="historical-widget-subpanel-tool"><mat-icon>query_builder</mat-icon> 5 seconds</span>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<div echarts [options]="tradesChartsOption" theme="light" class="demo-chart"></div>

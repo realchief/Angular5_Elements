@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CurrencySelectorModule } from "../shared/currency-selector/currency-selector.module";
+import { CurrencySelectorModule } from "../shared/components/currency-selector/currency-selector.module";
 import { TopMenuComponent } from "./top-menu.component";
 import { SharedModule } from "../shared/shared.module";
 import { MatButtonModule, MatToolbarModule } from "@angular/material";
