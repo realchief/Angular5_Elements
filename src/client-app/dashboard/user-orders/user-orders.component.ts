@@ -21,7 +21,7 @@ export class UserOrdersComponent implements OnInit {
     filledOrdersDataSource = new MatTableDataSource([]);
     rejectedOrdersDataSource = new MatTableDataSource([]);
 
-    isActiveStatus = status => status === OrderStatus.New || status === OrderStatus.PartialFill;
+    isActiveStatus = status => status === OrderStatus.New || status === OrderStatus.PartialFill || status === OrderStatus.Pending;
     isFilledStatus = status => status === OrderStatus.Filled;
     isRejectedStatus = status => !this.isActiveStatus(status) && !this.isFilledStatus(status);
 

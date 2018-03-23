@@ -6,6 +6,7 @@ import { MarketDataService } from "../../../../common/services/market-data.servi
 import { SymbolService } from "../../../shared/services/symbol.service";
 import "rxjs/add/observable/interval";
 import { TransactionRouter } from "../../../shared/transaction-router";
+import { Observable } from 'rxjs';
 
 @Component({
     selector: "app-order-history-chart-widget",
@@ -34,13 +35,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
     }
 
     ngOnInit() {
-        this.marketDataService
-            .getMarketChartData(this.currentSymbol)
-            .pipe(takeUntil(this.ngUnsub))
-            .subscribe(data => {
-                this.marketChartData = data;
-                this.cd.markForCheck();
-            });
+        this.getHistoryWidgetChartData();
         this.marketDataService
             .getLastPrice(this.currentSymbol)
             .pipe(takeUntil(this.ngUnsub))
@@ -62,7 +57,23 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 }
                 this.cd.markForCheck();
             });
+        var refreshChart = setInterval(() => {
+            this.getHistoryWidgetChartData()
+        }, 5000);
+    }
 
+    getHistoryWidgetChartData() {
+        this.marketDataService
+            .getMarketChartData(this.currentSymbol)
+            .pipe(takeUntil(this.ngUnsub))
+            .subscribe(data => {
+                this.marketChartData = data;
+                this.makeHistoryChartWidget(this.marketChartData);
+                this.cd.markForCheck();
+            });
+    }
+
+    makeHistoryChartWidget(data) {
         const apiFakeData = {
             "symbol": "BTC_USD",
             "entries": [
@@ -126,8 +137,8 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
         const xAxisData = [];
         const bidData = [];
         const askData = [];
-        console.log(this.marketChartData);
-        const chartData = apiFakeData.entries;
+        console.log(data);
+        const chartData = data.entries;
         chartData.sort(function (a, b) { return parseFloat(a.price) - parseFloat(b.price); });
         chartData.forEach(function (entrie) {
             if (!xAxisData.includes(entrie.price)) {
@@ -147,12 +158,6 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 data: ["Buyers", "Sellers"],
                 bottom: "3%"
             },
-            grid: {
-                left: "6%",
-                right: "6%",
-                bottom: "15%",
-                top: "20px",
-            },
             tooltip: {
                 formatter: function (params) {
                     return "At <span style=\"font-weight: bold;\">$" + params.name + "</span> per BTC ...</br>" +
@@ -169,18 +174,37 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 },
                 padding: 10
             },
-            xAxis: {
-                data: xAxisData,
-                silent: false,
-                splitLine: {
-                    show: false
+            grid: [{
+                left: 50,
+                right: 50,
+                height: '35%'
+            }, {
+                left: 50,
+                right: 50,
+                top: '50%',
+                height: '35%'
+            }],
+            xAxis : [
+                { 
+                    position: 'bottom',
+                    gridIndex: 1,
+                    type : 'category',
+                    axisLine: {onZero: true},
+                    data: xAxisData,
+                    axisTick: {
+                        show: false,
+                    }
                 },
-                axisLabel: {
-                    formatter: "${value}"
-                },
-                scale: true
-            },
+                {
+                    show: false,
+                    type : 'category',
+                    axisLine: {onZero: true},
+                    data: xAxisData,
+                    position: 'bottom'
+                }
+            ], 
             yAxis: [{
+                gridIndex: 1,
                 type: "value",
                 axisLabel: {
                     formatter: function (value, index) {
@@ -195,11 +219,13 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                     show: false
                 },
                 inverse: true,
-                min: -100,
-                max: 100,
-                scale: true
+                axisTick: {
+                    show: false,
+                }
+                
             },
             {
+                position: 'right',
                 type: "value",
                 axisLabel: {
                     formatter: function (value, index) {
@@ -211,10 +237,11 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                     }
                 },
                 splitLine: {
-                    show: true
+                    show: false
                 },
-                min: -100,
-                max: 100
+                axisTick: {
+                    show: false,
+                }
             }],
             series: [{
                 name: "Buyers",
@@ -226,7 +253,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 },
                 itemStyle: {
                     color: "#4dd0e1",
-                    barBorderRadius: [0, 0, 4, 4]
+                    barBorderRadius: [0, 0, 4, 4] 
                 },
                 animationDelay: function (idx) {
                     return idx * 10;
@@ -237,6 +264,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 data: askData,
                 stack: "one",
                 yAxisIndex: 1,
+                xAxisIndex: 1,
                 tooltip: {
                     borderColor: "#fb8c00"
                 },
@@ -253,7 +281,6 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 return idx * 5;
             }
         };
-
     }
 
     ngOnDestroy() {
