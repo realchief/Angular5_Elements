@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs/Observable";
-import { ApiService, TOKEN_STORAGE_KEY } from "./api.service";
+import { TOKEN_STORAGE_KEY } from "./api.service";
 import "rxjs/add/observable/of";
 
 @Injectable()

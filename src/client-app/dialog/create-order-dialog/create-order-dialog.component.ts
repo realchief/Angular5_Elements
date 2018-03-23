@@ -4,7 +4,7 @@ import { Subject } from "rxjs/Subject";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { ApiService } from "../../shared/api.service";
 import { BackendHub } from "../../shared/backend-hub";
-import { filter, switchMap, takeLast, takeUntil } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { OrderType } from "../../../common/enums/order-type";
 import { OrderClass } from "../../../common/enums/order-class";
 

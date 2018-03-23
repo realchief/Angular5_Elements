@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterSt
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/of";
 import { AuthDataStorage } from "./auth-data.storage";
-import {switchMap, zip} from "rxjs/operators";
 import "rxjs/add/observable/zip";
 
 @Injectable()

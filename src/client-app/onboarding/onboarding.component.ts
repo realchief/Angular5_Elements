@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy, ChangeDetectorRef, DoCheck} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy} from "@angular/core";
 import {MatStepper} from "@angular/material";
 import {ClientValidationService} from "../shared/client-validation.service";
 import {Subject} from "rxjs/Subject";
@@ -25,7 +25,7 @@ export class OnboardingComponent implements OnInit, OnDestroy {
         for (let i = 0; i < step; i++) {
           this.stepper.next();
         }
-      },err => alert(err));
+      },         err => alert(err));
   }
 
   toNextStep(event: any) {

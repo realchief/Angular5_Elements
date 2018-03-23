@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from "@angular/core";
 import { Subject } from "rxjs/Subject";
 import { filter, takeUntil } from "rxjs/operators";
 import { MatTableDataSource } from "@angular/material";

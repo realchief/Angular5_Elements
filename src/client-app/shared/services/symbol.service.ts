@@ -1,10 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
 
 export class SymbolService {
-    symbol: string = 'BTC';
-  
-    setSymbol(data:string) {
+    symbol = "BTC";
+
+    setSymbol(data: string) {
       this.symbol = data;
     }
 

@@ -1,10 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs/Observable";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { ElementsPipesModule } from "../../common/pipes/elements-pipes.module";
-import { ElementsApiService } from "../../common/services/elements-api.service";
 import { ElementsServicesModule } from "../../common/services/elements-services.module";
 import { OrderService } from "../../common/services/orders.service";
 import { MarketDataService } from "../../common/services/market-data.service";
@@ -18,7 +15,7 @@ import { AuthDataStorage } from "../../common/auth-data.storage";
 import { VerifyGuard } from "./verify-guard.service";
 import { ClientValidationService } from "./client-validation.service";
 import { TransactionRouter } from "./transaction-router";
-import { OrderHistoryChartWidgetModule } from './components/order-history-chart-widget/order-history-chart-widget.module'
+import { OrderHistoryChartWidgetModule } from "./components/order-history-chart-widget/order-history-chart-widget.module";
 
 const MODULES = [
     CommonModule,

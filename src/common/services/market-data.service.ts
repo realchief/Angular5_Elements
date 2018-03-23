@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { PriceRange, EntrieData, MarketChartData } from "../models/market-chartdata.model";
+import { PriceRange, MarketChartData } from "../models/market-chartdata.model";
 import { ElementsApiService } from "./elements-api.service";
 
 @Injectable()

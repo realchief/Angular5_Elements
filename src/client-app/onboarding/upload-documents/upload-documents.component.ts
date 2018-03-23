@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, ChangeDetectorRef, Input, OnDestroy} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, ChangeDetectorRef, OnDestroy} from "@angular/core";
 import {FileUpload} from "../../shared/models/file-upload";
 import {ApiService} from "../../shared/api.service";
 import {Subject} from "rxjs/Subject";
@@ -35,7 +35,7 @@ export class UploadDocumentsComponent implements OnInit, OnDestroy {
         this.hasPassport = data.hasPhotoId;
         this.hasAddressProof = data.hasUploadedDocument;
         this.cd.detectChanges();
-      }, err => alert(err));
+      },         err => alert(err));
   }
 
   getAddressProof(event) {
@@ -96,14 +96,14 @@ export class UploadDocumentsComponent implements OnInit, OnDestroy {
           this.hasAddressProof = true;
         }
         this.cd.detectChanges();
-      }, err => alert(err));
+      },         err => alert(err));
   }
 
   onStartCheck() {
     if (!(this.hasPassport && this.hasAddressProof)) {
       return;
     }
-    let model = {
+    const model = {
       isVerified: false,
       message: "Starting check error"
     };
@@ -112,7 +112,7 @@ export class UploadDocumentsComponent implements OnInit, OnDestroy {
       .subscribe(x => {
         model.isVerified = true;
         this.startCheck.emit(model);
-      }, err => alert(err));
+      },         err => alert(err));
   }
 
   toggleWebcam() {

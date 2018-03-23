@@ -1,16 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, AfterViewInit } from "@angular/core";
-import { filter, takeUntil } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
-import { PriceRange, RecentTradeStats } from "../../../common/models/recent-trade-stats.model";
+import { PriceRange } from "../../../common/models/recent-trade-stats.model";
 import { TradeDataService } from "../../../common/services/trade-data.service";
 import { TradePublicData } from "../../../common/models/trade-public-data.model";
-import { BackendHub } from "../../shared/backend-hub";
 import "rxjs/add/observable/interval";
 import { DecimalPipe } from "@angular/common";
 import { MatDialog } from "@angular/material";
-import { OrderType } from "../../../common/enums/order-type";
-import { CreateOrderDialogComponent } from "../../dialog/create-order-dialog/create-order-dialog.component";
-import { OrderClass } from "../../../common/enums/order-class";
 import { TransactionRouter } from "../../shared/transaction-router";
 
 @Component({
@@ -36,7 +32,7 @@ export class HistoryDataComponent implements OnInit, AfterViewInit, OnDestroy {
         private decimalPipe: DecimalPipe) { }
 
     ngAfterViewInit() {
-        
+
     }
 
     ngOnInit() {
@@ -64,7 +60,7 @@ export class HistoryDataComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
                 this.cd.markForCheck();
             });
-        
+
     }
 
     ngOnDestroy() {

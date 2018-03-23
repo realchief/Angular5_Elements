@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
-import { NgxEchartsModule } from 'ngx-echarts';
-import { MatGridListModule, MatDividerModule, MatIconModule } from '@angular/material';
+import { NgxEchartsModule } from "ngx-echarts";
+import { MatGridListModule, MatDividerModule, MatIconModule } from "@angular/material";
 import { OrderHistoryChartWidgetComponent } from "./order-history-chart-widget.component";
 
 @NgModule({

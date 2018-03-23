@@ -6,7 +6,7 @@ export class PriceRange {
 export class MarketChartData {
     symbol: string;
     date: string;
-    entries: EntrieData[]
+    entries: EntrieData[];
 }
 
 export class EntrieData {
@@ -14,4 +14,4 @@ export class EntrieData {
     total: number;
     price: number;
 }
-
+

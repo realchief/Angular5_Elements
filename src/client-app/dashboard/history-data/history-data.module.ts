@@ -13,4 +13,4 @@ import { CreateOrderDialogModule } from "../../dialog/create-order-dialog/create
     declarations: [HistoryDataComponent],
     exports: [HistoryDataComponent]
 })
-export class HistoryDataModule { } 
+export class HistoryDataModule { }

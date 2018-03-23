@@ -53,7 +53,7 @@ export class IdentityComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    let model = {
+    const model = {
       isVerified: false,
       message: "Cannot create identity"
     };
@@ -63,6 +63,6 @@ export class IdentityComponent implements OnInit {
       .subscribe(x => {
         model.isVerified = true;
         this.verifyIdentity.emit(model);
-      }, err => alert(err));
+      },         err => alert(err));
   }
 }
