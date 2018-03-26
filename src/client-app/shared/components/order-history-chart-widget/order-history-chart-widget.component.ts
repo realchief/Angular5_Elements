@@ -74,70 +74,9 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
     }
 
     makeHistoryChartWidget(data) {
-        const apiFakeData = {
-            "symbol": "BTC_USD",
-            "entries": [
-                {
-                    "type": "bid",
-                    "total": "12.3",
-                    "price": "10100"
-                },
-                {
-                    "type": "ask",
-                    "total": "10.1",
-                    "price": "10330"
-                },
-                {
-                    "type": "ask",
-                    "total": "0.5",
-                    "price": "10230"
-                },
-                {
-                    "type": "bid",
-                    "total": "67",
-                    "price": "10540"
-                },
-                {
-                    "type": "ask",
-                    "total": "86",
-                    "price": "10650"
-                },
-                {
-                    "type": "bid",
-                    "total": "63",
-                    "price": "10340"
-                },
-                {
-                    "type": "ask",
-                    "total": "26",
-                    "price": "10450"
-                },
-                {
-                    "type": "bid",
-                    "total": "73",
-                    "price": "10560"
-                },
-                {
-                    "type": "ask",
-                    "total": "43",
-                    "price": "10090"
-                },
-                {
-                    "type": "bid",
-                    "total": "23",
-                    "price": "10790"
-                },
-                {
-                    "type": "ask",
-                    "total": "12",
-                    "price": "10150"
-                },
-            ]
-        };
         const xAxisData = [];
         const bidData = [];
         const askData = [];
-        console.log(data);
         const chartData = data.entries;
         chartData.sort(function (a, b) { return parseFloat(a.price) - parseFloat(b.price); });
         chartData.forEach(function (entrie) {
