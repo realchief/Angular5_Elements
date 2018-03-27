@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subject } from "rxjs/Subject";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { ApiService } from "../../shared/api.service";
-import { BackendHub } from "../../shared/backend-hub";
 import { takeUntil } from "rxjs/operators";
 import { OrderType } from "../../../common/enums/order-type";
 import { OrderClass } from "../../../common/enums/order-class";
@@ -39,18 +38,17 @@ export class CreateOrderDialogComponent implements OnInit, OnDestroy {
     }
 
     get fee() {
-        return this.injectedData.orderType === OrderType.Bid ? "3%" : "--"; 
+        return this.injectedData.orderType === OrderType.Bid ? "3%" : "--";
     }
 
     private order(total) {
-        return this.injectedData.orderType === OrderType.Bid ? total*0.97 : total; 
+        return this.injectedData.orderType === OrderType.Bid ? total*0.97 : total;
     }
 
     constructor(
         private fb: FormBuilder,
         private dialogRef: MatDialogRef<CreateOrderDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private injectedData: any,
-        private hub: BackendHub,
         private cd: ChangeDetectorRef,
         private api: ApiService) { }
 
@@ -63,25 +61,25 @@ export class CreateOrderDialogComponent implements OnInit, OnDestroy {
         //    takeUntil(this.ngUnsub)
         //  )
         //  .subscribe(balanceDto => this.userId = balanceDto.userId);
-        this.hub
-            .chartData$
-            .pipe(
-                takeUntil(this.ngUnsub)
-            )
-            .subscribe(chartData => {
-                const data = chartData.entries;
-                this.bestBid = data
-                    .filter(x => x.type === "bid")
-                    .map(x => x.price)
-                    .sort()
-                    .pop();
+        // this.hub
+        //     .chartData$
+        //     .pipe(
+        //         takeUntil(this.ngUnsub)
+        //     )
+        //     .subscribe(chartData => {
+        //         const data = chartData.entries;
+        //         this.bestBid = data
+        //             .filter(x => x.type === "bid")
+        //             .map(x => x.price)
+        //             .sort()
+        //             .pop();
 
-                this.bestAsk = data
-                    .filter(x => x.type === "ask")
-                    .map(x => x.price)
-                    .sort()
-                    .shift();
-            });
+        //         this.bestAsk = data
+        //             .filter(x => x.type === "ask")
+        //             .map(x => x.price)
+        //             .sort()
+        //             .shift();
+        //     });
     }
 
     ngOnDestroy() {

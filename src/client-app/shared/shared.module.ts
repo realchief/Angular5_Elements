@@ -9,7 +9,6 @@ import { ApiService } from "./api.service";
 import { SymbolService } from "./services/symbol.service";
 import { AuthHttpInterceptor } from "./auth.interceptor";
 import { AuthGuard } from "../../common/auth-guard.service";
-import { BackendHub } from "./backend-hub";
 import { CountryService } from "./country.service";
 import { AuthDataStorage } from "../../common/auth-data.storage";
 import { VerifyGuard } from "./verify-guard.service";
@@ -31,7 +30,6 @@ const MODULES = [
         ApiService,
         AuthGuard,
         VerifyGuard,
-        BackendHub,
         CountryService,
         TransactionRouter,
         OrderService,

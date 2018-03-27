@@ -5,8 +5,7 @@
 
 export const environment = {
     backendEndpoint: "http://172.28.230.205",
-    apiEndpoint: "http://172.28.230.205/api",
+    apiEndpoint: "http://localhost:5010/api",
     transactionRouterEndpoint: "http://172.28.237.181/hubs/transaction-router",
-    marketDataHub: "hubs/market-data",
     production: false
 };

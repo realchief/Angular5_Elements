@@ -1,6 +1,6 @@
 export const environment = {
-  backendEndpoint: "https://api.elements.welton.ee",
-  apiEndpoint: "https://api.elements.welton.ee/api",
-  marketDataHub: "hubs/market-data",
+  backendEndpoint: "https://elementsdax.com",
+  apiEndpoint: "https://api.elementsdax.com",
+  transactionRouterEndpoint: "https://tx.elementsdax.com",
   production: true
 };

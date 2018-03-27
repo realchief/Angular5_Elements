@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import moment = require("moment");
+import * as moment from "moment";
 
 @Injectable()
 export class AuthDataStorage {
