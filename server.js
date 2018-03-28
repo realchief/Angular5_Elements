@@ -9,8 +9,8 @@ var port = process.env.PORT || 3000;
 app.use(express.static('${__dirname}/dist/' + process.env.APP));
  
 /* Direct all routes to index.html, where Angular will take care of routing */
-server.get('/*', function(req, res){
-  res.sendFile('${__dirname}/dist/' + process.env.APP + '/index.html');
+server.get('*', function(req, res){
+  res.sendFile(__dirname + /dist/' + process.env.APP + '/index.html');
 });
 
 app.listen(port, function () {
