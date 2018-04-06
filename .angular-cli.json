@@ -34,6 +34,7 @@
       "environments": {
         "dev": "environments/environment.ts",
         "staging": "environments/environment.staging.ts",
+        "janno": "environments/environment.janno.ts",
         "prod": "environments/environment.prod.ts"
       }
     },
@@ -63,6 +64,7 @@
       "environments": {
         "dev": "environments/environment.ts",
         "staging": "environments/environment.staging.ts",
+        "janno": "environments/environment.janno.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
