@@ -34,7 +34,7 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.api
-      .post("register", this.form.value)
+      .post("register/client", this.form.value)
       .pipe(
         takeUntil(this.ngUnsub)
       )
