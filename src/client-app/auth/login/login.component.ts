@@ -3,9 +3,9 @@ import { takeUntil } from "rxjs/operators";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { Subject } from "rxjs/Subject";
-import { ApiService, TOKEN_STORAGE_KEY } from "../shared/api.service";
-import { ApplicationDomain } from "../../shared/enums/application-domain";
-import { TokenModel } from "../../shared/models/token-model";
+import { ApiService, TOKEN_STORAGE_KEY } from "../../shared/api.service";
+import { ApplicationDomain } from "../../../shared/enums/application-domain";
+import { TokenModel } from "../../../shared/models/token-model";
 
 @Component({
     selector: "app-login",

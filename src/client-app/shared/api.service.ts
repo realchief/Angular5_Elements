@@ -47,7 +47,7 @@ export class ApiService {
       console.log(err);
       if (err.status === 401) {
         this.authDataStorage.unsetToken();
-        return this.router.navigate(["/login"], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+        return this.router.navigate(["/auth/login"], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
       }
       return Observable.throw(new Error(`${err.status} ${err.statusText}`));
     }
