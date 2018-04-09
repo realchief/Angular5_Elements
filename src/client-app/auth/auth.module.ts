@@ -6,10 +6,12 @@ import { LoginComponent } from "./login/login.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { RecoverPasswordComponent } from "./recover-password/recover-password.component";
 import { RecoverCodeComponent } from "./recover-code/recover-code.component";
+import { AuthComponent } from "./auth.component";
 
 const appRoutes: Routes = [
     {
         path: 'auth',
+        component: AuthComponent,
         children: [
             {
                 path: '',
@@ -39,7 +41,7 @@ const appRoutes: Routes = [
             appRoutes,
         )
     ],
-    declarations: [LoginComponent, RecoverPasswordComponent, RecoverCodeComponent, ResetPasswordComponent, ],
+    declarations: [AuthComponent, LoginComponent, RecoverPasswordComponent, RecoverCodeComponent, ResetPasswordComponent, ],
     exports: [RouterModule]
 })
 export class AuthModule { }

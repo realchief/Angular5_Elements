@@ -1,52 +1,25 @@
-<div class="main-container">
-    <img src="assets/img/guilloche-1.svg" class="bg-image opacity-10">
-
-    <section class="space-md height-100">
-
-        <div class="container align-self-start">
-            <div class="row mb-5">
-                <div class="col text-center">
-                    <a routerLink="/">
-                        <img alt="Image" src="assets/img/logo-white.svg">
-                    </a>
-                </div>
-                <!--end of col-->
+<div class="card-body">
+    <div class="mb-4">
+        <h2 class="mb-2">Login to Your Account</h2>
+        <span>Welcome back, sign in with your existing account credentials.</span>
+    </div>
+    <div class="row no-gutters justify-content-center">
+        <div class="text-left col-lg-8" [formGroup]="form">
+            <div class="form-group">
+                <label for="login-email" class="sr-only">Email Address</label>
+                <input class="form-control form-control-lg" type="email" autofocus="" id="login-email" placeholder="Email Address" formControlName="email" required>
             </div>
-            <!--end of row-->
-            <div class="row justify-content-center">
-                <div class="col-11 col-md-8 col-lg-7">
-                    <div class="card card-lg text-center">
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <h2 class="mb-2">Login to Your Account</h2>
-                                <span>Welcome back, sign in with your existing account credentials.</span>
-                            </div>
-                            <div class="row no-gutters justify-content-center">
-                                <div class="text-left col-lg-8" [formGroup]="form">
-                                    <div class="form-group">
-                                        <label for="login-email" class="sr-only">Email Address</label>
-                                        <input class="form-control form-control-lg" type="email" autofocus="" id="login-email" placeholder="Email Address" formControlName="email" required>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="login-password" class="sr-only">Password</label>
-                                        <input class="form-control form-control-lg" type="password" id="login-password" placeholder="Enter a password" formControlName="password" required>
-                                        <small>Forgot password? <a routerLink="/auth/recover-password">Reset Here</a></small>
-                                    </div>
-
-                                    <div class="text-center mt-3">
-                                        <button class="btn btn-lg btn-block btn-primary" [disabled]="form.invalid" (click)="login()">Log in</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end of row-->
-                        </div>
-                    </div>
-                </div>
-                <!--end of col-->
+            <div class="form-group">
+                <label for="login-password" class="sr-only">Password</label>
+                <input class="form-control form-control-lg" type="password" id="login-password" placeholder="Enter a password" formControlName="password" required>
+                <small>Forgot password? <a routerLink="/auth/recover-password">Reset Here</a></small>
             </div>
-            <!--end of row-->
+
+            <div class="text-center mt-3">
+                <button class="btn btn-lg btn-block btn-primary" [disabled]="form.invalid" (click)="login()">Log in</button>
+            </div>
         </div>
-        <!--end of container-->
-    </section>
+    </div>
+    <!--end of row-->
 </div>
