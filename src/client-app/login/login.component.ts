@@ -4,65 +4,65 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { Subject } from "rxjs/Subject";
 import { ApiService, TOKEN_STORAGE_KEY } from "../shared/api.service";
-import {ApplicationDomain} from "../../shared/enums/application-domain";
-import {TokenModel} from "../../shared/models/token-model";
+import { ApplicationDomain } from "../../shared/enums/application-domain";
+import { TokenModel } from "../../shared/models/token-model";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "app-login",
+    templateUrl: "./login.component.html",
+    styleUrls: ["./login.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+    form: FormGroup;
 
-  private ngUnsub = new Subject();
+    private ngUnsub = new Subject();
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
-    private api: ApiService) { }
+    constructor(
+        private fb: FormBuilder,
+        private router: Router,
+        private route: ActivatedRoute,
+        private api: ApiService) { }
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      "email": this.fb.control("", [Validators.compose([Validators.required, Validators.email])]),
-      "password": this.fb.control("", [Validators.required])
-    });
-  }
-
-  login() {
-    if (this.form.invalid) {
-      return;
+    ngOnInit() {
+        this.form = this.fb.group({
+            "email": this.fb.control("", [Validators.compose([Validators.required, Validators.email])]),
+            "password": this.fb.control("", [Validators.required])
+        });
     }
 
-    this.api
-      .post("auth/token", this.form.value)
-      .pipe(
-        takeUntil(this.ngUnsub)
-      )
-      .subscribe(this.onSuccessfulLogin.bind(this), err => alert(err));
-  }
+    login() {
+        if (this.form.invalid) {
+            return;
+        }
 
-  private onSuccessfulLogin(tokenModel: TokenModel): void {
-    if (tokenModel.domain !== ApplicationDomain.Client) {
-      alert("Access error");
-      return;
+        this.api
+            .post("auth/token", this.form.value)
+            .pipe(
+                takeUntil(this.ngUnsub)
+            )
+            .subscribe(this.onSuccessfulLogin.bind(this), err => alert(err));
     }
-    localStorage.setItem(TOKEN_STORAGE_KEY, tokenModel.token);
-    this.route
-      .queryParamMap
-      .pipe(
-        takeUntil(this.ngUnsub)
-      )
-      .subscribe(params => {
-        const url = params.get("returnUrl") || "/";
-        this.router.navigate([url]);
-      });
-  }
 
-  public ngOnDestroy(): void {
-    this.ngUnsub.next();
-    this.ngUnsub.complete();
-  }
+    private onSuccessfulLogin(tokenModel: TokenModel): void {
+        if (tokenModel.domain !== ApplicationDomain.Client) {
+            alert("Access error");
+            return;
+        }
+        localStorage.setItem(TOKEN_STORAGE_KEY, tokenModel.token);
+        this.route
+            .queryParamMap
+            .pipe(
+                takeUntil(this.ngUnsub)
+            )
+            .subscribe(params => {
+                const url = params.get("returnUrl") || "/";
+                this.router.navigate([url]);
+            });
+    }
+
+    public ngOnDestroy(): void {
+        this.ngUnsub.next();
+        this.ngUnsub.complete();
+    }
 }

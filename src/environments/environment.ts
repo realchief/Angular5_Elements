@@ -4,8 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-    backendEndpoint: "http://172.28.230.205",
-    apiEndpoint: "http://localhost:5010/api",
-    transactionRouterEndpoint: "http://172.28.237.181/hubs/transaction-router",
+    backendEndpoint: "https://api.elements.welton.ee",
+    apiEndpoint: "https://api.elements.welton.ee/api",
+    transactionRouterEndpoint: "https://tx.elements.welton.ee/hubs/transaction-router",
     production: false
 };
