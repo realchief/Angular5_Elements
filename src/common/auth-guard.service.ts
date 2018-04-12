@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     const isValidToken = this.authDataStorage.isTokenExistsAndNotExpired();
     if (!isValidToken) {
       const retUrl = state.url === "/onboarding" ? null : state.url;
-      this.router.navigate(["/login"], { queryParams: { returnUrl: retUrl } });
+      this.router.navigate(["/auth/login"], { queryParams: { returnUrl: retUrl } });
     }
     return isValidToken;
   }
