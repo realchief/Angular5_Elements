@@ -1,10 +1,10 @@
 import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CountryService} from "../../shared/country.service";
 import {Country} from "../../shared/models/country";
 import {Subject} from "rxjs/Subject";
 import {takeUntil} from "rxjs/operators";
 import {ApiService} from "../../shared/api.service";
+import { CountryService } from "../../shared/services/country.service";
 
 @Component({
   selector: "app-identity",

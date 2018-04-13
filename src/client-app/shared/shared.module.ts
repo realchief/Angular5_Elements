@@ -9,12 +9,12 @@ import { ApiService } from "./api.service";
 import { SymbolService } from "./services/symbol.service";
 import { AuthHttpInterceptor } from "./auth.interceptor";
 import { AuthGuard } from "../../common/auth-guard.service";
-import { CountryService } from "./country.service";
 import { AuthDataStorage } from "../../common/auth-data.storage";
 import { VerifyGuard } from "./verify-guard.service";
-import { ClientValidationService } from "./client-validation.service";
 import { TransactionRouter } from "./transaction-router";
 import { OrderHistoryChartWidgetModule } from "./components/order-history-chart-widget/order-history-chart-widget.module";
+import { ClientValidationService } from "./services/client-validation.service";
+import { CountryService } from "./services/country.service";
 
 const MODULES = [
     CommonModule,

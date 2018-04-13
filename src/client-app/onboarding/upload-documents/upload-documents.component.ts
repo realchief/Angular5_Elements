@@ -5,7 +5,7 @@ import {Subject} from "rxjs/Subject";
 import {takeUntil} from "rxjs/operators";
 import {Observable} from "rxjs/Observable";
 import {WebcamImage} from "ngx-webcam";
-import {ClientValidationService} from "../../shared/client-validation.service";
+import { ClientValidationService } from "../../shared/services/client-validation.service";
 
 @Component({
   selector: "app-upload-documents",
