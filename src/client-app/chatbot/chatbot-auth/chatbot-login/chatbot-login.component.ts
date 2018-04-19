@@ -6,6 +6,7 @@ import {ApiService, TOKEN_STORAGE_KEY} from "../../../shared/api.service";
 import {takeUntil} from "rxjs/operators";
 import {TokenModel} from "../../../../shared/models/token-model";
 import {ApplicationDomain} from "../../../../shared/enums/application-domain";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: "app-chatbot-login",
@@ -16,7 +17,7 @@ import {ApplicationDomain} from "../../../../shared/enums/application-domain";
 export class ChatbotLoginComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
-
+  public errorMessage: string = null;
   private ngUnsub = new Subject();
 
   constructor(
@@ -43,7 +44,15 @@ export class ChatbotLoginComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.ngUnsub)
       )
-      .subscribe(this.onSuccess.bind(this), () => this.redirectTo("error"));
+      .subscribe(this.onSuccess.bind(this), this.onError.bind(this));
+  }
+
+  private onError(model: any) {
+    if (model.message === "403 OK") {
+      this.errorMessage = "Login or password incorrect";
+    } else {
+      this.redirectTo("error");
+    }
   }
 
   private onSuccess(token: TokenModel) {
