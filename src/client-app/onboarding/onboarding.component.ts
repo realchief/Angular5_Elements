@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy } from "@angular/core";
-import { MatStepper } from "@angular/material";
+import { MatStepper, MatHorizontalStepper, MatStep } from "@angular/material";
 import { Subject } from "rxjs/Subject";
 import { takeUntil } from "rxjs/operators";
 import { ClientValidationService } from "../shared/services/client-validation.service";
@@ -22,10 +22,7 @@ export class OnboardingComponent implements OnInit, OnDestroy {
         this.validService.getStep()
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(step => {
-                console.log(step);
-                for (let i = 0; i < step; i++) {
-                    this.stepper.next();
-                }
+                this.stepper.selectedIndex = step;
             }, err => alert(err));
     }
 

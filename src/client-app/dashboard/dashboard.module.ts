@@ -5,7 +5,7 @@ import { SharedModule } from "../shared/shared.module";
 import { MatGridListModule, MatListModule, MatToolbarModule, MatDialogModule } from "@angular/material";
 import { UserOrdersModule } from "./user-orders/user-orders.module";
 import { HistoryDataModule } from "./history-data/history-data.module";
-import { TopMenuModule } from "../shared/components/top-menu/top-menu.module";
+import { HeaderModule } from "../shared/components/header/header.module";
 
 @NgModule({
     imports: [
@@ -14,7 +14,7 @@ import { TopMenuModule } from "../shared/components/top-menu/top-menu.module";
         MatListModule,
         MatToolbarModule,
         MatDialogModule,
-        TopMenuModule,
+        HeaderModule,
         UserOrdersModule,
         HistoryDataModule,
         BalancePanelModule

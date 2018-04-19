@@ -28,12 +28,12 @@ export class ClientValidationService {
                     const isIDVerified = data[2];
 
                     if (!isEmailVerified) {
-                        return Observable.of(1);
+                        return Observable.of(0);
                     } else if (!isPhoneVerified) {
-                        return Observable.of(2);
+                        return Observable.of(1);
                     }
                     // TODO: role check
-                    return Observable.of(3);
+                    return Observable.of(2);
                 })
             );
     }

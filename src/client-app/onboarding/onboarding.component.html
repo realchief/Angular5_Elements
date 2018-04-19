@@ -1,26 +1,47 @@
-<mat-card>
-    <mat-card-content>
-        <mat-horizontal-stepper linear #stepper class="disabled-header">
-            <mat-step label="Enable 2FA">
-                <app-enable-2fa (verifyPhone)="toNextStep($event)"></app-enable-2fa>
-            </mat-step>
-            <mat-step label="Add Bank Account">
-                dummy
-                <!--TODO: delete after creating bank account adding-->
-                <button mat-button (click)="toNextStep({isVerified: true})">Next</button>
-            </mat-step>
-            <mat-step label="Verify Identity">
-                <app-identity (verifyIdentity)="toNextStep($event)"></app-identity>
-            </mat-step>
-            <mat-step label="Upload Documents">
-                <app-upload-documents (startCheck)="toNextStep($event)"></app-upload-documents>
-            </mat-step>
-            <mat-step label="Complete">
-                <h2 style="text-align: center">Congratulations, Comrad!</h2>
-                <div>
-                    Thanks for joining us! If you are reading it, your account is not yet verified. For check your verify status please reload this page.
-                </div>
-            </mat-step>
-        </mat-horizontal-stepper>
-    </mat-card-content>
-</mat-card>
+<app-header></app-header>
+
+<div class="wizard" id="onboarding-wizard">
+
+    <section>
+        <div class="container">
+            <ul class="nav nav-tabs text-center row justify-content-center step-anchor" id="wizard-nav">
+                <li class="col-2"><a href="#first" class="step-circle step-circle-sm">1</a></li>
+                <li class="col-2"><a href="#second" class="step-circle step-circle-sm">2</a></li>
+                <li class="col-2"><a href="#third" class="step-circle step-circle-sm">3</a></li>
+                <li class="col-2"><a href="#fourth" class="step-circle step-circle-sm">4</a></li>
+                <li class="col-2"><a href="#fifth" class="step-circle step-circle-sm">5</a></li>
+            </ul>
+            <!--end of col-->
+        </div>
+    </section>
+
+    <section class="bg-white">
+        <div class="container">
+            <div class="bg-white" id="wizard-tabs">
+                <mat-horizontal-stepper linear #stepper class="disabled-header">
+                    <mat-step>
+                        <app-email-verify (verifyClientEmail)="toNextStep($event)"></app-email-verify>
+                    </mat-step>
+                    <mat-step>
+                        <app-enable-2fa (verifyPhone)="toNextStep($event)"></app-enable-2fa>
+                    </mat-step>
+                    <mat-step>
+                        <app-identity (verifyIdentity)="toNextStep($event)"></app-identity>
+                    </mat-step>
+                    <mat-step>
+                        <app-upload-documents (startCheck)="toNextStep($event)"></app-upload-documents>
+                    </mat-step>
+                    <mat-step>
+                        <h2 style="text-align: center">Congratulations, Comrad!</h2>
+                        <div>
+                            Thanks for joining us! If you are reading it, your account is not yet verified. For check your verify status please reload this page.
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<app-footer></app-footer>

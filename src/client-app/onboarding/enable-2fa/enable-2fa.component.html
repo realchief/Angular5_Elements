@@ -1,64 +1,54 @@
-<div *ngIf="step === 1">
-<h2 style="text-align: center">Welcome!</h2>
-<div style="margin: 20px;">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lobortis a risus nec feugiat.
-  Integer sagittis dignissim ante, vitae placerat mi congue a.
-  Nunc vel nibh interdum, lobortis augue sit amet, finibus tortor. Sed elementum mi vitae elit efficitur ultrices.
-  Vestibulum facilisis efficitur nibh eget maximus. Proin blandit non nunc vitae suscipit.
-  Suspendisse non laoreet orci. Integer bibendum lobortis ipsum sit amet consectetur.
-  Sed imperdiet nec elit non laoreet. Maecenas a erat et lectus mattis eleifend congue quis turpis. Aliquam.
-</div>
+<div id="second">
+    <div class="row">
+        <div class="col-6 d-none d-md-block"></div>
 
-<button mat-raised-button color="primary" (click)="incrimentStep()">Get started</button>
-<button mat-raised-button color="primary" (click)="completeRegistration()">No thanks, I'm developer</button>
-</div>
+        <div *ngIf="step === 1" class="col" [formGroup]="addPhoneForm">
+            <div class="mb-4">
+                <h5>Enable <abbr title="Two-Factor Authentication">2FA</abbr></h5>
+                <p>To keep your account secure, the Elements application requires a 2-factor authentication if you are accessing the site from out of the office. We use <a href="#">Authy</a> to achieve this - it's a free download from the <a href="https://play.google.com/store/apps/details?id=com.authy.authy">Google Play Store</a>                    or <a href="https://itunes.apple.com/us/app/authy/id494168017">Apple App Store</a>. To enable Authy 2FA, simply enter your mobile phone below.</p>
+            </div>
 
-<div *ngIf="step === 2" [formGroup]="addPhoneForm">
-  <h2 style="text-align: center">Set your phone number!</h2>
-  <div style="margin: 20px;">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lobortis a risus nec feugiat.
-    Integer sagittis dignissim ante, vitae placerat mi congue a.
-    Nunc vel nibh interdum, lobortis augue sit amet, finibus tortor. Sed elementum mi vitae elit efficitur ultrices.
-    Vestibulum facilisis efficitur nibh eget maximus. Proin blandit non nunc vitae suscipit.
-    Suspendisse non laoreet orci. Integer bibendum lobortis ipsum sit amet consectetur.
-    Sed imperdiet nec elit non laoreet. Maecenas a erat et lectus mattis eleifend congue quis turpis. Aliquam.
-  </div>
+            <div class="form-group">
+                <select class="custom-select form-control-lg" formControlName="countryCode">
+                    <option *ngFor="let country of countries" [value]="country.isdCode">
+                        {{ country.countryName }} (+{{ country.isdCode}})
+                    </option>
+                </select>
+            </div>
 
-  <mat-form-field>
-    <mat-select formControlName="countryCode">
-          <mat-option *ngFor="let country of countries" [value]="country.isdCode">
-            <span>{{ country.countryName }} (+{{ country.isdCode}})</span>
-          </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <!--<span matPrefix>+1</span>-->
-    <input type="tel"
-           formControlName="number"
-           matInput
-           placeholder="Phone Number">
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="setPhone()" [disabled]="addPhoneForm.invalid">Continue</button>
-</div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label class="sr-only">Phone Number</label>
+                    <input type="tel" class="form-control form-control-lg" placeholder="Phone Number" formControlName="number" />
+                </div>
 
-<div *ngIf="step === 3">
-  <h2 style="text-align: center">Verify Phone Number</h2>
-  <div style="margin: 20px;">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lobortis a risus nec feugiat.
-    Integer sagittis dignissim ante, vitae placerat mi congue a.
-    Nunc vel nibh interdum, lobortis augue sit amet, finibus tortor. Sed elementum mi vitae elit efficitur ultrices.
-    Vestibulum facilisis efficitur nibh eget maximus. Proin blandit non nunc vitae suscipit.
-    Suspendisse non laoreet orci. Integer bibendum lobortis ipsum sit amet consectetur.
-    Sed imperdiet nec elit non laoreet. Maecenas a erat et lectus mattis eleifend congue quis turpis. Aliquam.
-  </div>
-  <div [formGroup]="verifyPhoneForm">
-    <mat-form-field>
-      <input matInput placeholder="Phone Number" formControlName="number">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Phone Code" formControlName="code">
-    </mat-form-field>
-  </div>
-  <button mat-button (click)="decrimentStep()">Go Back</button>
-  <button mat-raised-button color="primary" (click)="onVerifyPhone()" [disabled]="verifyPhoneForm.invalid">Verify</button>
+                <div class="form-group col">
+                    <button class="btn btn-block btn-lg btn-primary" (click)="setPhone()" [disabled]="addPhoneForm.invalid">Add Your Mobile</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="step === 2" class="col" [formGroup]="verifyPhoneForm">
+            <div class="mb-4">
+                <h5>Enable <abbr title="Two-Factor Authentication">2FA</abbr></h5>
+                <p>To keep your account secure, the Elements application requires a 2-factor authentication if you are accessing the site from out of the office. We use <a href="#">Authy</a> to achieve this - it's a free download from the <a href="https://play.google.com/store/apps/details?id=com.authy.authy">Google Play Store</a>                    or <a href="https://itunes.apple.com/us/app/authy/id494168017">Apple App Store</a>. To enable Authy 2FA, simply enter your mobile phone below.</p>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label class="sr-only">Phone Number</label>
+                    <input type="tel" class="form-control form-control-lg" placeholder="Phone Number" formControlName="number" />
+                </div>
+
+                <div class="form-group col">
+                    <label class="sr-only">Phone Number</label>
+                    <input type="tel" class="form-control form-control-lg" placeholder="Verification Code" formControlName="code" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-block btn-lg btn-primary" (click)="onVerifyPhone()" [disabled]="verifyPhoneForm.invalid">Add Your Mobile</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -7,6 +7,7 @@ import { Country } from "../../shared/models/country";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ApiService } from "../../shared/api.service";
 import { CountryService } from "../../shared/services/country.service";
+import { RegisterService } from "../../../common/services/registration.service";
 
 @Component({
     selector: "app-enable-2fa",
@@ -28,7 +29,8 @@ export class Enable2faComponent implements OnInit, OnDestroy {
         private authDataStorage: AuthDataStorage,
         private fb: FormBuilder,
         private api: ApiService,
-        private cd: ChangeDetectorRef) {
+        private cd: ChangeDetectorRef,
+        private registerApi: RegisterService) {
     }
 
     ngOnInit() {
@@ -62,8 +64,8 @@ export class Enable2faComponent implements OnInit, OnDestroy {
             return;
         }
         const number = `+${this.addPhoneForm.value.countryCode}${this.addPhoneForm.value.number}`;
-
-        this.api.post("sms/sendsms", JSON.stringify(number), { headers: { "Content-Type": "application/json" } })
+        this.registerApi
+            .clientPhone({ "phoneNumber": number }, { headers: { "Content-Type": "application/json" } })
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(x => {
                 this.verifyPhoneForm = this.fb.group({
@@ -84,9 +86,11 @@ export class Enable2faComponent implements OnInit, OnDestroy {
             isVerified: false,
             message: "Invalid security code!"
         };
-        this.api.post("sms/verify", this.verifyPhoneForm.getRawValue())
+        this.registerApi
+            .verifyClientPhone(this.verifyPhoneForm.getRawValue())
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(x => {
+                console.log(x);
                 model.isVerified = x;
                 this.verifyPhone.emit(model);
             }, err => alert(err));

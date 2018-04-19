@@ -8,12 +8,12 @@ import { CreateOrderDialogComponent } from "../../../dialog/create-order-dialog/
 import { OrderType } from "../../../../common/enums/order-type";
 
 @Component({
-    selector: "app-top-menu",
-    templateUrl: "./top-menu.component.html",
-    styleUrls: ["./top-menu.component.scss"],
+    selector: "app-header",
+    templateUrl: "./header.component.html",
+    styleUrls: ["./header.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TopMenuComponent implements OnInit {
+export class HeaderComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         private api: ElementsApiService,
