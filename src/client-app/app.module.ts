@@ -13,6 +13,7 @@ import { OnboardingModule } from "./onboarding/onboarding.module";
 import { MatNativeDateModule } from "@angular/material";
 import { CheckAwatingModule } from "./check-awating/check-awating.module";
 import { AuthModule } from "./auth/auth.module";
+import {ChatbotModule} from "./chatbot/chatbot.module";
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { AuthModule } from "./auth/auth.module";
         OnboardingModule,
         RouterModule,
         MatNativeDateModule,
-        CheckAwatingModule
+        CheckAwatingModule,
+        ChatbotModule
     ],
     providers: [DecimalPipe],
     bootstrap: [AppComponent]
