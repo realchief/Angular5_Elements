@@ -1,7 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ApiService} from "../../../shared/api.service";
+import {ApiService, TOKEN_STORAGE_KEY} from "../../../shared/api.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs/Subject";
 
@@ -38,12 +38,15 @@ export class ChatbotLogin2faComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.ngUnsub)
       )
-      .subscribe(() => this.redirectToResult(true), () => this.redirectToResult(false));
+      .subscribe(() => this.onSuccess(true), () => this.onSuccess(false));
   }
 
-  private redirectToResult (isSuccess: boolean) {
+  private onSuccess (isSuccess: boolean) {
     const path = isSuccess ? "success" : "error";
     const url = `${this.router.url}/${path}`;
+    if (isSuccess) {
+      localStorage.removeItem(TOKEN_STORAGE_KEY);
+    }
     this.router.navigate([url]);
   }
 

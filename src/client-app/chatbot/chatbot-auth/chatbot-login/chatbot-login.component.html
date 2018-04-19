@@ -13,7 +13,7 @@
         <label for="login-password" class="sr-only">Password</label>
         <input class="form-control form-control-lg" type="password" id="login-password" placeholder="Enter a password" formControlName="password" required>
       </div>
-
+      <div class="alert-warning alert" [hidden]="!errorMessage">{{errorMessage}}</div>
       <div class="text-center mt-3">
         <button class="btn btn-lg btn-block btn-primary" [disabled]="form.invalid" (click)="login()">Log in</button>
       </div>
