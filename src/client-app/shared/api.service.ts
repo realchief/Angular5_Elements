@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
 import { HttpClient, HttpParams } from "@angular/common/http";
@@ -18,7 +17,6 @@ export class ApiService {
       private http: HttpClient, 
       private router: Router, 
       private authDataStorage: AuthDataStorage,
-      private ht: Http
     ) {
     }
 
@@ -44,14 +42,6 @@ export class ApiService {
       const opts = options || {};
       return this.http
         .put(`${this.apiUrl}/${url}`, body, opts)
-        .pipe(
-          catchError(this.processError.bind(this))
-        );
-    }
-
-    POST_PARAM<T>(url: string): Observable<T | any> {
-      return this.ht
-        .post(`${this.apiUrl}/${url}`)
         .pipe(
           catchError(this.processError.bind(this))
         );

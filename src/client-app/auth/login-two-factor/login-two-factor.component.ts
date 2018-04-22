@@ -1,5 +1,4 @@
 import { ActivatedRoute, Router } from "@angular/router";
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { takeUntil } from "rxjs/operators";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
@@ -22,7 +21,6 @@ export class LoginTwoFactorComponent {
     constructor(
         private fb: FormBuilder,
         private router: Router,
-        private http: Http,
         private authDataStorage: AuthDataStorage,
         private route: ActivatedRoute,
         private api: ApiService) { }
@@ -38,25 +36,26 @@ export class LoginTwoFactorComponent {
             return;
         } 
 
-        // this.api.POST_PARAM("auth/login-2fa?Code=" + this.form.value.Code)
-        //      .subscribe(this.onSuccessfulVerify.bind(this), err => alert(err));
+        this.api
+            .get("auth/login-2fa?Code=" + this.form.value.Code)
+            .subscribe(this.onSuccessfulVerify.bind(this), err => alert(err));
+    }
 
-    // private onSuccessfulVerify(tokenModel: TokenModel): void {
-    //     if (tokenModel.domain !== ApplicationDomain.Client) {
-    //         alert("Access error");
-    //         return;
-    //     }
-    //     localStorage.setItem(TOKEN_STORAGE_KEY, tokenModel.token);
-    //     this.route
-    //         .queryParamMap
-    //         .pipe(
-    //             takeUntil(this.ngUnsub)
-    //         )
-    //         .subscribe(params => {
-    //             const url = params.get("returnUrl") || "/";
-    //             this.router.navigate([url]);
-    //         });
-    // }
+    private onSuccessfulVerify(tokenModel: TokenModel): void {
+        if (tokenModel.domain !== ApplicationDomain.Client) {
+            alert("Access error");
+            return;
+        }
+        localStorage.setItem(TOKEN_STORAGE_KEY, tokenModel.token);
+        this.route
+            .queryParamMap
+            .pipe(
+                takeUntil(this.ngUnsub)
+            )
+            .subscribe(params => {
+                const url = params.get("returnUrl") || "/";
+                this.router.navigate([url]);
+            });
     }
 
     ngOnDestroy(): void {
