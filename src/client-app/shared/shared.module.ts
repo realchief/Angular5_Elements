@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { HttpModule } from '@angular/http';
 import { CommonModule } from "@angular/common";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { ElementsPipesModule } from "../../common/pipes/elements-pipes.module";
@@ -21,7 +22,8 @@ const MODULES = [
     HttpClientModule,
     ElementsPipesModule,
     ElementsServicesModule,
-    OrderHistoryChartWidgetModule
+    OrderHistoryChartWidgetModule,
+    HttpModule
 ];
 
 @NgModule({

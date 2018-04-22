@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { HttpModule } from '@angular/http';
 import { SharedModule } from "../shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -44,10 +45,11 @@ const appRoutes: Routes = [
 @NgModule({
     imports: [
         SharedModule,
+        HttpModule,
         ReactiveFormsModule,
         RouterModule.forRoot(
             appRoutes,
-        )
+        ),
     ],
     declarations: [AuthComponent, LoginComponent, RegistrationComponent, LoginTwoFactorComponent, RecoverPasswordComponent, RecoverCodeComponent, ResetPasswordComponent],
     exports: [RouterModule]
