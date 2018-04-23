@@ -37,12 +37,9 @@ export class LoginTwoFactorComponent {
         } 
 
         this.api
-            .post("auth/login-2fa?Code=" + this.form.value.Code, this.form.value)
-            .pipe(
-                takeUntil(this.ngUnsub)
-            )
+            .get("auth/login-2fa?Code=" + this.form.value.Code)
             .subscribe(this.onSuccessfulVerify.bind(this), err => alert(err));
-    } 
+    }
 
     private onSuccessfulVerify(tokenModel: TokenModel): void {
         if (tokenModel.domain !== ApplicationDomain.Client) {
@@ -61,7 +58,7 @@ export class LoginTwoFactorComponent {
             });
     }
 
-    public ngOnDestroy(): void {
+    ngOnDestroy(): void {
         this.ngUnsub.next();
         this.ngUnsub.complete();
     }

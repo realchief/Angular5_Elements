@@ -47,7 +47,7 @@ const appRoutes: Routes = [
         ReactiveFormsModule,
         RouterModule.forRoot(
             appRoutes,
-        )
+        ),
     ],
     declarations: [AuthComponent, LoginComponent, RegistrationComponent, LoginTwoFactorComponent, RecoverPasswordComponent, RecoverCodeComponent, ResetPasswordComponent],
     exports: [RouterModule]

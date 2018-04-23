@@ -35,7 +35,7 @@ export class VerifyGuard implements CanActivate, CanActivateChild {
                     const isEmailVerified = data[0];
                     const isPhoneVerified = data[1];
                     const isIDVerified = data[2];
-
+                    
                     if (!isEmailVerified || !isPhoneVerified) {
                         this.router.navigate(["/onboarding"]);
                         return Observable.of(false);
@@ -43,7 +43,6 @@ export class VerifyGuard implements CanActivate, CanActivateChild {
                         this.router.navigate(["/auth/login-two-factor"]);
                         return Observable.of(false);
                     } else {
-                        this.router.navigate(["/"]);
                         return Observable.of(true);
                     }
                 })

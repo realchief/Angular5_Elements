@@ -21,7 +21,7 @@ const MODULES = [
     HttpClientModule,
     ElementsPipesModule,
     ElementsServicesModule,
-    OrderHistoryChartWidgetModule
+    OrderHistoryChartWidgetModule,
 ];
 
 @NgModule({
