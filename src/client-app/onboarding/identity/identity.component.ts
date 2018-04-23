@@ -31,10 +31,13 @@ export class IdentityComponent implements OnInit {
                 "middleName": this.fb.control(""),
                 "lastName": this.fb.control("", Validators.required),
                 "bitrthday": this.fb.control("", Validators.required),
-                "profession": this.fb.control("", Validators.required),
-                "ssn": this.fb.control("")
+                "gender": this.fb.control("", Validators.required),
+                "profession": this.fb.control(""),
+                "ssn": this.fb.control(""),
+                "placeOfBirthCountryId": this.fb.control("", Validators.required),
+                "citizenshipCountryId": this.fb.control("", Validators.required),
             }),
-            "passportNumber": this.fb.control("", Validators.required),
+            "passportNumber": this.fb.control("123", Validators.required),
             "clientAddressModel": this.fb.group({
                 "addressData": this.fb.group({
                     "line1": this.fb.control("", Validators.required),

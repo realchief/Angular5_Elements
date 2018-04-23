@@ -5,7 +5,9 @@ import { Subject } from "rxjs/Subject";
 import { takeUntil } from "rxjs/operators";
 import { Country } from "../../shared/models/country";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ApiService } from "../../shared/api.service";
+import { ApiService, TOKEN_STORAGE_KEY } from "../../shared/api.service";
+import { TokenModel } from "../../../shared/models/token-model";
+import { ApplicationDomain } from "../../../shared/enums/application-domain";
 import { CountryService } from "../../shared/services/country.service";
 import { RegisterService } from "../../../common/services/registration.service";
 
@@ -34,6 +36,14 @@ export class Enable2faComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.countryService
+            .getCountries()
+            .pipe(
+                takeUntil(this.ngUnsub)
+            )
+            .subscribe(countries => {
+                this.countries = countries;
+            });
         this.addPhoneForm = this.fb.group({
             "countryCode": this.fb.control("", [Validators.required]),
             "number": this.fb.control("", [Validators.required])
@@ -42,12 +52,6 @@ export class Enable2faComponent implements OnInit, OnDestroy {
             "number": this.fb.control({ value: "123", disabled: true }, Validators.required),
             "code": this.fb.control("", Validators.required)
         });
-        this.countryService
-            .getCountries()
-            .pipe(
-                takeUntil(this.ngUnsub),
-        )
-            .subscribe(countries => this.countries = countries);
         this.step = 1;
     }
 
@@ -86,23 +90,28 @@ export class Enable2faComponent implements OnInit, OnDestroy {
         if (this.verifyPhoneForm.invalid) {
             return;
         }
-        const model = {
-            isVerified: false,
-            message: "Invalid security code!"
-        };
 
         const phoneVerifyCode = {
             "code": this.verifyPhoneForm.value.code
         }
+
         this.registerApi
             .verifyClientPhone(phoneVerifyCode)
             .pipe(takeUntil(this.ngUnsub))
-            .subscribe(res => {
-                if (res == null) {
-                    model.isVerified = true;
-                    this.verifyPhone.emit(model);
-                }
-            }, err => alert(err));
+            .subscribe(this.onSuccessfulVerify.bind(this), err => alert(err));
+    }
+
+    private onSuccessfulVerify(tokenModel: TokenModel): void {
+        if (tokenModel.domain !== ApplicationDomain.Client) {
+            alert("Access error");
+            return;
+        }
+        localStorage.setItem(TOKEN_STORAGE_KEY, tokenModel.token);
+        const model = {
+            isVerified: true,
+            message: "Cannot verify Client Phone"
+        };
+        this.verifyPhone.emit(model);
     }
 
     completeRegistration() {

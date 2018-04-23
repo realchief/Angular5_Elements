@@ -58,8 +58,9 @@
                 </div>
 
                 <div class="card-footer" *ngIf="!hasPassport">
-                    <button class="btn btn-primary" (click)="passportInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</button>
+                    <button class="btn btn-primary" (click)="passportInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Open File</button>
                     <input hidden type="file" #passportInput (change)="getPassportFromFile($event)" accept="application/pdf, image/png, image/jpeg" />
+                    <button class="btn btn-primary" [disabled]="!(passport && passport.base64)" (click)="uploadDocument(passport)"><i class="icon-upload-to-cloud">&nbsp;</i>Start Uploading</button>
                 </div>
             </div>
         </div>
@@ -80,8 +81,9 @@
                 </div>
 
                 <div class="card-footer" *ngIf="!hasAddressProof">
-                    <button class="btn btn-primary" (click)="addressProofInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</button>
+                    <button class="btn btn-primary" (click)="addressProofInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Open File</button>
                     <input hidden type="file" #addressProofInput (change)="getAddressProof($event)" accept="application/pdf, image/png, image/jpeg" />
+                    <button class="btn btn-primary" [disabled]="!(addressProof && addressProof.base64)" (click)="uploadDocument(addressProof)"><i class="icon-upload-to-cloud">&nbsp;</i>Start Uploading</button>
                 </div>
             </div>
         </div>
