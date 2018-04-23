@@ -64,8 +64,12 @@ export class Enable2faComponent implements OnInit, OnDestroy {
             return;
         }
         const number = `+${this.addPhoneForm.value.countryCode}${this.addPhoneForm.value.number}`;
+        const phoneNumberObj = {
+            "phoneNumber": this.addPhoneForm.value.number,
+            "countryCode": parseInt(this.addPhoneForm.value.countryCode)
+        }
         this.registerApi
-            .clientPhone({ "phoneNumber": number }, { headers: { "Content-Type": "application/json" } })
+            .clientPhone(phoneNumberObj, { headers: { "Content-Type": "application/json" } })
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(x => {
                 this.verifyPhoneForm = this.fb.group({
@@ -86,13 +90,18 @@ export class Enable2faComponent implements OnInit, OnDestroy {
             isVerified: false,
             message: "Invalid security code!"
         };
+
+        const phoneVerifyCode = {
+            "code": this.verifyPhoneForm.value.code
+        }
         this.registerApi
-            .verifyClientPhone(this.verifyPhoneForm.getRawValue())
+            .verifyClientPhone(phoneVerifyCode)
             .pipe(takeUntil(this.ngUnsub))
-            .subscribe(x => {
-                console.log(x);
-                model.isVerified = x;
-                this.verifyPhone.emit(model);
+            .subscribe(res => {
+                if (res == null) {
+                    model.isVerified = true;
+                    this.verifyPhone.emit(model);
+                }
             }, err => alert(err));
     }
 

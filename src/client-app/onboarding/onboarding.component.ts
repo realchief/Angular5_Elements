@@ -16,7 +16,9 @@ export class OnboardingComponent implements OnInit, OnDestroy {
     hasUploadedDocument: boolean;
     hasPhotoId: boolean;
 
-    constructor(private validService: ClientValidationService) { }
+    constructor(
+        private validService: ClientValidationService
+    ) { }
 
     ngOnInit() {
         this.validService.getStep()

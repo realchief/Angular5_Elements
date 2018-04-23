@@ -26,24 +26,17 @@ export class VerifyGuard implements CanActivate, CanActivateChild {
     private check() {
         return Observable
             .zip(
-                this.authDataStorage.getClientId(),
-                this.authDataStorage.getClientIsVerified('ClientIsVerified'),
                 this.authDataStorage.getClientIsVerified('IsEmailConfirmed'),
                 this.authDataStorage.getClientIsVerified('IsPhoneConfirmed'),
                 this.authDataStorage.getClientIsVerified('HasVerifiedIdentity')
             )
             .pipe(
                 switchMap(data => {
-                    const id = data[0];
-                    const isVerified = data[1];
-                    const isEmailVerified = data[2];
-                    const isPhoneVerified = data[3];
-                    const isIDVerified = data[4];
+                    const isEmailVerified = data[0];
+                    const isPhoneVerified = data[1];
+                    const isIDVerified = data[2];
 
-                    if (id !== undefined && !isVerified) {
-                        this.router.navigate(["/onboarding"]);
-                        return Observable.of(false);
-                    } else if (!isEmailVerified || !isPhoneVerified) {
+                    if (!isEmailVerified || !isPhoneVerified) {
                         this.router.navigate(["/onboarding"]);
                         return Observable.of(false);
                     } else if (!isIDVerified) {

@@ -24,16 +24,16 @@ export class ClientValidationService {
             .pipe(
                 switchMap(data => {
                     const isEmailVerified = data[0];
-                    const isPhoneVerified = data[1];
+                    const isPhoneVerified = data[1]; 
                     const isIDVerified = data[2];
 
-                    if (!isEmailVerified) {
-                        return Observable.of(0);
-                    } else if (!isPhoneVerified) {
-                        return Observable.of(1);
-                    }
+                    // if (!isEmailVerified) {
+                    //     return Observable.of(0);
+                    // } else if (!isPhoneVerified) {
+                    //     return Observable.of(1);
+                    // }
                     // TODO: role check
-                    return Observable.of(2);
+                    return Observable.of(4);
                 })
             );
     }
