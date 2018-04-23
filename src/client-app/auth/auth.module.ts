@@ -3,6 +3,7 @@ import { SharedModule } from "../shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LoginComponent } from "./login/login.component";
+import { RegistrationComponent } from "./registration/registration.component";
 import { LoginTwoFactorComponent } from "./login-two-factor/login-two-factor.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { RecoverPasswordComponent } from "./recover-password/recover-password.component";
@@ -20,6 +21,9 @@ const appRoutes: Routes = [
             }, {
                 path: 'login',
                 component: LoginComponent
+            }, {
+                path: 'register',
+                component: RegistrationComponent
             }, {
                 path: 'login-two-factor',
                 component: LoginTwoFactorComponent
@@ -45,7 +49,7 @@ const appRoutes: Routes = [
             appRoutes,
         )
     ],
-    declarations: [AuthComponent, LoginComponent, LoginTwoFactorComponent, RecoverPasswordComponent, RecoverCodeComponent, ResetPasswordComponent],
+    declarations: [AuthComponent, LoginComponent, RegistrationComponent, LoginTwoFactorComponent, RecoverPasswordComponent, RecoverCodeComponent, ResetPasswordComponent],
     exports: [RouterModule]
 })
 export class AuthModule { }

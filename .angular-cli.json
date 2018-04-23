@@ -20,7 +20,10 @@
             "testTsconfig": "tsconfig.spec.json",
             "prefix": "app",
             "styles": [
-                "styles/core.scss"
+                "styles/core.scss",
+                "styles/app-theme.scss",
+                "styles/site.scss",
+                "../node_modules/socicon/css/socicon.css"
             ],
             "stylePreprocessorOptions": {
                 "includePaths": [

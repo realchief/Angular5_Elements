@@ -6,6 +6,7 @@ import { Subject } from "rxjs/Subject";
 import { ApiService, TOKEN_STORAGE_KEY } from "../../shared/api.service";
 import { ApplicationDomain } from "../../../shared/enums/application-domain";
 import { TokenModel } from "../../../shared/models/token-model";
+import { AuthDataStorage } from "../../../common/auth-data.storage";
 
 @Component({
     selector: "app-login",
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private router: Router,
+        private authDataStorage: AuthDataStorage,
         private route: ActivatedRoute,
         private api: ApiService) { }
 
