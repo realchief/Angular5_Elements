@@ -37,6 +37,7 @@
                 "dev": "environments/environment.ts",
                 "staging": "environments/environment.staging.ts",
                 "janno": "environments/environment.janno.ts",
+                "max": "environments/environment.max.ts",
                 "prod": "environments/environment.prod.ts"
             }
         },
