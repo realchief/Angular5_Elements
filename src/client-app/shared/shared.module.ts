@@ -15,6 +15,7 @@ import { TransactionRouter } from "./transaction-router";
 import { OrderHistoryChartWidgetModule } from "./components/order-history-chart-widget/order-history-chart-widget.module";
 import { ClientValidationService } from "./services/client-validation.service";
 import { CountryService } from "./services/country.service";
+import {ClientService} from "../../common/services/client.service";
 
 const MODULES = [
     CommonModule,
@@ -29,6 +30,7 @@ const MODULES = [
     providers: [
         ApiService,
         AuthGuard,
+        ClientService,
         VerifyGuard,
         CountryService,
         TransactionRouter,
