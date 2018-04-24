@@ -34,7 +34,10 @@ export class IdentityComponent implements OnInit {
     ngOnInit() {
         this.countryService.getCountries()
             .pipe(takeUntil(this.ngUnsub))
-            .subscribe(x => this.countries = x);
+            .subscribe(x => {
+              this.countries = x;
+              this.cd.markForCheck();
+            });
 
         this.clientService.getClientIdentity()
             .pipe(takeUntil(this.ngUnsub))
