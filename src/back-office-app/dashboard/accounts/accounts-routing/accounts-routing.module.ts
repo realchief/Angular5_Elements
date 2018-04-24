@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {AccountCreationComponent} from "../account-creation/account-creation.component";
 import {AccountsComponent} from "../accounts.component";
-import {AccReviewApprovalComponent} from "../acc-review-approval/acc-review-approval.component";
 import {ChangePasswordComponent} from "../change-password/change-password.component";
+import {ClientsListComponent} from "../clients-management/clients-list/clients-list.component";
 
 const appRoutes: Routes = [
   {
@@ -11,8 +11,8 @@ const appRoutes: Routes = [
     component: AccountsComponent,
     children: [
       {path: "create-account", pathMatch: "full", component: AccountCreationComponent},
-      {path: "review-approval", pathMatch: "full", component: AccReviewApprovalComponent},
-      {path: "change-password", pathMatch: "full", component: ChangePasswordComponent}
+      {path: "change-password", pathMatch: "full", component: ChangePasswordComponent},
+      {path: "clients", component: ClientsListComponent}
     ]
   }
 ];

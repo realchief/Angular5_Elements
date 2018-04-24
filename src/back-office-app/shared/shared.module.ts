@@ -4,10 +4,12 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ApiService} from "./api.service";
 import {AuthGuard} from "./auth-guard.service";
 import {AuthHttpInterceptor} from "./auth.interceptor";
+import { ClientVerificationStatusPipe } from "./pipes/client-verification-status.pipe";
 
 const MODULES = [
   CommonModule,
-  HttpClientModule
+  HttpClientModule,
+  //ClientVerificationStatusPipe
 ];
 
 @NgModule({
@@ -21,7 +23,7 @@ const MODULES = [
       multi: true
     }
   ],
-  declarations: [],
-  exports: [MODULES]
+  declarations: [ClientVerificationStatusPipe],
+  exports: [MODULES, ClientVerificationStatusPipe]
 })
 export class SharedModule { }

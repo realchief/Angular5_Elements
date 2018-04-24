@@ -4,10 +4,10 @@ import { AccountsComponent } from "./accounts.component";
 import {RouterModule} from "@angular/router";
 import {MatButtonModule, MatSidenavModule} from "@angular/material";
 import {ReactiveFormsModule} from "@angular/forms";
-import {AccReviewApprovalModule} from "./acc-review-approval/acc-review-approval.module";
 import {AccountCreationModule} from "./account-creation/account-creation.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
 import {AccountsRoutingModule} from "./accounts-routing/accounts-routing.module";
+import {ClientsManagementModule} from "./clients-management/clients-management.module";
 
 @NgModule({
   imports: [
@@ -15,10 +15,10 @@ import {AccountsRoutingModule} from "./accounts-routing/accounts-routing.module"
     MatButtonModule,
     MatSidenavModule,
     ReactiveFormsModule,
-    AccReviewApprovalModule,
     AccountCreationModule,
     ChangePasswordModule,
-    AccountsRoutingModule
+    AccountsRoutingModule,
+    ClientsManagementModule
   ],
   declarations: [AccountsComponent],
   exports: [RouterModule]
