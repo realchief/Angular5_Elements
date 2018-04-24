@@ -6,6 +6,7 @@ import { ClientPublicModel } from "../models/client-public.model";
 import { ElementsApiService } from "./elements-api.service";
 import "rxjs/add/operator/publishReplay";
 import {ClientIdentityModel} from "../models/client-identity.model";
+import {ClientBankAccountModel} from "../models/client-bank-account.model";
 
 @Injectable()
 export class ClientService {
@@ -21,5 +22,9 @@ export class ClientService {
 
   getClientIdentity(): Observable<ClientIdentityModel> {
     return this.api.get(`client/identity`);
+  }
+
+  getClientBankAccounts(): Observable<ClientBankAccountModel> {
+    return this.api.get("client/get-client-bank-accounts");
   }
 }
