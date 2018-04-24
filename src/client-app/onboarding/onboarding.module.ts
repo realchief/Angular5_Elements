@@ -15,6 +15,8 @@ import { AuthGuard } from "../../common/auth-guard.service";
 import { WebcamModule } from "ngx-webcam";
 import { HeaderModule } from "../shared/components/header/header.module";
 import { FooterModule } from "../shared/components/footer/footer.module";
+import {IdentityModule} from "./identity/identity.module";
+import {AddBankModule} from "./add-bank/add-bank.module";
 
 @NgModule({
     imports: [
@@ -32,9 +34,11 @@ import { FooterModule } from "../shared/components/footer/footer.module";
         WebcamModule,
         HeaderModule,
         FooterModule,
+        IdentityModule,
+        AddBankModule,
         RouterModule.forChild([{ path: "onboarding", component: OnboardingComponent, canActivate: [AuthGuard] }])
     ],
-    declarations: [OnboardingComponent, EmailVerificationComponent, Enable2faComponent, IdentityComponent, AddBankComponent, UploadDocumentsComponent],
+    declarations: [OnboardingComponent, EmailVerificationComponent, Enable2faComponent, UploadDocumentsComponent],
     exports: [RouterModule]
 })
 export class OnboardingModule { }

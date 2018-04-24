@@ -1,4 +1,4 @@
-<div id="third">
+<div id="third" *ngIf="isInitialized" >
     <div class="mb-4">
         <h5>Enter Personal particulars</h5>
         <span>Elements verifies and records information that identifies each customer that opens an account with us. We will ask you for your name and other information that will allow us to identify you.</span></div>
@@ -33,7 +33,7 @@
 
                         <select class="custom-select form-control-lg" formControlName="gender">
                                 <option value="male">Male</option>
-                                
+
                                 <option value="female">Female</option>
                             </select>
                     </div>
@@ -113,5 +113,7 @@ Please ensure the information entered above is correct. You can not change it la
         </div>
     </div>
 
-    <button (click)="onVerifyIdentity()" [disabled]="form.invalid" class="btn btn-block btn-lg btn-primary">Submit</button>
+    <button (click)="onVerifyIdentity()" [disabled]="form.invalid || isSubmitting" class="btn btn-block btn-lg btn-primary">
+      {{isSubmitting ? "Saving..." : "Submit"}}
+    </button>
 </div>

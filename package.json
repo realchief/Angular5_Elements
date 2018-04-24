@@ -5,6 +5,7 @@
     "scripts": {
         "ng": "ng",
         "sa": "ng serve -p 4202 -w -o --app client-app -aot",
+        "sa-max": "ng serve -p 4202 -w -o --app client-app -aot --env=max",
         "sb": "ng serve -p 4203 -w -o --app back-office-app -aot",
         "build": "ng build",
         "test": "ng test",
