@@ -1,6 +1,6 @@
 <div id="fourth">
     <div class="row">
-        <div class="col-6 d-none d-md-block"></div>
+        <div *ngIf="onboardingMode" class="col-6 d-none d-md-block"></div>
 
         <div class="col" [formGroup]="form">
             <h5>Add a Bank Account</h5>
@@ -51,6 +51,6 @@
             </div>
 
             <button type="submit" class="btn btn-block btn-lg btn-primary" (click)="addBankAccount()">Add Your Bank Account</button>
-            <button class="btn btn-block btn-lg btn-secondary" (click)="onVerifyBank()">Do This Later</button></div>
+            <button *ngIf="onboardingMode" class="btn btn-block btn-lg btn-secondary" (click)="onVerifyBank()">Do This Later</button></div>
     </div>
 </div>

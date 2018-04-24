@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy } from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, Input} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../shared/models/country";
 import { Subject } from "rxjs/Subject";
@@ -13,7 +13,7 @@ import { CountryService } from "../../shared/services/country.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddBankComponent implements OnInit, OnDestroy {
-
+    @Input() onboardingMode = true;
     form: FormGroup;
     countries: Country[];
     ngUnsub = new Subject();
@@ -64,8 +64,8 @@ export class AddBankComponent implements OnInit, OnDestroy {
     onVerifyBank() {
         const model = {
             isVerified: true,
-            message: 'Bank not verified'
-        }
+            message: "Bank not verified"
+        };
         this.verifyBank.emit(model);
     }
 
