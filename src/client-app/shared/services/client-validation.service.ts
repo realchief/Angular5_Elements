@@ -17,24 +17,23 @@ export class ClientValidationService {
     getStep(): Observable<number> {
         return Observable
             .zip(
-                this.authDataStorage.getClientIsVerified('IsEmailConfirmed'),
-                this.authDataStorage.getClientIsVerified('IsPhoneConfirmed'),
-                this.authDataStorage.getClientIsVerified('HasVerifiedIdentity')
+                this.authDataStorage.getClientIsVerified('RequireEmailConfirmation'),
+                this.authDataStorage.getClientIsVerified('RequirePhoneConfirmation'),
+                this.authDataStorage.getClientIsVerified('RequirePersonalParticuars'),
             )
             .pipe(
                 switchMap(data => {
-                    const isEmailVerified = data[0];
-                    const isPhoneVerified = data[1]; 
-                    const isIDVerified = data[2];
+                    const isEmailVerifyRequire = data[0];
+                    const isPhoneVerifyRequire = data[1];
+                    const isPersonalVerifyRequire = data[2];
 
-                    if (!isEmailVerified) {
+                    if (isEmailVerifyRequire) {
                         return Observable.of(0);
-                    } else if (!isPhoneVerified) {
+                    } else if (isPhoneVerifyRequire) {
                         return Observable.of(1);
-                    } else if (!isIDVerified) {
+                    } else if (isPersonalVerifyRequire) {
                         return Observable.of(2);
                     }
-                    // return Observable.of(4);
                 })
             );
     }

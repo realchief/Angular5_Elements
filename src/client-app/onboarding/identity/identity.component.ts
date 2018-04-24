@@ -30,7 +30,7 @@ export class IdentityComponent implements OnInit {
                 "firstName": this.fb.control("", Validators.required),
                 "middleName": this.fb.control(""),
                 "lastName": this.fb.control("", Validators.required),
-                "bitrthday": this.fb.control("", Validators.required),
+                "birthday": this.fb.control("", Validators.required),
                 "gender": this.fb.control("", Validators.required),
                 "profession": this.fb.control(""),
                 "ssn": this.fb.control(""),
