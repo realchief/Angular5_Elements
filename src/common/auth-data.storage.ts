@@ -31,10 +31,10 @@ export class AuthDataStorage {
         return Observable.of(payload["ClientId"]);
     }
 
-    getClientIsVerified(type): Observable<boolean> {
+    getBooleanClaimValue(name: string): Observable<boolean> {
         const token = this.getToken();
         const payload = this.getTokenPayload(token);
-        const isVerified = payload[type] === "True";
+        const isVerified = payload[name] === "True";
         return Observable.of(isVerified);
     }
 
