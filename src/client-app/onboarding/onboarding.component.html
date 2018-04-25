@@ -24,13 +24,13 @@
         <div class="container">
             <div class="bg-white" id="wizard-tabs">
                 <mat-horizontal-stepper linear #stepper class="disabled-header">
-                    <mat-step>
+                    <mat-step  [editable]="false" [completed]="currentStep > 0">
                         <app-email-verify (verifyClientEmail)="toNextStep($event)"></app-email-verify>
                     </mat-step>
-                    <mat-step>
+                    <mat-step  [editable]="false" [completed]="currentStep > 1">
                         <app-enable-2fa (verifyPhone)="toNextStep($event)"></app-enable-2fa>
                     </mat-step>
-                    <mat-step>
+                    <mat-step  [editable]="false" [completed]="currentStep > 2">
                         <app-identity (verifyIdentity)="toNextStep($event)"></app-identity>
                     </mat-step>
                     <mat-step>

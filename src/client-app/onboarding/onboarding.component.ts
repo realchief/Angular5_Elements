@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy } from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy, ChangeDetectorRef} from "@angular/core";
 import { MatStepper, MatHorizontalStepper, MatStep } from "@angular/material";
 import { Subject } from "rxjs/Subject";
 import { takeUntil } from "rxjs/operators";
@@ -15,9 +15,11 @@ export class OnboardingComponent implements OnInit, OnDestroy {
     private ngUnsub = new Subject();
     hasUploadedDocument: boolean;
     hasPhotoId: boolean;
+    currentStep = 0;
 
     constructor(
-        private validService: ClientValidationService
+        private validService: ClientValidationService,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -25,12 +27,17 @@ export class OnboardingComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(step => {
                 this.stepper.selectedIndex = step;
+                this.currentStep = step;
             }, err => alert(err));
     }
 
     toNextStep(event: any) {
+        console.log(event);
         if (event.isVerified) {
+            this.stepper.selected.completed = true;
             this.stepper.next();
+            this.currentStep++;
+            this.cd.markForCheck();
         } else {
             alert(event.message);
         }

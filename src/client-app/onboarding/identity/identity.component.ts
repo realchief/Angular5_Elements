@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../shared/models/country";
 import { Subject } from "rxjs/Subject";
 import { takeUntil } from "rxjs/operators";
-import { ApiService } from "../../shared/api.service";
+import {ApiService, TOKEN_STORAGE_KEY} from "../../shared/api.service";
 import { CountryService } from "../../shared/services/country.service";
 import {ClientService} from "../../../common/services/client.service";
 import {ClientIdentityModel} from "../../../common/models/client-identity.model";
@@ -111,12 +111,11 @@ export class IdentityComponent implements OnInit {
             this.api.post("onboarding/identity", formData)
               .pipe(takeUntil(this.ngUnsub))
               .subscribe(
-                res => {
-                  if (res == null) {
+                tokenModel => {
                     model.isVerified = true;
+                    localStorage.setItem(TOKEN_STORAGE_KEY, tokenModel.token);
                     this.verifyIdentity.emit(model);
-                  }
-                  this.disableSubmitFlagAndRefresh();
+                    this.disableSubmitFlagAndRefresh();
                 },
                 err => {
                   alert(err);
