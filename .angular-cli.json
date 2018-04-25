@@ -58,9 +58,16 @@
             "testTsconfig": "tsconfig.spec.json",
             "prefix": "app",
             "styles": [
-                "styles/site.scss"
+                "styles/core.scss",
+                "../node_modules/socicon/css/socicon.css"
             ],
+            "stylePreprocessorOptions": {
+                "includePaths": [
+                    "./styles"
+                ]
+            },
             "scripts": [
+                "scripts/font-awesome.js",
                 "../node_modules/echarts/dist/echarts.min.js"
             ],
             "environmentSource": "environments/environment.ts",
