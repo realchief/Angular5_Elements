@@ -16,6 +16,9 @@ import { OrderHistoryChartWidgetModule } from "./components/order-history-chart-
 import { ClientValidationService } from "./services/client-validation.service";
 import { CountryService } from "../../common/services/country.service";
 import {ClientService} from "../../common/services/client.service";
+import {BankService} from "../../common/services/bank.service";
+import {BankOrderService} from "../../common/services/bank-order.service";
+import {CryptoAddressService} from "../../common/services/crypto-address.service";
 
 const MODULES = [
     CommonModule,
@@ -32,6 +35,9 @@ const MODULES = [
         AuthGuard,
         ClientService,
         VerifyGuard,
+        BankService,
+        BankOrderService,
+        CryptoAddressService,
         CountryService,
         TransactionRouter,
         OrderService,

@@ -8,7 +8,7 @@ const appRoutes: Routes = [
     path: "",
     pathMatch: "full",
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard] // TODO add Verify Guard
   }
 ];
 
