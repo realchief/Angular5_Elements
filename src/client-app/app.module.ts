@@ -16,6 +16,7 @@ import {ChatbotModule} from "./chatbot/chatbot.module";
 import {SettingsModule} from "./settings/settings.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {DepositsModule} from "./deposit/deposits.module";
+import {WithdrawalModule} from "./withdrawal/withdrawal.module";
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import {DepositsModule} from "./deposit/deposits.module";
         ChatbotModule,
         SettingsModule,
         DepositsModule,
+        WithdrawalModule,
         NgbModule.forRoot()
     ],
     providers: [DecimalPipe, DatePipe],
