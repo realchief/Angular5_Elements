@@ -1,11 +1,11 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ApiService, TOKEN_STORAGE_KEY} from "../shared/api.service";
-import {Subject} from "rxjs/Subject";
-import {takeUntil} from "rxjs/operators";
-import {TokenModel} from "../../shared/models/token-model";
-import {ApplicationDomain} from "../../shared/enums/application-domain";
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subject } from "rxjs/Subject";
+import { takeUntil } from "rxjs/operators";
+import { ApiService, TOKEN_STORAGE_KEY } from "../../shared/api.service";
+import { ApplicationDomain } from "../../../shared/enums/application-domain";
+import { TokenModel } from "../../../shared/models/token-model";
 
 @Component({
   selector: "app-login",
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private api: ApiService) {}
+    private api: ApiService) { }
 
   ngOnInit() {
     this.form = this.fb.group({

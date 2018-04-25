@@ -4,7 +4,7 @@ import { OrderModel } from "../../common/models/order.model";
 import { TradePublicData } from "../../common/models/trade-public-data.model";
 import { environment } from "../../environments/environment";
 import { AuthDataStorage } from "../../common/auth-data.storage";
-import { HubConnection } from "@aspnet/signalr-client";
+import { HubConnection } from "@aspnet/signalr";
 import { ClientBalanceChangeModel } from "./models/client-balance-change.model";
 
 @Injectable()
