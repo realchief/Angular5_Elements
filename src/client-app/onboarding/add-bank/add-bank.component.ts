@@ -2,9 +2,11 @@ import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, OnDest
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../shared/models/country";
 import { Subject } from "rxjs/Subject";
-import { takeUntil } from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil} from "rxjs/operators";
 import { ApiService } from "../../shared/api.service";
 import { CountryService } from "../../shared/services/country.service";
+import {Observable} from "rxjs/Observable";
+import {BankService} from "../../../common/services/bank.service";
 
 @Component({
     selector: "app-add-bank",
@@ -16,10 +18,27 @@ export class AddBankComponent implements OnInit, OnDestroy {
     @Input() onboardingMode = true;
     form: FormGroup;
     countries: Country[];
+    swiftCodes: string[];
     ngUnsub = new Subject();
     @Output() verifyBank = new EventEmitter();
+    // TODO: move bank selector to component
+    searchBanks = (text$: Observable<string>) =>
+      text$
+        .pipe(
+          filter(x => x.length > 2),
+          debounceTime(400),
+          distinctUntilChanged(),
+          switchMap(text => this.bankService.searchBanks(text)),
+          takeUntil(this.ngUnsub)
+        )
 
-    constructor(private fb: FormBuilder, private countryService: CountryService, private api: ApiService) { }
+    bankDisplayFn = val => val.name;
+
+    constructor(
+      private fb: FormBuilder,
+      private countryService: CountryService,
+      private bankService: BankService,
+      private api: ApiService) { }
 
     ngOnInit() {
         this.countryService.getCountries()
@@ -27,19 +46,15 @@ export class AddBankComponent implements OnInit, OnDestroy {
             .subscribe(x => this.countries = x);
 
         this.form = this.fb.group({
-            "clientId": this.fb.control(0, Validators.required),
             "name": this.fb.control("", Validators.required),
-            "isVerified": this.fb.control(false, Validators.required),
-            "isDefault": this.fb.control(true, Validators.required),
             "accountHolder": this.fb.control("", Validators.required),
             "accountNumber": this.fb.control("", Validators.required),
-            "iban": this.fb.control("iban", Validators.required),
             "swiftCode": this.fb.control("", Validators.required),
             "bankId": this.fb.control(0, Validators.required),
-            "clearingCode": this.fb.control("", Validators.required),
+            "clearingCode": this.fb.control(""),
             "countryCode": this.fb.control("", Validators.required),
-            "dateFrom": this.fb.control("2018-04-23T20:35:33.315Z", Validators.required),
-            "dateTo": this.fb.control("2018-04-23T20:35:33.315Z", Validators.required)
+            "dateFrom": this.fb.control(new Date().toISOString(), Validators.required),
+            "dateTo": this.fb.control(null)
         });
     }
 
@@ -67,6 +82,12 @@ export class AddBankComponent implements OnInit, OnDestroy {
             message: "Bank not verified"
         };
         this.verifyBank.emit(model);
+    }
+
+    onBankSelect($event) {
+      const bank = $event.item;
+      this.swiftCodes = bank.swiftCodes;
+      this.form.get("bankId").setValue(bank.id);
     }
 
     ngOnDestroy(): void {

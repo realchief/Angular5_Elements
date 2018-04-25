@@ -1,4 +1,7 @@
 export class ClientAddressModel {
+  constructor() {
+    this.addressData = new AddressData();
+  }
   id: number;
   clientId: number;
   addressData: AddressData;

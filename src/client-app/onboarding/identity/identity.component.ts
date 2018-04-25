@@ -8,6 +8,8 @@ import { CountryService } from "../../shared/services/country.service";
 import {ClientService} from "../../../common/services/client.service";
 import {ClientIdentityModel} from "../../../common/models/client-identity.model";
 import {DatePipe} from "@angular/common";
+import {PersonalParticularsModel} from "../../../common/models/personal-particulars.model";
+import {AddressData, ClientAddressModel} from "../../../common/models/client-address.model";
 
 @Component({
     selector: "app-identity",
@@ -39,7 +41,8 @@ export class IdentityComponent implements OnInit {
               this.cd.markForCheck();
             });
 
-        this.clientService.getClientIdentity()
+        this.clientService
+            .getClientIdentity()
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(model => {
               this.form = this.buildForm(model);
@@ -49,12 +52,12 @@ export class IdentityComponent implements OnInit {
     }
 
     private buildForm(model: ClientIdentityModel) {
-      const personalParticulars = model.personalParticularsModel;
-      const clientAddress = model.clientAddressModel;
-      const addressData = clientAddress.addressData;
+      const personalParticulars = model.personalParticularsModel || new PersonalParticularsModel();
+      const clientAddress = model.clientAddressModel || new ClientAddressModel();
+      const addressData = clientAddress.addressData || new AddressData();
       return this.fb.group({
         "personalParticularsModel": this.fb.group({
-          "clientId": this.fb.control(personalParticulars.clientId),
+          "clientId": this.fb.control(personalParticulars.clientId || 0),
           "firstName": this.fb.control(personalParticulars.firstName, Validators.required),
           "middleName": this.fb.control(personalParticulars.middleName),
           "lastName": this.fb.control(personalParticulars.lastName, Validators.required),
@@ -67,9 +70,9 @@ export class IdentityComponent implements OnInit {
         }),
         "passportNumber": this.fb.control(model.passportNumber || "123", Validators.required),
         "clientAddressModel": this.fb.group({
-          "id": this.fb.control(clientAddress.id),
+          "id": this.fb.control(clientAddress.id || 0),
           "addressData": this.fb.group({
-            "id": this.fb.control(addressData.id),
+            "id": this.fb.control(addressData.id || 0),
             "line1": this.fb.control(addressData.line1, Validators.required),
             "line2": this.fb.control(addressData.line2),
             "city": this.fb.control(addressData.city, Validators.required),
@@ -77,8 +80,8 @@ export class IdentityComponent implements OnInit {
             "stateProvidence": this.fb.control(addressData.stateProvidence),
             "countryId": this.fb.control(addressData.countryId, Validators.required)
           }),
-          "addressType": this.fb.control(clientAddress.addressType, Validators.required),
-          "clientId": this.fb.control(clientAddress.clientId)
+          "addressType": this.fb.control(clientAddress.addressType || 1, Validators.required),
+          "clientId": this.fb.control(clientAddress.clientId || 0)
         })
       });
     }

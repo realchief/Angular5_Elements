@@ -7,6 +7,13 @@
 
             <p>Link your bank account to your Elements account to transfer Fiat into and out of exchange. You can verify your bank account by initiating a wire transfer to Elements.</p>
 
+          <div class="form-group">
+            <label>Account name</label>
+
+            <input class="form-control form-control-lg" type="text" data-toggle="tooltip" data-placement="top" placeholder="Account Name"
+                   formControlName="name">
+          </div>
+
             <div class="form-group">
                 <label>Bank Account Holder Name</label>
 
@@ -17,14 +24,20 @@
             <div class="form-group">
                 <label>Bank Name</label>
 
-                <input class="form-control form-control-lg" formControlName="name" />
+                <input class="form-control form-control-lg"
+                       [ngbTypeahead]="searchBanks"
+                       [resultFormatter]="bankDisplayFn"
+                       [inputFormatter]="bankDisplayFn"
+                       (selectItem)="onBankSelect($event)"/>
             </div>
 
             <div class="form-row">
                 <div class="form-group col">
                     <label>SWIFT Code</label>
 
-                    <input class="form-control form-control-lg" formControlName="swiftCode" />
+                    <select class="form-control form-control-lg" formControlName="swiftCode">
+                      <option *ngFor="let code of swiftCodes" [value]="code">{{code}}</option>
+                    </select>
                 </div>
 
                 <div class="form-group col">
