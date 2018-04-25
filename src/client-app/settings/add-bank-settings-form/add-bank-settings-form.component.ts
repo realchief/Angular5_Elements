@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-add-bank-settings-form",
@@ -8,9 +9,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 })
 export class AddBankSettingsFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goBack() {
+    this.router.navigate(["settings", "bank-accounts"]);
   }
 
 }
