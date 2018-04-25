@@ -6,10 +6,14 @@ import { AuthGuard } from "./auth-guard.service";
 import { AuthHttpInterceptor } from "./auth.interceptor";
 import { ClientVerificationStatusPipe } from "./pipes/client-verification-status.pipe";
 import { EnumKeysPipe } from "./pipes/enum-keys.pipe";
+import {CountryService} from "../../common/services/country.service";
+import {ElementsServicesModule} from "../../common/services/elements-services.module";
+import {AuthDataStorage} from "../../common/auth-data.storage";
 
 const MODULES = [
   CommonModule,
-  HttpClientModule
+  HttpClientModule,
+  ElementsServicesModule
 ];
 
 @NgModule({
@@ -17,6 +21,8 @@ const MODULES = [
   providers: [
     ApiService,
     AuthGuard,
+    CountryService,
+    AuthDataStorage,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,

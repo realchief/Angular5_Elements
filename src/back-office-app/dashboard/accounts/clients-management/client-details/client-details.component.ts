@@ -32,7 +32,7 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
       .subscribe(x => this.countries = x);
     this.api.get(`client/get-client-details?id=${this.route.snapshot.params["id"]}`)
       .pipe(takeUntil(this.ngUnsub))
-      .subscribe(x => {this.client = x; this.cd.detectChanges(); console.log(x);}, err => alert(err));
+      .subscribe(x => { this.client = x; this.cd.detectChanges(); }, err => alert(err));
   }
 
   getCountryNameById(id: number): string {

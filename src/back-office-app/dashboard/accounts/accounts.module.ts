@@ -6,8 +6,8 @@ import {MatButtonModule, MatSidenavModule} from "@angular/material";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AccountCreationModule} from "./account-creation/account-creation.module";
 import {ChangePasswordModule} from "./change-password/change-password.module";
-import {AccountsRoutingModule} from "./accounts-routing/accounts-routing.module";
 import {ClientsManagementModule} from "./clients-management/clients-management.module";
+import {AppRoutingModule} from "../../app-routing/app-routing.module";
 
 @NgModule({
   imports: [
@@ -17,8 +17,8 @@ import {ClientsManagementModule} from "./clients-management/clients-management.m
     ReactiveFormsModule,
     AccountCreationModule,
     ChangePasswordModule,
-    AccountsRoutingModule,
-    ClientsManagementModule
+    ClientsManagementModule,
+    AppRoutingModule
   ],
   declarations: [AccountsComponent],
   exports: [RouterModule]

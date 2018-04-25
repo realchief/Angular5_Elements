@@ -85,7 +85,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <div class="card">
+          <div class="card" *ngIf="client && client.personalParticulars">
             <div class="card-header d-flex justify-content-between">
               <div>
                 <span class="h6">Personal Particulars</span>
@@ -94,17 +94,20 @@
             <div class="card-body">
               <dl class="row">
                 <dt class="col-4">First Name(s)</dt>
-                <dd class="col-8">Adam Jones</dd>
+                <dd class="col-8">
+                  {{client.personalParticulars.firstName}}
+                  {{client.personalParticulars.middleName}}
+                </dd>
                 <dt class="col-4">Last Name</dt>
-                <dd class="col-8">West</dd>
+                <dd class="col-8">{{client.personalParticulars.lastName}}</dd>
                 <dt class="col-4">Date of Birth</dt>
-                <dd class="col-8">20/05/1983</dd>
+                <dd class="col-8">{{client.personalParticulars.birthday | date:"dd/MM/yyyy"}}</dd>
                 <dt class="col-4">Gender</dt>
-                <dd class="col-8">Male</dd>
+                <dd class="col-8">{{client.personalParticulars.gender}}</dd>
                 <dt class="col-4">Place of Birth</dt>
-                <dd class="col-8">Canada</dd>
+                <dd class="col-8">{{getCountryNameById(client.personalParticulars.placeOfBirthCountryId)}}</dd>
                 <dt class="col-4">Country of Residency</dt>
-                <dd class="col-8">Hong Kong</dd>
+                <dd class="col-8">{{getCountryNameById(client.personalParticulars.citizenshipCountryId)}}</dd>
               </dl>
               <hr class="mb-3">
               <div class="alert alert-warning mb-0" role="alert">
@@ -116,7 +119,7 @@
               </div>
             </div>
           </div>
-          <div class="card">
+          <div class="card" *ngIf="client && client.residentialAddress">
             <div class="card-header d-flex justify-content-between">
               <div>
                 <span class="h6">Residential Address</span>
@@ -125,17 +128,17 @@
             <div class="card-body">
               <dl class="row">
                 <dt class="col-4">Street Address 1</dt>
-                <dd class="col-8">Flat D, 23rd Floor, Tower 2, Tierra Verde</dd>
+                <dd class="col-8">{{client.residentialAddress.line1}}</dd>
                 <dt class="col-4">Street Address 2</dt>
-                <dd class="col-8">33 Tsing King Road</dd>
+                <dd class="col-8">{{client.residentialAddress.line2}}</dd>
                 <dt class="col-4">City/Town</dt>
-                <dd class="col-8">Tsing Yi</dd>
+                <dd class="col-8">{{client.residentialAddress.city}}</dd>
                 <dt class="col-4">Province/Region</dt>
-                <dd class="col-8">New Territories</dd>
+                <dd class="col-8">{{client.residentialAddress.stateProvidence}}</dd>
                 <dt class="col-4">Zip/Post Code</dt>
-                <dd class="col-8">N/A</dd>
+                <dd class="col-8">{{client.residentialAddress.postalCode}}</dd>
                 <dt class="col-4">Country</dt>
-                <dd class="col-8">Hong Kong</dd>
+                <dd class="col-8">{{getCountryNameById(client.residentialAddress.countryId)}}</dd>
               </dl>
               <hr class="mb-3">
               <div class="alert alert-warning mb-0" role="alert">
@@ -167,7 +170,7 @@
               </dl>
             </div>
           </div>
-          <div class="card">
+          <div class="card" *ngIf="client">
             <div class="card-header d-flex justify-content-between">
               <div>
                 <span class="h6">Contact Details</span>
@@ -176,15 +179,15 @@
             <div class="card-body">
               <dl class="row">
                 <dt class="col-4">Email</dt>
-                <dd class="col-7">adamw39@gmail.com</dd>
+                <dd class="col-7">{{client.email}}</dd>
                 <dd class="col-1"><span class="badge badge-indicator badge-success mr-1">&nbsp;</span></dd>
                 <dt class="col-4">Phone Number</dt>
-                <dd class="col-7">+852 97066029</dd>
+                <dd class="col-7">{{client.phone}}</dd>
                 <dd class="col-1"><span class="badge badge-indicator badge-success mr-1">&nbsp;</span></dd>
               </dl>
             </div>
           </div>
-          <div class="card">
+          <div class="card" *ngIf="client && client.mainBankAccount">
             <div class="card-header d-flex justify-content-between">
               <div>
                 <span class="h6">Bank Account</span>
@@ -193,15 +196,15 @@
             <div class="card-body">
               <dl class="row">
                 <dt class="col-4">Account Holder Name</dt>
-                <dd class="col-8">Adam Jones West</dd>
+                <dd class="col-8">{{client.mainBankAccount.accountHolder}}</dd>
                 <dt class="col-4">Bank Name</dt>
-                <dd class="col-8">Hang Seng Bank</dd>
+                <dd class="col-8">{{client.mainBankAccount.bankName}}</dd>
                 <dt class="col-4">Swift Code</dt>
-                <dd class="col-8">HASEHKHH</dd>
+                <dd class="col-8">{{client.mainBankAccount.swiftCode}}</dd>
                 <dt class="col-4">Country</dt>
-                <dd class="col-8">Hong Kong</dd>
+                <dd class="col-8">{{getCountryNameById(client.mainBankAccount.countryId)}}</dd>
                 <dt class="col-4">Account Number</dt>
-                <dd class="col-8">773230903923</dd>
+                <dd class="col-8">{{client.mainBankAccount.accountNumber}}</dd>
               </dl>
             </div>
           </div>
