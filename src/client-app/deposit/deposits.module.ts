@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {HeaderModule} from "../shared/components/header/header.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FooterModule} from "../shared/components/footer/footer.module";
+import {QRCodeModule} from "angularx-qrcode";
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import {FooterModule} from "../shared/components/footer/footer.module";
     HeaderModule,
     FooterModule,
     ReactiveFormsModule,
+    QRCodeModule,
     RouterModule.forChild([
       {path: "deposit", component: DepositPageLayoutComponent, children: [
           {path: "fiat", component: FiatDepositPageComponent},

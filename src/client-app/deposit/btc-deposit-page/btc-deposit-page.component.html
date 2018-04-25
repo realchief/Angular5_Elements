@@ -10,37 +10,32 @@
           <div class="col-6 d-none d-md-block"></div>
 
           <div class="col">
-            <div class="mb-4">
-              <p>Wire deposits will require you to contact your approved bank on file, and have funds sent to Elements. Please fill out the form above to get the necessary instructions on the wire transfer.</p>
+            <div *ngIf="!lastAddress" class="form-group">
+              <p>It seems like you don't have Bitcoin address.<br/>Click below to generate a new unique address.</p>
             </div>
+            <div *ngIf="lastAddress" class="form-row">
+              <div class="form-group col">
+                <qrcode [qrdata]="lastAddress"></qrcode>
+              </div>
+              <div class="form-group col">
+                <label class="">Most recent address</label>
+                <input class="form-control form-control-lg" type="text" [value]="lastAddress" readonly/>
+              </div>
+            </div>
+
 
             <div class="form-group">
-              <label for="fields[email]" class="">Funding Source</label>
-
-              <select name="countryCode" class="custom-select form-control-lg" id="">
-                <option>**** 8549 - Citibank</option>
-
-                <option>**** 8549 - Hang Seng Bank</option>
-              </select>
+              <button class="btn btn-primary btn-lg btn-block" [disabled]="isQuerying" (click)="generateAddress()">
+                Generate address
+              </button>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col">
-                <label for="signup-password" class="sr-only">Amount</label>
-
-                <div class="input-group">
-                  <input class="form-control form-control-lg" type="number" name="price" id="price" placeholder="0.00">
-
-                  <div class="input-group-append"><span class="input-group-text">USD</span></div>
-                </div>
-              </div>
-
-              <div class="form-group col">
-                <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Initiate Transfer</button>
-              </div>
+            <div class="alert alert-warning" role="alert">
+              Coins will be deposited immediately after 6 network confirmations.<br/>
+              After making a deposit, you can track its progress on the transactions page.<br/>
+              Minimum deposit amount 0.0001 BTC.<br/>
+              <strong>Warning!</strong> Please do not not mine directly to your Elements DAX address.
             </div>
-
-            <div class="alert alert-warning" role="alert">Bank transfer must originate from the selected bank account above. Funds sent form unapproved or third-party accounts will be rejected.</div>
           </div>
         </div>
       </div>
@@ -62,27 +57,17 @@
       </thead>
 
       <tbody>
-      <tr class="bg-white">
-        <th>15nQ3E2bYGA8oMHY1etR8S1t1ZZvnQfyuK</th>
+      <ng-template ngFor let-model [ngForOf]="addresses$ | async">
+        <tr class="bg-white">
+          <th>{{model.address}}</th>
 
-        <td>-</td>
+          <td>{{model.label || "-"}}</td>
 
-        <td>Nov 15 2017 at 9:44:56 AM</td>
+          <td>{{model.createdDate | date:"dd-MMMM-yyyy hh:mm"}}</td>
+        </tr>
 
-        <td><a href="#">View</a></td>
-      </tr>
-
-      <tr class="table-divider"></tr>
-
-      <tr class="bg-white">
-        <th>1C6uBQ1CLrHXdNVuyFVCfS9TgZd9Z6icN9</th>
-
-        <td>-</td>
-
-        <td>Nov 15 2017 at 9:44:56 AM</td>
-
-        <td><a href="#"><i class="icon-qr-code mr-1"></i></a></td>
-      </tr>
+        <tr class="table-divider"></tr>
+      </ng-template>
       </tbody>
     </table>
   </div>
