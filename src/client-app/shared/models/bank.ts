@@ -3,6 +3,6 @@ export class Bank {
     name: string;
     city: string;
     countryId: number;
-    swiftCodes: string;    
+    swiftCodes: string[];    
   }
   
