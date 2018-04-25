@@ -7,7 +7,7 @@ import { RouterModule } from "@angular/router";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { SharedModule } from "./shared/shared.module";
-import { AuthModule } from "../client-app/auth/auth.module";
+import { AuthModule } from "./auth/auth.module";
 
 @NgModule({
   declarations: [
