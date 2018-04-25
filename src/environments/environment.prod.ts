@@ -1,6 +1,6 @@
 export const environment = {
-  backendEndpoint: "https://elements.exchange",
-  apiEndpoint: "https://elements.exchange/api",
+  backendEndpoint: "https://api.elements.exchange",
+  apiEndpoint: "https://api.elements.exchange/api",
   transactionRouterEndpoint: "https://tx.elements.exchange/hubs/transaction-router/",
   production: true
 };
