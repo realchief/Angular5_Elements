@@ -12,4 +12,12 @@ export class CryptoAddressService {
   createBtcAddress(): Observable<string> {
     return this.api.get("cryptocurrency/btc/address/create");
   }
+
+  getEthAddresses(): Observable<CryptoAddressModel[]> {
+    return this.api.get("cryptocurrency/eth/address/list");
+  }
+
+  createEthAddress(): Observable<string> {
+    return this.api.get("cryptocurrency/eth/address/create");
+  }
 }

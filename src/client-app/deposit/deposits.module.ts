@@ -8,6 +8,7 @@ import {HeaderModule} from "../shared/components/header/header.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FooterModule} from "../shared/components/footer/footer.module";
 import {QRCodeModule} from "angularx-qrcode";
+import { EthDepositPageComponent } from "./eth-deposit-page/eth-deposit-page.component";
 
 @NgModule({
   imports: [
@@ -20,10 +21,11 @@ import {QRCodeModule} from "angularx-qrcode";
       {path: "deposit", component: DepositPageLayoutComponent, children: [
           {path: "fiat", component: FiatDepositPageComponent},
           {path: "btc", component: BtcDepositPageComponent},
+          {path: "eth", component: EthDepositPageComponent},
           {path: "", redirectTo: "fiat", pathMatch: "full"}
       ]}
     ])
   ],
-  declarations: [DepositPageLayoutComponent, FiatDepositPageComponent, BtcDepositPageComponent]
+  declarations: [DepositPageLayoutComponent, FiatDepositPageComponent, BtcDepositPageComponent, EthDepositPageComponent]
 })
 export class DepositsModule { }
