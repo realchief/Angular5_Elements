@@ -23,7 +23,6 @@ export class ClientValidationService {
             )
             .pipe(
                 switchMap(data => {
-                    console.log(data);
                     const isEmailVerifyRequire = data[0];
                     const isPhoneVerifyRequire = data[1];
                     const isPersonalVerifyRequire = data[2];
