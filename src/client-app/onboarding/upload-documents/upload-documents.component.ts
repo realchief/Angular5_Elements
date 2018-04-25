@@ -111,7 +111,6 @@ export class UploadDocumentsComponent implements OnInit, OnDestroy {
             isVerified: false,
             message: "Starting check error"
         };
-        this.authDataStorage.unsetToken();
         this.router.navigate(["/"]);
         // this.api.post("onboarding/run-check", null)
         //     .pipe(takeUntil(this.ngUnsub))
