@@ -1,6 +1,11 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from "@angular/core";
 import {Subject} from "rxjs/Subject";
-import {ApiService} from "../../../../shared/api.service";
+import {ElementsApiService} from "../../../../../common/services/elements-api.service";
+import {CountryService} from "../../../../../common/services/country.service";
+import {Country} from "../../../../../common/models/country";
+import {takeUntil} from "rxjs/operators";
+import {ClientDetailsModel} from "../../../../shared/models/client-details-model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: "app-client-details",
@@ -10,11 +15,32 @@ import {ApiService} from "../../../../shared/api.service";
 })
 export class ClientDetailsComponent implements OnInit, OnDestroy {
 
-  private ngUnsub = new Subject();
+  client: ClientDetailsModel;
 
-  constructor(private api: ApiService) { }
+  private ngUnsub = new Subject();
+  private countries: Country[];
+
+  constructor(
+    private api: ElementsApiService,
+    private countryService: CountryService,
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.countryService.getCountries()
+      .pipe(takeUntil(this.ngUnsub))
+      .subscribe(x => this.countries = x);
+    this.api.get(`client/get-client-details?id=${this.route.snapshot.params["id"]}`)
+      .pipe(takeUntil(this.ngUnsub))
+      .subscribe(x => {this.client = x; this.cd.detectChanges(); console.log(x);}, err => alert(err));
+  }
+
+  getCountryNameById(id: number): string {
+    const result = this.countries.find(x => x.id === id);
+    if (result) {
+      return result.countryName;
+    }
+    return null;
   }
 
   ngOnDestroy(): void {

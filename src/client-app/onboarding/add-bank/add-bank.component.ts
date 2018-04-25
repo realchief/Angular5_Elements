@@ -1,10 +1,10 @@
 import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, Input, ViewChild, ElementRef} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Country } from "../../shared/models/country";
+import { Country } from "../../../common/models/country";
 import { Subject } from "rxjs/Subject";
 import {debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil} from "rxjs/operators";
 import { ApiService } from "../../shared/api.service";
-import { CountryService } from "../../shared/services/country.service";
+import { CountryService } from "../../../common/services/country.service";
 import {Observable} from "rxjs/Observable";
 import {BankService} from "../../../common/services/bank.service";
 

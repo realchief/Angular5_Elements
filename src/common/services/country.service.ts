@@ -3,13 +3,13 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import { filter } from "rxjs/operators";
 import { Country } from "../models/country";
-import { ApiService } from "../api.service";
+import {ElementsApiService} from "./elements-api.service";
 
 @Injectable()
 export class CountryService {
     private countries = new BehaviorSubject<Country[]>(null);
 
-    constructor(private api: ApiService) {
+    constructor(private api: ElementsApiService) {
         api.get("common/get-countries")
             .subscribe(countries => this.countries.next(countries));
     }
