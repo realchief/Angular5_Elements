@@ -46,6 +46,6 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         this.authDataStorage.unsetToken();
-        this.router.navigate(["/"]);
+        this.router.navigate(["/auth/login"]);
     }
 }

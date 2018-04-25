@@ -43,11 +43,14 @@ export class Enable2faComponent implements OnInit, OnDestroy {
             )
             .subscribe(countries => {
                 this.countries = countries;
+                this.step = 1;
             });
+
         this.addPhoneForm = this.fb.group({
             "countryCode": this.fb.control("", [Validators.required]),
             "number": this.fb.control("", [Validators.required])
         });
+
         this.verifyPhoneForm = this.fb.group({
             "number": this.fb.control({ value: "123", disabled: true }, Validators.required),
             "code": this.fb.control("", Validators.required)
