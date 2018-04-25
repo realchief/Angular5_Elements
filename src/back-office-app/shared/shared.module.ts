@@ -5,11 +5,11 @@ import {ApiService} from "./api.service";
 import {AuthGuard} from "./auth-guard.service";
 import {AuthHttpInterceptor} from "./auth.interceptor";
 import { ClientVerificationStatusPipe } from "./pipes/client-verification-status.pipe";
+import { EnumKeysPipe } from "./pipes/enum-keys.pipe";
 
 const MODULES = [
   CommonModule,
-  HttpClientModule,
-  //ClientVerificationStatusPipe
+  HttpClientModule
 ];
 
 @NgModule({
@@ -23,7 +23,7 @@ const MODULES = [
       multi: true
     }
   ],
-  declarations: [ClientVerificationStatusPipe],
-  exports: [MODULES, ClientVerificationStatusPipe]
+  declarations: [ClientVerificationStatusPipe, EnumKeysPipe],
+  exports: [MODULES, ClientVerificationStatusPipe, EnumKeysPipe]
 })
 export class SharedModule { }

@@ -4,6 +4,7 @@ import {AccountCreationComponent} from "../account-creation/account-creation.com
 import {AccountsComponent} from "../accounts.component";
 import {ChangePasswordComponent} from "../change-password/change-password.component";
 import {ClientsListComponent} from "../clients-management/clients-list/clients-list.component";
+import {ClientDetailsComponent} from "../clients-management/client-details/client-details.component";
 
 const appRoutes: Routes = [
   {
@@ -12,7 +13,8 @@ const appRoutes: Routes = [
     children: [
       {path: "create-account", pathMatch: "full", component: AccountCreationComponent},
       {path: "change-password", pathMatch: "full", component: ChangePasswordComponent},
-      {path: "clients", component: ClientsListComponent}
+      {path: "clients", component: ClientsListComponent},
+      {path: "clients/:id", component: ClientDetailsComponent}
     ]
   }
 ];
