@@ -1,3 +1,89 @@
-<p>
-  btc-deposit-page works!
-</p>
+<div class="tab-pane fade active show" id="bitcoin" role="tabpanel" aria-labelledby="bitcoin">
+  <div class="container">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div><span class="h6">Deposit Bitcoin</span></div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6 d-none d-md-block"></div>
+
+          <div class="col">
+            <div class="mb-4">
+              <p>Wire deposits will require you to contact your approved bank on file, and have funds sent to Elements. Please fill out the form above to get the necessary instructions on the wire transfer.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="fields[email]" class="">Funding Source</label>
+
+              <select name="countryCode" class="custom-select form-control-lg" id="">
+                <option>**** 8549 - Citibank</option>
+
+                <option>**** 8549 - Hang Seng Bank</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="signup-password" class="sr-only">Amount</label>
+
+                <div class="input-group">
+                  <input class="form-control form-control-lg" type="number" name="price" id="price" placeholder="0.00">
+
+                  <div class="input-group-append"><span class="input-group-text">USD</span></div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Initiate Transfer</button>
+              </div>
+            </div>
+
+            <div class="alert alert-warning" role="alert">Bank transfer must originate from the selected bank account above. Funds sent form unapproved or third-party accounts will be rejected.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Bitcoin Deposit Addresses</h3>
+
+    <hr class="short">
+
+    <table class="table table-hover align-items-center table-borderless">
+      <thead>
+      <tr>
+        <th scope="col">Address</th>
+
+        <th scope="col">Nickname</th>
+
+        <th scope="col" colspan="2">Date Created</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr class="bg-white">
+        <th>15nQ3E2bYGA8oMHY1etR8S1t1ZZvnQfyuK</th>
+
+        <td>-</td>
+
+        <td>Nov 15 2017 at 9:44:56 AM</td>
+
+        <td><a href="#">View</a></td>
+      </tr>
+
+      <tr class="table-divider"></tr>
+
+      <tr class="bg-white">
+        <th>1C6uBQ1CLrHXdNVuyFVCfS9TgZd9Z6icN9</th>
+
+        <td>-</td>
+
+        <td>Nov 15 2017 at 9:44:56 AM</td>
+
+        <td><a href="#"><i class="icon-qr-code mr-1"></i></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -6,11 +6,13 @@ import {SharedModule} from "../shared/shared.module";
 import {RouterModule} from "@angular/router";
 import {HeaderModule} from "../shared/components/header/header.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {FooterModule} from "../shared/components/footer/footer.module";
 
 @NgModule({
   imports: [
     SharedModule,
     HeaderModule,
+    FooterModule,
     ReactiveFormsModule,
     RouterModule.forChild([
       {path: "deposit", component: DepositPageLayoutComponent, children: [
