@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
 import "rxjs/add/observable/throw";
 import { AuthDataStorage } from "../../common/auth-data.storage";
@@ -13,7 +13,11 @@ export const TOKEN_STORAGE_KEY = "token";
 export class ApiService {
     private apiUrl = environment.apiEndpoint;
 
-    constructor(private http: HttpClient, private router: Router, private authDataStorage: AuthDataStorage) {
+    constructor(
+      private http: HttpClient, 
+      private router: Router, 
+      private authDataStorage: AuthDataStorage,
+    ) {
     }
 
     get<T>(url: string, options?: any): Observable<T | any> {
@@ -47,7 +51,7 @@ export class ApiService {
       console.log(err);
       if (err.status === 401) {
         this.authDataStorage.unsetToken();
-        return this.router.navigate(["/login"], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+        return this.router.navigate(["/auth/login"], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
       }
       return Observable.throw(new Error(`${err.status} ${err.statusText}`));
     }

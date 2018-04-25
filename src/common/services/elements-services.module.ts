@@ -6,6 +6,7 @@ import { AuthDataStorage } from "../auth-data.storage";
 import { ClientService } from "./client.service";
 import { ElementsApiService } from "./elements-api.service";
 import { TradeDataService } from "./trade-data.service";
+import { RegisterService } from "./registration.service";
 
 export function apiServiceFactory(http: HttpClient, router: Router, authDataStorage: AuthDataStorage) {
   const onError = (err: Response) => {
@@ -27,7 +28,8 @@ export function apiServiceFactory(http: HttpClient, router: Router, authDataStor
       deps: [HttpClient, Router, AuthDataStorage]
     },
     ClientService,
-    TradeDataService
+    TradeDataService,
+    RegisterService
   ]
 })
 export class ElementsServicesModule {}

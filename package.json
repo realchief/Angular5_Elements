@@ -5,6 +5,7 @@
     "scripts": {
         "ng": "ng",
         "sa": "ng serve -p 4202 -w -o --app client-app -aot",
+        "sa-max": "ng serve -p 4202 -w -o --app client-app -aot --env=max",
         "sb": "ng serve -p 4203 -w -o --app back-office-app -aot",
         "build": "ng build",
         "test": "ng test",
@@ -24,9 +25,12 @@
         "@angular/platform-browser": "^5.0.0",
         "@angular/platform-browser-dynamic": "^5.0.0",
         "@angular/router": "^5.0.0",
-        "@aspnet/signalr-client": "^1.0.0-alpha2-final",
+        "@aspnet/signalr": "^1.0.0-preview2-final",
+        "@ng-bootstrap/ng-bootstrap": "^1.1.2",
         "@ngx-translate/core": "^9.1.1",
         "@ngx-translate/http-loader": "^2.0.1",
+        "angular-custom-dropdown": "^1.1.1",
+        "angularx-qrcode": "^1.1.5",
         "chart.js": "^2.7.1",
         "core-js": "^2.4.1",
         "echarts": "^4.0.4",
@@ -34,6 +38,7 @@
         "ngx-echarts": "^2.1.0",
         "ngx-webcam": "^0.1.4",
         "rxjs": "^5.5.2",
+        "socicon": "^3.0.5",
         "zone.js": "^0.8.14"
     },
     "devDependencies": {

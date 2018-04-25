@@ -1,29 +1,49 @@
-<mat-card>
-  <mat-card-content>
-    <mat-horizontal-stepper linear #stepper class="disabled-header">
-      <mat-step label="Enable 2FA">
-        <app-enable-2fa (verifyPhone)="toNextStep($event)"></app-enable-2fa>
-      </mat-step>
-      <mat-step label="Add Bank Account">
-        dummy
-        <!--TODO: delete after creating bank account adding-->
-        <button mat-button (click)="toNextStep({isVerified: true})">Next</button>
-      </mat-step>
-      <mat-step label="Verify Identity">
-        <app-identity (verifyIdentity)="toNextStep($event)"></app-identity>
-      </mat-step>
-      <mat-step label="Upload Documents">
-        <app-upload-documents
-          (startCheck)="toNextStep($event)"></app-upload-documents>
-      </mat-step>
-      <mat-step label="Complete">
-        <h2 style="text-align: center">Congratulations, Comrad!</h2>
-        <div>
-          Thanks for joining us!
-          If you are reading it, your account is not yet verified.
-          For check your verify status please reload this page.
+<app-header></app-header>
+
+<div class="main-container">
+    <section class="bg-gradient text-light p-0">
+        <img src="assets/img/guilloche-1.svg" class="bg-image opacity-10" />
+
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-12 col-md-7">
+                    <div class="space-lg text-center text-md-left">
+                        <h1>Welcome to Elements</h1>
+                    </div>
+                </div>
+                <!--end of row-->
+            </div>
         </div>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </mat-card-content>
-</mat-card>
+        <!--end of container-->
+    </section>
+</div>
+
+<div class="wizard" id="onboarding-wizard">
+
+    <section class="bg-white">
+        <div class="container">
+            <div class="bg-white" id="wizard-tabs">
+                <mat-horizontal-stepper linear #stepper class="disabled-header">
+                    <mat-step  [editable]="false" [completed]="currentStep > 0">
+                        <app-email-verify (verifyClientEmail)="toNextStep($event)"></app-email-verify>
+                    </mat-step>
+                    <mat-step  [editable]="false" [completed]="currentStep > 1">
+                        <app-enable-2fa (verifyPhone)="toNextStep($event)"></app-enable-2fa>
+                    </mat-step>
+                    <mat-step  [editable]="false" [completed]="currentStep > 2">
+                        <app-identity (verifyIdentity)="toNextStep($event)"></app-identity>
+                    </mat-step>
+                    <mat-step>
+                        <app-add-bank (verifyBank)="toNextStep($event)"></app-add-bank>
+                    </mat-step>
+                    <mat-step>
+                        <app-upload-documents (startCheck)="toNextStep($event)"></app-upload-documents>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<app-footer></app-footer>

@@ -7,28 +7,28 @@ import "rxjs/add/observable/zip";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private router: Router, private authDataStorage: AuthDataStorage) {}
+    constructor(private router: Router, private authDataStorage: AuthDataStorage) { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | Promise <boolean> | boolean {
-    return this.check(state);
-  }
-
-  public canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable <boolean> | Promise <boolean> | boolean {
-    return this.check(state);
-  }
-
-  private check(state: RouterStateSnapshot) {
-    const isValidToken = this.authDataStorage.isTokenExistsAndNotExpired();
-    if (!isValidToken) {
-      const retUrl = state.url === "/onboarding" ? null : state.url;
-      this.router.navigate(["/login"], { queryParams: { returnUrl: retUrl } });
+    canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<boolean> | Promise<boolean> | boolean {
+        return this.check(state);
     }
-    return isValidToken;
-  }
+
+    public canActivateChild(
+        childRoute: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<boolean> | Promise<boolean> | boolean {
+        return this.check(state);
+    }
+
+    private check(state: RouterStateSnapshot) {
+        const isValidToken = this.authDataStorage.isTokenExistsAndNotExpired();
+        if (!isValidToken) {
+            const retUrl = state.url === "/onboarding" ? null : state.url;
+            this.router.navigate(["/auth/login"], { queryParams: { returnUrl: retUrl } });
+        }
+        return isValidToken;
+    }
 }

@@ -1,51 +1,94 @@
-<div>
-  <h2 style="text-align: center">Verify Your Identity</h2>
-  <mat-grid-list [cols]="2">
-    <mat-grid-tile>
-      <mat-grid-tile-header>
-        <h3 style="text-align: center">Upload passport</h3>
-      </mat-grid-tile-header>
-      <div *ngIf="hasPassport">
-        passport uploaded
-      </div>
-      <div *ngIf="showWebcam">
-        <webcam [trigger]="triggerObservable" (imageCapture)="getPassportFromWebcam($event)"></webcam>
-        <button mat-button (click)="toggleWebcam()">Hide Webcam</button>
-        <button mat-raised-button color="primary" (click)="triggerSnapshot()">Take A Snapshot</button>
-      </div>
-      <mat-grid-tile-footer *ngIf="!hasPassport">
-          <button mat-raised-button color="primary" (click)="passportInput.click()">Open File</button>
-          <input hidden type="file" #passportInput
-                 (change)="getPassportFromFile($event)"
-                 accept="application/pdf, image/png, image/jpeg"/>
-          <button mat-raised-button
-                  *ngIf="!showWebcam"
-                  color="accent"
-                  (click)="toggleWebcam()">Upload From Webcam</button>
-        <button mat-raised-button color="primary"
-                [disabled]="!(passport && passport.base64)"
-                (click)="uploadDocument(passport)">Start Uploading</button>
-      </mat-grid-tile-footer>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-grid-tile-header>
-        <h3 style="text-align: center">Upload address proof</h3>
-      </mat-grid-tile-header>
-    <div *ngIf="hasAddressProof">
-      address proof uploaded
+<!-- <div>
+    <h2 style="text-align: center">Verify Your Identity</h2>
+    <mat-grid-list [cols]="2">
+        <mat-grid-tile>
+            <div *ngIf="showWebcam">
+                <webcam [trigger]="triggerObservable" (imageCapture)="getPassportFromWebcam($event)"></webcam>
+                <button mat-button (click)="toggleWebcam()">Hide Webcam</button>
+                <button mat-raised-button color="primary" (click)="triggerSnapshot()">Take A Snapshot</button>
+            </div>
+            <mat-grid-tile-footer *ngIf="!hasPassport">
+                <button mat-raised-button color="primary" (click)="passportInput.click()">Open File</button>
+                <input hidden type="file" #passportInput (change)="getPassportFromFile($event)" accept="application/pdf, image/png, image/jpeg" />
+                <button mat-raised-button *ngIf="!showWebcam" color="accent" (click)="toggleWebcam()">Upload From Webcam</ button>
+                <button mat-raised-button color="primary" [disabled]="!(passport && passport.base64)" (click)="uploadDocument(passport)">Start Uploading</button>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-grid-tile-header>
+                <h3 style="text-align: center">Upload address proof</h3>
+            </mat-grid-tile-header>
+            <div *ngIf="hasAddressProof">
+                address proof uploaded
+            </div>
+            <mat-grid-tile-footer *ngIf="!hasAddressProof">
+                <button mat-raised-button color="primary" (click)="addressProofInput.click()">Open File</button>
+                <input hidden type="file" #addressProofInput (change)="getAddressProof($event)" accept="application/pdf, image/png, image/jpeg" />
+                <button mat-raised-button color="accent" [disabled]="!(addressProof && addressProof.base64)" (click)="uploadDocument(addressProof)">Start Uploading</button>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <button mat-raised-button color="primary" (click)="onStartCheck()" [disabled]="!(hasPassport && hasAddressProof)">Start Check</button>
+</div> -->
+
+<div id="fifth">
+    <div class="mb-4">
+        <h5>Upload Documents</h5>
+
+        <p>Submit proof of identity and address to trade on exchange.</p>
     </div>
-    <mat-grid-tile-footer *ngIf="!hasAddressProof">
-      <button mat-raised-button color="primary" (click)="addressProofInput.click()">Open File</button>
-      <input hidden type="file" #addressProofInput
-             (change)="getAddressProof($event)"
-             accept="application/pdf, image/png, image/jpeg"/>
-      <button mat-raised-button color="accent"
-              [disabled]="!(addressProof && addressProof.base64)"
-              (click)="uploadDocument(addressProof)">Start Uploading</button>
-    </mat-grid-tile-footer>
-  </mat-grid-tile>
-  </mat-grid-list>
-  <button mat-raised-button color="primary"
-          (click)="onStartCheck()"
-          [disabled]="!(hasPassport && hasAddressProof)">Start Check</button>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">Photo ID</div>
+
+                <div><span class="text-success">Permitted</span>
+
+                    <ul class="text-success">
+                        <li>Passport</li>
+                    </ul>
+                    <span class="text-red">Not Permitted</span>
+
+                    <ul class="text-red">
+                        <li>Driver's License</li>
+                        <li>Student ID</li>
+                        <li>Identity Card</li>
+                    </ul>
+                </div>
+
+                <div class="card-footer" *ngIf="!hasPassport">
+                    <button class="btn btn-primary" (click)="passportInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Open File</button>
+                    <input hidden type="file" #passportInput (change)="getPassportFromFile($event)" accept="application/pdf, image/png, image/jpeg" />
+                    <button class="btn btn-primary" [disabled]="!(passport && passport.base64)" (click)="uploadDocument(passport)"><i class="icon-upload-to-cloud">&nbsp;</i>Start Uploading</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">Proof of Address</div>
+
+                <div><span class="text-success">Permitted</span>
+
+                    <ul class="text-success">
+                        <li>Full Page Scan of Utility Bill
+                            <br /><i><small>(e.g. gas, water, or electricity)</small></i></li>
+                        <li>Bank Statement</li>
+                        <li>Cellphone Bill</li>
+                        <li>Internet Bill</li>
+                    </ul>
+                </div>
+
+                <div class="card-footer" *ngIf="!hasAddressProof">
+                    <button class="btn btn-primary" (click)="addressProofInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Open File</button>
+                    <input hidden type="file" #addressProofInput (change)="getAddressProof($event)" accept="application/pdf, image/png, image/jpeg" />
+                    <button class="btn btn-primary" [disabled]="!(addressProof && addressProof.base64)" (click)="uploadDocument(addressProof)"><i class="icon-upload-to-cloud">&nbsp;</i>Start Uploading</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-block btn-lg btn-primary" (click)="onStartCheck()" [disabled]="!(hasPassport && hasAddressProof)">Submit for Review</button>
+    <button class="btn btn-block btn-lg btn-secondary" (click)="onStartCheck()">Do This Later</button>
 </div>

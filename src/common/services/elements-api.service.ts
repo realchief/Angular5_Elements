@@ -42,4 +42,22 @@ export class ElementsApiService {
         catchError(this.onError.bind(this))
       );
   }
+
+  delete<T>(url: string, options?: any): Observable<T | any> {
+    const opts = options || {};
+    return this.http
+      .delete(`${this.apiUrl}/${url}`, opts)
+      .pipe(
+        catchError(this.onError.bind(this))
+      );
+  }
+
+  patch<T>(url: string, body: any, options?: any): Observable<T | any> {
+    const opts = options || {};
+    return this.http
+      .patch(`${this.apiUrl}/${url}`, body, opts)
+      .pipe(
+        catchError(this.onError.bind(this))
+      );
+  }
 }

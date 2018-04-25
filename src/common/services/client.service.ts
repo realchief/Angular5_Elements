@@ -5,6 +5,9 @@ import { AuthDataStorage } from "../auth-data.storage";
 import { ClientPublicModel } from "../models/client-public.model";
 import { ElementsApiService } from "./elements-api.service";
 import "rxjs/add/operator/publishReplay";
+import {ClientIdentityModel} from "../models/client-identity.model";
+import {ClientBankAccountModel} from "../models/client-bank-account.model";
+import {BankOrderPublicModel} from "../models/bank-order.model";
 
 @Injectable()
 export class ClientService {
@@ -16,5 +19,29 @@ export class ClientService {
 
   getBalance(clientId: number): Observable<ClientBalanceModel[]> {
     return this.api.get(`balance/${clientId}`);
+  }
+
+  getClientIdentity(): Observable<ClientIdentityModel> {
+    return this.api.get(`client/identity`);
+  }
+
+  getClientBankAccounts(): Observable<ClientBankAccountModel[]> {
+    return this.api.get("client/bank-accounts");
+  }
+
+  getClientDeposits(): Observable<BankOrderPublicModel[]> {
+    return this.api.get("fiat/order/deposits");
+  }
+
+  getClientWithdrawals(): Observable<BankOrderPublicModel[]> {
+    return this.api.get("fiat/order/withdrawals");
+  }
+
+  deleteBankAccount(accId: number) {
+    return this.api.delete(`client/bank-accounts/delete/${accId}`);
+  }
+
+  setDefaultBankAccount(accId: number) {
+    return this.api.patch(`client/bank-accounts/set-default`, {value: accId});
   }
 }
