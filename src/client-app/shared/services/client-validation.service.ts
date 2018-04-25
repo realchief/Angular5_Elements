@@ -26,14 +26,14 @@ export class ClientValidationService {
                     const isEmailVerifyRequire = data[0];
                     const isPhoneVerifyRequire = data[1];
                     const isPersonalVerifyRequire = data[2];
-
-                    if (isEmailVerifyRequire) {
-                        return Observable.of(0);
-                    } else if (isPhoneVerifyRequire) {
-                        return Observable.of(1);
-                    } else if (isPersonalVerifyRequire) {
-                        return Observable.of(2);
-                    }
+                    return Observable.of(3);
+                    // if (isEmailVerifyRequire) {
+                    //     return Observable.of(0);
+                    // } else if (isPhoneVerifyRequire) {
+                    //     return Observable.of(1);
+                    // } else if (isPersonalVerifyRequire) {
+                    //     return Observable.of(2);
+                    // }
                 })
             );
     }

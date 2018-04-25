@@ -17,23 +17,32 @@
             <div class="form-group">
                 <label>Bank Name</label>
 
-                <input class="form-control form-control-lg" formControlName="name" />
+                <input class="form-control form-control-lg" formControlName="name" [attr.disabled]="!isBankSelected" readonly/>
             </div>
 
             <div class="form-row">
                 <div class="form-group col">
                     <label>SWIFT Code</label>
 
-                    <input class="form-control form-control-lg" formControlName="swiftCode" />
+                    <input class="form-control form-control-lg" formControlName="swiftCode" [attr.disabled]="!isBankSelected" readonly/>
                 </div>
 
                 <div class="form-group col">
                     <label>Country</label>
 
-                    <select class="custom-select form-control-lg" formControlName="countryCode">
+                    <select class="custom-select form-control-lg" formControlName="countryCode" (change)="onSelectCountry($event.target.value)">
                         <option *ngFor="let country of countries" [value]=country.id>{{ country.countryName }}</option>
                     </select>
                 </div>
+
+                <div class="form-group col">
+                    <label>Bank List</label>
+
+                    <select class="custom-select form-control-lg" formControlName="bankList" [attr.disabled]="!isCountrySelected">
+                        <option *ngFor="let bank of country_banks" [value]=bank.id>{{ bank.name }}</option>
+                    </select>
+                </div>
+
             </div>
 
             <div class="form-row">
