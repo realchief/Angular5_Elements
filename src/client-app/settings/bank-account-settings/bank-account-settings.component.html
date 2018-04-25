@@ -24,7 +24,7 @@
               {{acc.name}}
             </th>
             <td>
-              {{getBankName(acc.bankId)}}
+              {{acc.bankName}}
             </td>
             <td>
               <div class="custom-control custom-radio">
@@ -38,12 +38,14 @@
               </div>
             </td>
             <td>
-              <button type="submit" class="btn btn-sm btn-danger"><i class="icon-squared-cross"></i> Remove card</button>
+              <button type="button" class="btn btn-sm btn-danger" [disabled]="acc[disableBtnProp]" (click)="deleteAccount(acc.id)">
+                <i class="icon-squared-cross"></i> Remove
+              </button>
             </td>
           </tr>
           </tbody>
         </table>
-        <a class="btn btn-success" routerLink="add">Add new card</a>
+        <a class="btn btn-success" routerLink="add">Add new account</a>
       </form>
     </div>
     <!--end of col-->

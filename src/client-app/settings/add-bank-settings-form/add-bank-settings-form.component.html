@@ -1,3 +1,4 @@
 <div class="container">
   <app-add-bank [onboardingMode]="false"></app-add-bank>
+  <a *ngIf="!onboardingMode" class="go-back" routerLink="/settings/bank-accounts">Go back</a>
 </div>

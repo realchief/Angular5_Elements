@@ -22,6 +22,7 @@ export class AddBankComponent implements OnInit, OnDestroy {
     ngUnsub = new Subject();
     @ViewChild("bankInput") bankInput: ElementRef;
     @Output() verifyBank = new EventEmitter();
+    @Output() afterSubmit = new EventEmitter();
     // TODO: move bank selector to component
     searchBanks = (text$: Observable<string>) =>
       text$
@@ -70,6 +71,7 @@ export class AddBankComponent implements OnInit, OnDestroy {
         this.api.post("onboarding/add-bank-account", this.form.value)
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(res => {
+                this.afterSubmit.emit();
                 if (res == null) {
                     model.isVerified = true;
                     this.verifyBank.emit(model);
@@ -90,7 +92,6 @@ export class AddBankComponent implements OnInit, OnDestroy {
       this.swiftCodes = bank.swiftCodes;
       this.form.get("bankId").setValue(bank.id);
       this.form.get("countryCode").setValue(bank.countryId);
-      console.log($event.item);
     }
 
     onCountryChange($event) {

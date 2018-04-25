@@ -24,7 +24,15 @@ export class ClientService {
     return this.api.get(`client/identity`);
   }
 
-  getClientBankAccounts(): Observable<ClientBankAccountModel> {
-    return this.api.get("client/get-client-bank-accounts");
+  getClientBankAccounts(): Observable<ClientBankAccountModel[]> {
+    return this.api.get("client/bank-accounts");
+  }
+
+  deleteBankAccount(accId: number) {
+    return this.api.delete(`client/bank-accounts/delete/${accId}`);
+  }
+
+  setDefaultBankAccount(accId: number) {
+    return this.api.patch(`client/bank-accounts/set-default`, {value: accId});
   }
 }
