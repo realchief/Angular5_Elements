@@ -26,10 +26,10 @@ export class VerifyGuard implements CanActivate, CanActivateChild {
     private check() {
         return Observable
             .zip(
-                this.authDataStorage.getClientIsVerified('RequireEmailConfirmation'),
-                this.authDataStorage.getClientIsVerified('RequirePhoneConfirmation'),
-                this.authDataStorage.getClientIsVerified('RequirePersonalParticuars'),
-                this.authDataStorage.getClientIsVerified('Require2fa'),
+                this.authDataStorage.getBooleanClaimValue("RequireEmailConfirmation"),
+                this.authDataStorage.getBooleanClaimValue("RequirePhoneConfirmation"),
+                this.authDataStorage.getBooleanClaimValue("RequirePersonalParticulars"),
+                this.authDataStorage.getBooleanClaimValue("Require2fa"),
             )
             .pipe(
                 switchMap(data => {
@@ -37,7 +37,7 @@ export class VerifyGuard implements CanActivate, CanActivateChild {
                     const isPhoneVerifyRequire = data[1];
                     const isPersonalVerifyRequire = data[2];
                     const is2FaRequire = data[3];
-                    
+
                     if (isEmailVerifyRequire || isPhoneVerifyRequire || isPersonalVerifyRequire) {
                         this.router.navigate(["/onboarding"]);
                         return Observable.of(false);

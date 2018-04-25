@@ -6,6 +6,7 @@ export class ClientBankAccountModel {
   accountNumber: string;
   swiftCode: string;
   bankId: number;
+  bankName: string;
   clearingCode: string;
   isDefault: boolean;
 }

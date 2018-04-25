@@ -1,7 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from "@angular/core";
 import {ClientService} from "../../../common/services/client.service";
 import {Subject} from "rxjs/Subject";
-import {takeUntil} from "rxjs/operators";
+import {switchMap, takeUntil, tap} from "rxjs/operators";
+import {ClientBankAccountModel} from "../../../common/models/client-bank-account.model";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: "app-bank-account-settings",
@@ -11,60 +13,10 @@ import {takeUntil} from "rxjs/operators";
 })
 export class BankAccountSettingsComponent implements OnInit, OnDestroy {
   private ngUnsub = new Subject<void>();
-  banks = [
-    {
-      "id": 1,
-      "name": "ANDORRA BANC AGRICOL REIG S.A.",
-      "city": null,
-      "countryId": 6,
-      "swiftCodes": [
-        "BACAADAD"
-      ]
-    },
-    {
-      "id": 2,
-      "name": "ANDORRA GESTIO AGRICOL REIG SAU",
-      "city": null,
-      "countryId": 6,
-      "swiftCodes": [
-        "AAMAADAD"
-      ]
-    },
-    {
-      "id": 3,
-      "name": "BANC SABADELL D'ANDORRA S.A.",
-      "city": null,
-      "countryId": 6,
-      "swiftCodes": [
-        "BSANADAD"
-      ]
-    },
-  ];
+  accounts: ClientBankAccountModel[] = [];
+  disableBtnProp = "isRemoveButtonDisabled";
 
-  accounts = [
-    {
-      "id": 1,
-      "clientId": 1,
-      "name": "Account 1",
-      "accountHolder": "Max",
-      "accountNumber": "1234567890",
-      "swiftCode": "BSANADAD",
-      "bankId": 3,
-      "isDefault": true
-    },
-    {
-      "id": 2,
-      "clientId": 1,
-      "name": "Account 2",
-      "accountHolder": "Max",
-      "accountNumber": "1234567890",
-      "swiftCode": "AAMAADAD",
-      "bankId": 2,
-      "isDefault": false
-    }
-  ];
-
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.clientService
@@ -73,8 +25,8 @@ export class BankAccountSettingsComponent implements OnInit, OnDestroy {
         takeUntil(this.ngUnsub)
       )
       .subscribe(accounts => {
-        console.log(accounts);
-        // this.accounts = accounts;
+        this.accounts = accounts;
+        this.cd.markForCheck();
       });
   }
 
@@ -83,11 +35,37 @@ export class BankAccountSettingsComponent implements OnInit, OnDestroy {
     this.ngUnsub.complete();
   }
 
-  getBankName(id: number): string {
-    return this.banks.find(x => x.id === id).name;
-  }
-
   onDefaultAccountChange(accId: number) {
     this.accounts.forEach(x => x.isDefault = x.id === accId);
+    this.clientService.setDefaultBankAccount(accId).subscribe(x => {}, err => alert(err));
+  }
+
+  deleteAccount(accId: number) {
+    const acc = this.accounts.find(x => x.id === accId);
+    Observable.of(accId)
+      .pipe(
+        tap(() => {
+          acc[this.disableBtnProp] = true;
+          this.cd.markForCheck();
+        }),
+        switchMap(id => this.clientService.deleteBankAccount(id))
+      )
+      .subscribe(
+        newDefaultAccId => {
+          const index = this.accounts.findIndex(x => x.id === accId);
+          if (index === -1) {
+            return;
+          }
+          this.accounts.splice(index, 1);
+          if (newDefaultAccId) {
+            this.accounts.find(x => x.id === newDefaultAccId).isDefault = true;
+          }
+          this.cd.markForCheck();
+        },
+        err => {
+          acc[this.disableBtnProp] = false;
+          this.cd.markForCheck();
+          alert(err);
+        });
   }
 }

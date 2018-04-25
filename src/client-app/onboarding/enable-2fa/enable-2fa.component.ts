@@ -44,6 +44,7 @@ export class Enable2faComponent implements OnInit, OnDestroy {
             .subscribe(countries => {
                 this.countries = countries;
                 this.step = 1;
+                this.cd.markForCheck();
             });
 
         this.addPhoneForm = this.fb.group({
@@ -96,7 +97,7 @@ export class Enable2faComponent implements OnInit, OnDestroy {
 
         const phoneVerifyCode = {
             "code": this.verifyPhoneForm.value.code
-        }
+        };
 
         this.registerApi
             .verifyClientPhone(phoneVerifyCode)

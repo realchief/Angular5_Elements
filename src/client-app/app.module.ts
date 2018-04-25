@@ -14,6 +14,7 @@ import { CheckAwatingModule } from "./check-awating/check-awating.module";
 import { AuthModule } from "./auth/auth.module";
 import {ChatbotModule} from "./chatbot/chatbot.module";
 import {SettingsModule} from "./settings/settings.module";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {SettingsModule} from "./settings/settings.module";
         MatNativeDateModule,
         CheckAwatingModule,
         ChatbotModule,
-        SettingsModule
+        SettingsModule,
+        NgbModule.forRoot()
     ],
     providers: [DecimalPipe, DatePipe],
     bootstrap: [AppComponent]
