@@ -19,6 +19,7 @@ import {ClientService} from "../../common/services/client.service";
 import {BankService} from "../../common/services/bank.service";
 import {BankOrderService} from "../../common/services/bank-order.service";
 import {CryptoAddressService} from "../../common/services/crypto-address.service";
+import {CryptoOrderService} from "../../common/services/crypto-order.service";
 
 const MODULES = [
     CommonModule,
@@ -38,6 +39,7 @@ const MODULES = [
         BankService,
         BankOrderService,
         CryptoAddressService,
+        CryptoOrderService,
         CountryService,
         TransactionRouter,
         OrderService,

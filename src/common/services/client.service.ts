@@ -8,6 +8,7 @@ import "rxjs/add/operator/publishReplay";
 import {ClientIdentityModel} from "../models/client-identity.model";
 import {ClientBankAccountModel} from "../models/client-bank-account.model";
 import {BankOrderPublicModel} from "../models/bank-order.model";
+import {CryptoOrderModel} from "../models/crypto-order.model";
 
 @Injectable()
 export class ClientService {
@@ -35,6 +36,10 @@ export class ClientService {
 
   getClientWithdrawals(): Observable<BankOrderPublicModel[]> {
     return this.api.get("fiat/order/withdrawals");
+  }
+
+  getClientCryptoWithdrawals(asset: string): Observable<CryptoOrderModel[]> {
+    return this.api.get("cryptocurrency/orders/withdrawals", {params: {asset: asset}});
   }
 
   deleteBankAccount(accId: number) {
