@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, Input} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, Input, ViewChild, ElementRef} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../shared/models/country";
 import { Subject } from "rxjs/Subject";
@@ -20,6 +20,7 @@ export class AddBankComponent implements OnInit, OnDestroy {
     countries: Country[];
     swiftCodes: string[];
     ngUnsub = new Subject();
+    @ViewChild("bankInput") bankInput: ElementRef;
     @Output() verifyBank = new EventEmitter();
     // TODO: move bank selector to component
     searchBanks = (text$: Observable<string>) =>
@@ -28,7 +29,7 @@ export class AddBankComponent implements OnInit, OnDestroy {
           filter(x => x.length > 2),
           debounceTime(400),
           distinctUntilChanged(),
-          switchMap(text => this.bankService.searchBanks(text)),
+          switchMap(text => this.bankService.searchBanks(text, this.form.get("countryCode").value)),
           takeUntil(this.ngUnsub)
         )
 
@@ -88,8 +89,17 @@ export class AddBankComponent implements OnInit, OnDestroy {
       const bank = $event.item;
       this.swiftCodes = bank.swiftCodes;
       this.form.get("bankId").setValue(bank.id);
+      this.form.get("countryCode").setValue(bank.countryId);
+      console.log($event.item);
+    }
+
+    onCountryChange($event) {
+      this.form.get("bankId").setValue(0);
+      this.bankInput.nativeElement.value = "";
     }
 
     ngOnDestroy(): void {
+      this.ngUnsub.next();
+      this.ngUnsub.complete();
     }
 }

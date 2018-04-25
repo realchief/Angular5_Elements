@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label>Bank Account Holder Name</label>
 
-                <input class="form-control form-control-lg" type="text" data-toggle="tooltip" data-placement="top" title="We do not accept third-party bank accounts. The bank account must be in the account holder name." value="John Doe" placeholder="Account Holder Name"
+                <input class="form-control form-control-lg" type="text" data-toggle="tooltip" data-placement="top" title="We do not accept third-party bank accounts. The bank account must be in the account holder name." placeholder="Account Holder Name"
                     formControlName="accountHolder">
             </div>
 
@@ -25,6 +25,8 @@
                 <label>Bank Name</label>
 
                 <input class="form-control form-control-lg"
+                       placeholder="Type bank name here..."
+                       #bankInput
                        [ngbTypeahead]="searchBanks"
                        [resultFormatter]="bankDisplayFn"
                        [inputFormatter]="bankDisplayFn"
@@ -43,7 +45,7 @@
                 <div class="form-group col">
                     <label>Country</label>
 
-                    <select class="custom-select form-control-lg" formControlName="countryCode">
+                    <select class="custom-select form-control-lg" formControlName="countryCode" (change)="onCountryChange($event)">
                         <option *ngFor="let country of countries" [value]=country.id>{{ country.countryName }}</option>
                     </select>
                 </div>
@@ -63,7 +65,12 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-block btn-lg btn-primary" (click)="addBankAccount()">Add Your Bank Account</button>
+            <button type="submit"
+                    class="btn btn-block btn-lg btn-primary"
+                    [disabled]="this.form.invalid"
+                    (click)="addBankAccount()">
+              Add Your Bank Account
+            </button>
             <button *ngIf="onboardingMode" class="btn btn-block btn-lg btn-secondary" (click)="onVerifyBank()">Do This Later</button></div>
     </div>
 </div>
