@@ -1,13 +1,13 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from "@angular/core";
-import {ClientListModel, ClientSearchResult} from "../../../../shared/models/client-search-result";
-import {ApiService} from "../../../../shared/api.service";
+import {ClientListModel, ClientSearchResult} from "../../../shared/models/client-search-result";
+import {ApiService} from "../../../shared/api.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs/Subject";
-import {AccountVerificationStatus} from "../../../../../shared/enums/account-verification-status";
-import {EnumKeysPipe} from "../../../../shared/pipes/enum-keys.pipe";
+import {AccountVerificationStatus} from "../../../../shared/enums/account-verification-status";
+import {EnumKeysPipe} from "../../../shared/pipes/enum-keys.pipe";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {KeyValueModel} from "../../../../../shared/models/key-value-model";
-import {ClientSortBy} from "../../../../../shared/enums/client-sort-by";
+import {KeyValueModel} from "../../../../shared/models/key-value-model";
+import {ClientSortBy} from "../../../../shared/enums/client-sort-by";
 
 @Component({
   selector: "app-clients-list",

@@ -1,10 +1,10 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from "@angular/core";
 import {Subject} from "rxjs/Subject";
-import {ElementsApiService} from "../../../../../common/services/elements-api.service";
-import {CountryService} from "../../../../../common/services/country.service";
-import {Country} from "../../../../../common/models/country";
+import {ElementsApiService} from "../../../../common/services/elements-api.service";
+import {CountryService} from "../../../../common/services/country.service";
+import {Country} from "../../../../common/models/country";
 import {takeUntil} from "rxjs/operators";
-import {ClientDetailsModel} from "../../../../shared/models/client-details-model";
+import {ClientDetailsModel} from "../../../shared/models/client-details-model";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
