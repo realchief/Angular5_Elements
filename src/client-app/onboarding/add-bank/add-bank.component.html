@@ -10,7 +10,10 @@
           <div class="form-group" *ngIf="!onboardingMode">
             <label>Account name</label>
 
-            <input class="form-control form-control-lg" type="text" data-toggle="tooltip" data-placement="top" placeholder="Account Name"
+            <input class="form-control form-control-lg"
+                   type="text"
+                   data-toggle="tooltip"
+                   data-placement="top"
                    formControlName="name">
           </div>
 
@@ -21,7 +24,6 @@
                        type="text" data-toggle="tooltip"
                        data-placement="top"
                        title="We do not accept third-party bank accounts. The bank account must be in the account holder name."
-                       placeholder="Account Holder Name"
                        formControlName="accountHolder"
                        readonly>
             </div>
@@ -30,7 +32,7 @@
                 <label>Bank Name</label>
 
                 <input class="form-control form-control-lg"
-                       placeholder="Type bank name here..."
+                       placeholder="Start typing bank name here..."
                        #bankInput
                        [ngbTypeahead]="searchBanks"
                        [resultFormatter]="bankDisplayFn"
