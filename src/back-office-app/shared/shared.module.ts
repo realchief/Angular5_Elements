@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {ApiService} from "./api.service";
-import {AuthGuard} from "./auth-guard.service";
-import {AuthHttpInterceptor} from "./auth.interceptor";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { ApiService } from "./api.service";
+import { AuthGuard } from "./auth-guard.service";
+import { AuthHttpInterceptor } from "./auth.interceptor";
 
 const MODULES = [
   CommonModule,
