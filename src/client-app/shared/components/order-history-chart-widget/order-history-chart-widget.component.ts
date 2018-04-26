@@ -6,7 +6,6 @@ import { MarketDataService } from "../../../../common/services/market-data.servi
 import { SymbolService } from "../../../shared/services/symbol.service";
 import "rxjs/add/observable/interval";
 import { TransactionRouter } from "../../../shared/transaction-router";
-import { Observable } from 'rxjs';
 
 @Component({
     selector: "app-order-history-chart-widget",
@@ -24,7 +23,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
     priceDiff: number;
     priceDiffPercentage: number;
     currentSymbol: string;
-    spread = {};
+    spread: any = {};
 
     constructor(
         private marketDataService: MarketDataService,
