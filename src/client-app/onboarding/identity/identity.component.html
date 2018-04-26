@@ -12,7 +12,6 @@
                         <label>First Name(s)</label>
                         <input type="text"
                                class="form-control form-control-lg"
-                               placeholder="First Name"
                                formControlName="firstName"
                                [attr.disabled]="onboardingMode ? null : 'readonly'"/>
                     </div>
@@ -21,7 +20,6 @@
                         <label>Last Name</label>
                         <input type="text"
                                class="form-control form-control-lg"
-                               placeholder="Last Name"
                                formControlName="lastName"
                                [attr.disabled]="onboardingMode ? null : 'readonly'"/>
                     </div>
@@ -33,7 +31,6 @@
                         <div class="input-group">
                         <input type="text"
                                class="form-control form-control-lg"
-                               placeholder="DD/MM/YYYY"
                                formControlName="birthday"
                                ngbDatepicker
                                #d="ngbDatepicker"
@@ -106,13 +103,13 @@ Please ensure the information entered above is correct. You can not change it la
                     <div class="form-group col">
                         <label>City</label>
 
-                        <input type="text" class="form-control form-control-lg" placeholder="City" formControlName="city" />
+                        <input type="text" class="form-control form-control-lg" formControlName="city" />
                     </div>
 
                     <div class="form-group col">
-                        <label>State/Providence</label>
+                        <label>State/Province</label>
 
-                        <input type="text" class="form-control form-control-lg" placeholder="state/Providence" formControlName="stateProvidence" />
+                        <input type="text" class="form-control form-control-lg" formControlName="stateProvidence" />
                     </div>
                 </div>
 
@@ -120,7 +117,7 @@ Please ensure the information entered above is correct. You can not change it la
                     <div class="form-group col" [style.visibility]="isPostalCodeRequired ? 'visible' : 'hidden'">
                         <label>Postal Code/Zip</label>
 
-                        <input type="text" class="form-control form-control-lg" placeholder="" formControlName="postalCode" />
+                        <input type="text" class="form-control form-control-lg" placeholder="" />
                     </div>
 
                     <div class="form-group col">
