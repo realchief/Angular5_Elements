@@ -8,5 +8,6 @@ export class ClientBankAccountModel {
   bankId: number;
   bankName: string;
   clearingCode: string;
+  countryId: number;
   isDefault: boolean;
 }

@@ -3,12 +3,12 @@ import { Router } from "@angular/router";
 import { AuthDataStorage } from "../../../common/auth-data.storage";
 import { Subject } from "rxjs/Subject";
 import { takeUntil } from "rxjs/operators";
-import { Country } from "../../shared/models/country";
+import { Country } from "../../../common/models/country";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ApiService, TOKEN_STORAGE_KEY } from "../../shared/api.service";
 import { TokenModel } from "../../../shared/models/token-model";
 import { ApplicationDomain } from "../../../shared/enums/application-domain";
-import { CountryService } from "../../shared/services/country.service";
+import { CountryService } from "../../../common/services/country.service";
 import { RegisterService } from "../../../common/services/registration.service";
 
 @Component({

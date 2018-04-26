@@ -1,10 +1,10 @@
 import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, ChangeDetectorRef} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Country } from "../../shared/models/country";
+import { Country } from "../../../common/models/country";
 import { Subject } from "rxjs/Subject";
 import { takeUntil } from "rxjs/operators";
 import {ApiService, TOKEN_STORAGE_KEY} from "../../shared/api.service";
-import { CountryService } from "../../shared/services/country.service";
+import { CountryService } from "../../../common/services/country.service";
 import {ClientService} from "../../../common/services/client.service";
 import {ClientIdentityModel} from "../../../common/models/client-identity.model";
 import {DatePipe} from "@angular/common";

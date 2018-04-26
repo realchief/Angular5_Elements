@@ -4,6 +4,8 @@ import { DashboardComponent } from "./dashboard.component";
 import { AccountsModule } from "./accounts/accounts.module";
 import { MatButtonModule, MatGridListModule } from "@angular/material";
 import { DepositsModule } from "./deposits/deposits.module";
+import {ClientsManagementModule} from "./clients-management/clients-management.module";
+import {AppRoutingModule} from "../app-routing/app-routing.module";
 
 @NgModule({
   imports: [
@@ -11,7 +13,9 @@ import { DepositsModule } from "./deposits/deposits.module";
     MatButtonModule,
     MatGridListModule,
     AccountsModule,
-    DepositsModule
+    DepositsModule,
+    ClientsManagementModule,
+    AppRoutingModule
   ],
   declarations: [DashboardComponent]
 })
