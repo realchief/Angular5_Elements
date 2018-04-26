@@ -5,6 +5,7 @@ import { MatButtonModule, MatGridListModule } from "@angular/material";
 import { DepositsModule } from "./deposits/deposits.module";
 import {ClientsManagementModule} from "./clients-management/clients-management.module";
 import {AppRoutingModule} from "../app-routing/app-routing.module";
+import {HeaderModule} from "../shared/components/header/header.module";
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import {AppRoutingModule} from "../app-routing/app-routing.module";
     MatGridListModule,
     DepositsModule,
     ClientsManagementModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HeaderModule
   ],
   declarations: [DashboardComponent]
 })
