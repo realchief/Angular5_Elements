@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="main-container">
   <section class="bg-white space-sm pb-4">
     <div class="container">
@@ -59,7 +60,9 @@
 
           <td>{{client.fullName}}</td>
 
-          <td><span class="badge badge-warning badge-pill">{{client.accountVerificationStatus | clientVerificationStatus}}</span></td>
+          <td><span class="badge badge-pill" [ngClass]="getStatusClass(client.accountVerificationStatus)">
+            {{client.accountVerificationStatus | clientVerificationStatus}}
+          </span></td>
 
           <td>
             <div class="dropdown">

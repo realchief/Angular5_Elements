@@ -4,6 +4,7 @@ import { AdministrationLayoutComponent } from "./administration-layout/administr
 import { AccountCreationComponent } from "./account-creation/account-creation.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
+import {HeaderModule} from "../shared/components/header/header.module";
 
 const ROUTES: Routes = [
   {path: "administration", component: AdministrationLayoutComponent, children: [
@@ -16,6 +17,7 @@ const ROUTES: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HeaderModule,
     RouterModule.forChild(ROUTES)
   ],
   declarations: [AdministrationLayoutComponent, AccountCreationComponent]

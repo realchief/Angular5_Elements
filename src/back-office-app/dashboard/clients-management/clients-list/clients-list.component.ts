@@ -57,6 +57,23 @@ export class ClientsListComponent implements OnInit, OnDestroy {
       .subscribe(this.onSuccess.bind(this), err => alert(err));
   }
 
+  getStatusClass(status: AccountVerificationStatus) {
+    switch (status) {
+      case AccountVerificationStatus.NotVerified:
+        return "badge-secondary";
+      case AccountVerificationStatus.Pending:
+        return "badge-warning";
+      case AccountVerificationStatus.RunningChecks:
+        return "badge-info";
+      case AccountVerificationStatus.UnderReview:
+        return "badge-danger";
+      case AccountVerificationStatus.Approved:
+        return "badge-success";
+      default:
+        return "badge-dark";
+    }
+  }
+
   private onSuccess(result: ClientSearchResult) {
     this.clients = result.data;
     this.clientsCount = result.count;

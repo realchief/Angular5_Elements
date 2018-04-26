@@ -9,6 +9,7 @@ import { EnumKeysPipe } from "./pipes/enum-keys.pipe";
 import {CountryService} from "../../common/services/country.service";
 import {ElementsServicesModule} from "../../common/services/elements-services.module";
 import {AuthDataStorage} from "../../common/auth-data.storage";
+import {HeaderModule} from "./components/header/header.module";
 
 const MODULES = [
   CommonModule,
@@ -23,6 +24,7 @@ const MODULES = [
     AuthGuard,
     CountryService,
     AuthDataStorage,
+    HeaderModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,

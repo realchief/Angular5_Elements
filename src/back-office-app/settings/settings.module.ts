@@ -4,6 +4,7 @@ import { SettingsLayoutComponent } from "./settings-layout/settings-layout.compo
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 import {RouterModule, Routes} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
+import {HeaderModule} from "../shared/components/header/header.module";
 
 const ROUTES: Routes = [
   {path: "settings", component: SettingsLayoutComponent, children: [
@@ -16,6 +17,7 @@ const ROUTES: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HeaderModule,
     RouterModule.forChild(ROUTES)
   ],
   declarations: [SettingsLayoutComponent, ChangePasswordComponent]
