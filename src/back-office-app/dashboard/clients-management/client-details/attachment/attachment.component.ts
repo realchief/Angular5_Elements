@@ -1,9 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy} from "@angular/core";
 import {FileMetadataModel} from "../../../../shared/models/file-metadata-model";
-import {environment} from "../../../../../environments/environment";
 import {ElementsApiService} from "../../../../../common/services/elements-api.service";
 import {Subject} from "rxjs/Subject";
 import {takeUntil} from "rxjs/operators";
+import {saveAs} from "file-saver/FileSaver";
 
 @Component({
   selector: "app-attachment",
@@ -42,8 +42,6 @@ export class AttachmentComponent implements OnInit, OnDestroy {
 
   private downloadFile(data: Response) {
     const blob = new Blob([data], { type: this.model.contentType });
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
-    // window.open(url);
+    saveAs(blob, this.model.key);
   }
 }
