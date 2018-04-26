@@ -10,6 +10,13 @@
   </tr>
   </thead>
   <tbody>
+    <tr *ngIf="orders.length === 0">
+      <td colspan="6">
+        <div class="alert alert-warning" role="alert" style="text-align: center">
+          We didn't find any ..... in the system.
+        </div>
+      </td>
+    </tr>
     <ng-template ngFor let-order [ngForOf]="orders">
       <tr class="bg-white">
         <td>{{order.createdAt | date:"dd-MMMM-yyyy hh:mm"}}</td>
@@ -32,5 +39,7 @@
     </ng-template>
   </tbody>
 </table>
-<a href="#" (click)="showAll($event)" [hidden]="!isCollapsed ? 'hidden' : null">View all</a>
-<a href="#" (click)="collapse($event)" [hidden]="isCollapsed ? 'hidden' : null">Collapse</a>
+<div *ngIf="orders.length > 0">
+  <a href="#" (click)="showAll($event)" [hidden]="!isCollapsed ? 'hidden' : null">View all</a>
+  <a href="#" (click)="collapse($event)" [hidden]="isCollapsed ? 'hidden' : null">Collapse</a>
+</div>
