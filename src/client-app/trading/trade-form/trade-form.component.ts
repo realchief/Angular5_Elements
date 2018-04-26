@@ -89,6 +89,11 @@ export class TradeFormComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (!this.isPriceVisible) {
+      this.form.get("price").setValue(0);
+    }
+    console.log(this.form.value);
+
     this.isSubmitting = true;
     this.orderService
       .placeOrder(this.form.value)
