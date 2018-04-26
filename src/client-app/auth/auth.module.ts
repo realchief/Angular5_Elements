@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from "./reset-password/reset-password.componen
 import { RecoverPasswordComponent } from "./recover-password/recover-password.component";
 import { RecoverCodeComponent } from "./recover-code/recover-code.component";
 import { AuthComponent } from "./auth.component";
+import {ShowHidePasswordModule} from "ngx-show-hide-password";
 
 const appRoutes: Routes = [
     {
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
                 component: RecoverCodeComponent
             }, {
                 path: 'reset-password',
-                component: ResetPasswordComponent 
+                component: ResetPasswordComponent
             }
         ]
     },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     imports: [
         SharedModule,
         ReactiveFormsModule,
+        ShowHidePasswordModule,
         RouterModule.forRoot(
             appRoutes,
         ),

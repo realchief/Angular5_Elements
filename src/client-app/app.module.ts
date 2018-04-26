@@ -18,6 +18,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {DepositsModule} from "./deposit/deposits.module";
 import {WithdrawalModule} from "./withdrawal/withdrawal.module";
 import {TradingModule} from "./trading/trading.module";
+import {ShowHidePasswordModule} from "ngx-show-hide-password";
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import {TradingModule} from "./trading/trading.module";
         DepositsModule,
         WithdrawalModule,
         TradingModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        ShowHidePasswordModule.forRoot()
     ],
     providers: [DecimalPipe, DatePipe],
     bootstrap: [AppComponent]
