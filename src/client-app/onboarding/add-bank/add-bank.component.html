@@ -1,4 +1,4 @@
-<div id="fourth">
+<div id="fourth" *ngIf="form">
     <div class="row">
         <div *ngIf="onboardingMode" class="col-6 d-none d-md-block"></div>
 
@@ -7,18 +7,16 @@
 
             <p>Link your bank account to your Elements account to transfer Fiat into and out of exchange. You can verify your bank account by initiating a wire transfer to Elements.</p>
 
-          <div class="form-group">
-            <label>Account name</label>
-
-            <input class="form-control form-control-lg" type="text" data-toggle="tooltip" data-placement="top" placeholder="Account Name"
-                   formControlName="name">
-          </div>
-
             <div class="form-group">
                 <label>Bank Account Holder Name</label>
 
-                <input class="form-control form-control-lg" type="text" data-toggle="tooltip" data-placement="top" title="We do not accept third-party bank accounts. The bank account must be in the account holder name." placeholder="Account Holder Name"
-                    formControlName="accountHolder">
+                <input class="form-control form-control-lg"
+                       type="text" data-toggle="tooltip"
+                       data-placement="top"
+                       title="We do not accept third-party bank accounts. The bank account must be in the account holder name."
+                       placeholder="Account Holder Name"
+                       formControlName="accountHolder"
+                       readonly>
             </div>
 
             <div class="form-group">

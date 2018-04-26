@@ -42,7 +42,7 @@ export class BalancePanelComponent implements OnInit, OnDestroy {
       .getClientId()
       .pipe(
         switchMap(clientId => this.clientService.getClientPublicData(clientId)),
-        map(x => x.name),
+        map(x => `${x.firstName} ${x.lastName}`),
         takeUntil(this.ngUnsub)
       );
   }

@@ -46,6 +46,10 @@ export class ClientService {
     return this.api.post("fiat/get-balance-detalization", {});
   }
 
+  getPublicInfo(): Observable<ClientPublicModel> {
+    return this.api.get("client/public-info");
+  }
+
   deleteBankAccount(accId: number) {
     return this.api.delete(`client/bank-accounts/delete/${accId}`);
   }

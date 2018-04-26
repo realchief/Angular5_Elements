@@ -1,6 +1,6 @@
 import { Observable } from "rxjs/Observable";
 import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import { catchError } from "rxjs/operators";
 import "rxjs/add/observable/throw";
 import { environment } from "../../environments/environment";
@@ -13,7 +13,7 @@ export class ElementsApiService {
     private http: HttpClient,
     private router: Router,
     private authDataStorage: AuthDataStorage,
-    private onError: (err: Response) => void) {
+    private onError: (err: HttpErrorResponse) => void) {
   }
 
   get<T>(url: string, options?: any): Observable<T | any> {

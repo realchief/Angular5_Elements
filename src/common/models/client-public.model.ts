@@ -1,3 +1,11 @@
 export class ClientPublicModel {
-  name: string;
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+
+  getFullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }

@@ -1,4 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, Input, ViewChild, ElementRef} from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  OnDestroy,
+  Input,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef
+} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../../common/models/country";
 import { Subject } from "rxjs/Subject";
@@ -7,6 +18,8 @@ import { ApiService } from "../../shared/api.service";
 import { CountryService } from "../../../common/services/country.service";
 import {Observable} from "rxjs/Observable";
 import {BankService} from "../../../common/services/bank.service";
+import {ElementsApiService} from "../../../common/services/elements-api.service";
+import {ClientService} from "../../../common/services/client.service";
 
 @Component({
     selector: "app-add-bank",
@@ -30,7 +43,7 @@ export class AddBankComponent implements OnInit, OnDestroy {
           filter(x => x.length > 2),
           debounceTime(400),
           distinctUntilChanged(),
-          switchMap(text => this.bankService.searchBanks(text, this.form.get("countryCode").value)),
+          switchMap(text => this.bankService.searchBanks(text, this.form.get("countryId").value)),
           takeUntil(this.ngUnsub)
         )
 
@@ -38,26 +51,39 @@ export class AddBankComponent implements OnInit, OnDestroy {
 
     constructor(
       private fb: FormBuilder,
+      private clientService: ClientService,
       private countryService: CountryService,
       private bankService: BankService,
-      private api: ApiService) { }
+      private api: ElementsApiService,
+      private cd: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.countryService.getCountries()
-            .pipe(takeUntil(this.ngUnsub))
-            .subscribe(x => this.countries = x);
+      this.countryService
+        .getCountries()
+        .pipe(takeUntil(this.ngUnsub))
+        .subscribe(x => this.countries = x);
 
-        this.form = this.fb.group({
-            "name": this.fb.control("", Validators.required),
-            "accountHolder": this.fb.control("", Validators.required),
+      this.clientService
+        .getPublicInfo()
+        .pipe(
+          takeUntil(this.ngUnsub)
+        )
+        .subscribe(clientInfo => {
+          this.form = this.fb.group({
+            "name": this.fb.control("Default account", Validators.required),
+            "accountHolder": this.fb.control(`${clientInfo.firstName} ${clientInfo.lastName}`, Validators.required),
             "accountNumber": this.fb.control("", Validators.required),
             "swiftCode": this.fb.control("", Validators.required),
             "bankId": this.fb.control(0, Validators.required),
             "clearingCode": this.fb.control(""),
-            "countryCode": this.fb.control("", Validators.required),
+            "countryId": this.fb.control("", Validators.required),
             "dateFrom": this.fb.control(new Date().toISOString(), Validators.required),
             "dateTo": this.fb.control(null)
+          });
+          this.cd.markForCheck();
         });
+
+
     }
 
     addBankAccount() {
@@ -91,7 +117,7 @@ export class AddBankComponent implements OnInit, OnDestroy {
       const bank = $event.item;
       this.swiftCodes = bank.swiftCodes;
       this.form.get("bankId").setValue(bank.id);
-      this.form.get("countryCode").setValue(bank.countryId);
+      this.form.get("countryId").setValue(bank.countryId);
     }
 
     onCountryChange($event) {
