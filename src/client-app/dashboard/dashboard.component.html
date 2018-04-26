@@ -43,16 +43,21 @@
             <div class="card-body">
               <div class="row text-center">
                 <div class="col-12 col-sm-6 col-md-12 my-2"><span class="title-decorative  m-0">Market Price</span>
-                  <small class="title-decorative text-dark">$8,858.30</small></div>
+                  <small class="title-decorative text-dark">${{marketPrice | number:"1.2-2"}}</small></div>
                 <!--end of col-->
                 <div class="col-12 col-sm-6 col-md-12  my-2"><span class="title-decorative m-0">24hr Change</span>
-                  <small class="title-decorative text-red"><span class="stack-down-dir">▾</span> $183 (-0.83%) </small></div>
+                  <small class="title-decorative" [class.text-red]="!isGrow" [class.text-green]="isGrow">
+                    <span class="stack-down-dir">{{isGrow ? '▲' : '▼'}}</span>
+                    ${{priceDiff}} ({{priceDiffPercentage}}%)
+                  </small>
                 <!--end of col-->
                 <div class="col-12 col-sm-6 col-md-12 my-2"><span class="title-decorative m-0">24hr Range</span>
-                  <small class="title-decorative text-dark">$8,602.08-9,038.00</small></div>
+                  <small class="title-decorative text-dark">
+                    ${{dashboardData.priceDiff?.dayAgo | number:"1.2-2"}}-{{dashboardData.priceDiff?.now | number:"1.2-2"}}
+                  </small></div>
                 <!--end of col-->
                 <div class="col-12 col-sm-6 col-md-12 my-2"><span class="title-decorative m-0">24hr Volume</span>
-                  <small class="title-decorative text-dark">$933,293</small></div>
+                  <small class="title-decorative text-dark">${{volume | number:"1.2-2"}}</small></div>
                 <!--end of col-->
               </div>
             </div>

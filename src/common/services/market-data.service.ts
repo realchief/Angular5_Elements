@@ -31,4 +31,8 @@ export class MarketDataService {
     getLastWeekPrice(symbol): Observable<any> {
       return this.api.get("market-data/last-week-price-history", {params: {symbol: symbol}});
     }
+
+    getDashboardData(symbol) {
+      return this.api.get("market-data/dashboard-data", {params: {symbol: symbol}});
+    }
 }

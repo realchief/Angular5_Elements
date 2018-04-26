@@ -15,6 +15,12 @@ export class DashboardComponent implements OnInit {
   transactions = [];
   txTypeEnum = TransactionType;
   clientName: string;
+  dashboardData: any = {};
+  isGrow: boolean;
+  priceDiff: number;
+  priceDiffPercentage: number;
+  marketPrice: number;
+  volume: number;
 
   constructor(
     private marketDataService: MarketDataService,
@@ -37,6 +43,21 @@ export class DashboardComponent implements OnInit {
       .getClientIdentity()
       .subscribe(identity => {
         this.clientName = identity.personalParticularsModel.firstName;
+      });
+
+    this.marketDataService
+      .getDashboardData("BTC_USD")
+      .subscribe(data => {
+        this.dashboardData = data;
+        const diff = data.priceDiff;
+        this.marketPrice = data.marketPrice;
+        this.volume = data.volume;
+        this.isGrow = diff.now > diff.dayAgo;
+        this.priceDiff = Math.abs(diff.now - diff.dayAgo);
+        this.priceDiffPercentage = 0;
+        if (diff.dayAgo > 0 && diff.dayAgo > 0) {
+          this.priceDiffPercentage = diff.now / diff.dayAgo - 1;
+        }
       });
   }
 
