@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, ChangeDetectorRef, Input} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, ChangeDetectorRef, Input, Injectable} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../../common/models/country";
 import { Subject } from "rxjs/Subject";
@@ -12,11 +12,14 @@ import {PersonalParticularsModel} from "../../../common/models/personal-particul
 import {AddressData, ClientAddressModel} from "../../../common/models/client-address.model";
 import {COUNTRIES_WITHOUT_POSTCODES} from "../../../common/countries-without-postal-codes";
 import {ElementsApiService} from "../../../common/services/elements-api.service";
+import {NgbDateAdapter} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateNativeAdapter} from "../../../common/ng-date-native-adapter";
 
 @Component({
     selector: "app-identity",
     templateUrl: "./identity.component.html",
     styleUrls: ["./identity.component.scss"],
+    providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IdentityComponent implements OnInit {
@@ -152,6 +155,10 @@ export class IdentityComponent implements OnInit {
         postalCodeControl.updateValueAndValidity();
         this.cd.markForCheck();
       }, err => console.log(err));
+  }
+
+  onBirthdayChange($event) {
+    console.log($event);
   }
 
   private disableSubmitFlagAndRefresh() {
