@@ -8,6 +8,7 @@ import {HeaderModule} from "../shared/components/header/header.module";
 import {FooterModule} from "../shared/components/footer/footer.module";
 import {OrderHistoryChartWidgetModule} from "../shared/components/order-history-chart-widget/order-history-chart-widget.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { OrdersTableComponent } from "./orders-table/orders-table.component";
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
       {path: "trading", component: TradingPageLayoutComponent}
     ])
   ],
-  declarations: [TradingPageLayoutComponent, TradeFormComponent]
+  declarations: [TradingPageLayoutComponent, TradeFormComponent, OrdersTableComponent]
 })
 export class TradingModule { }
