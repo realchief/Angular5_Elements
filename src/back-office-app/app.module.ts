@@ -8,6 +8,9 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { SharedModule } from "./shared/shared.module";
 import { AuthModule } from "./auth/auth.module";
+import {DropdownModule} from "angular-custom-dropdown";
+import {SettingsModule} from "./settings/settings.module";
+import {AdministrationModule} from "./administration/administration.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { AuthModule } from "./auth/auth.module";
     AppRoutingModule,
     DashboardModule,
     SharedModule,
-    AuthModule
+    AuthModule,
+    DropdownModule,
+    SettingsModule,
+    AdministrationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
