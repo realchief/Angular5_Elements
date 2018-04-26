@@ -1,5 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy} from "@angular/core";
 import {FileMetadataModel} from "../../../../shared/models/file-metadata-model";
+import {environment} from "../../../../../environments/environment";
+import {ElementsApiService} from "../../../../../common/services/elements-api.service";
+import {Subject} from "rxjs/Subject";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: "app-attachment",
@@ -7,13 +11,39 @@ import {FileMetadataModel} from "../../../../shared/models/file-metadata-model";
   styleUrls: ["./attachment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AttachmentComponent implements OnInit {
+export class AttachmentComponent implements OnInit, OnDestroy {
 
   @Input() model: FileMetadataModel;
+  private ngUnsub = new Subject();
 
-  constructor() { }
+  constructor(private api: ElementsApiService) { }
 
   ngOnInit() {
   }
 
+  getFile() {
+    const opts = {
+      params: this.model,
+      responseType: "blob"
+    };
+    this.api.get("file-storage/get-file", opts)
+      .pipe(takeUntil(this.ngUnsub))
+      .subscribe(x => this.downloadFile(x), err => alert(err));
+  }
+
+  getFileSizeInKb(): number {
+    return Math.ceil(this.model.size / 1024);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsub.next();
+    this.ngUnsub.complete();
+  }
+
+  private downloadFile(data: Response) {
+    const blob = new Blob([data], { type: this.model.contentType });
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
+    // window.open(url);
+  }
 }

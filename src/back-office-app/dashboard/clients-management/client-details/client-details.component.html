@@ -72,7 +72,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-success">Yes</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="approve()">Yes</button>
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@
           </div>
         </div>
         <div class="col-6">
-          <div class="card">
+          <div class="card" *ngIf="client">
             <div class="card-header d-flex justify-content-between">
               <div>
                 <span class="h6">Onfido</span>

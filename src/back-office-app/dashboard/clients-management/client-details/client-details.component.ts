@@ -43,6 +43,12 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
     return null;
   }
 
+  approve() {
+    this.api.post(`client/approve-client/${this.client.id}`, null)
+      .pipe(takeUntil(this.ngUnsub))
+      .subscribe(x => console.log(x) , err => alert(err));
+  }
+
   ngOnDestroy(): void {
     this.ngUnsub.next();
     this.ngUnsub.complete();
