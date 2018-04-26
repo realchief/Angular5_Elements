@@ -1,5 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { TransactionRouter } from "../shared/transaction-router";
+import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from "@angular/core";
+import {MarketDataService} from "../../common/services/market-data.service";
+import * as moment from "moment";
+import {ClientService} from "../../common/services/client.service";
+import {TransactionType} from "../../common/enums/transaction-type";
 
 @Component({
   selector: "app-dashboard",
@@ -8,10 +11,52 @@ import { TransactionRouter } from "../shared/transaction-router";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
+  chartOptions;
+  transactions = [];
+  txTypeEnum = TransactionType;
+  clientName: string;
 
-  constructor(private txRouter: TransactionRouter) {}
+  constructor(
+    private marketDataService: MarketDataService,
+    private clientService: ClientService,
+    private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.marketDataService
+      .getLastWeekPrice("BTC_USD")
+      .subscribe(data => {
+        this.buildChartOptions(data);
+        this.cd.markForCheck();
+      });
+    this.clientService
+      .getTransactionHistory()
+      .subscribe(data => {
+        this.transactions = data;
+      });
+    this.clientService
+      .getClientIdentity()
+      .subscribe(identity => {
+        this.clientName = identity.personalParticularsModel.firstName;
+      });
+  }
+
+  private buildChartOptions(data) {
+    const prices = data.map(x => x.price);
+    const minY = Math.min.apply(null, prices) - 100;
+    this.chartOptions = {
+      xAxis: {
+        type: "category",
+        data: data.map(x => moment(x.dataPoint).format("dd-MM hh:mm "))
+      },
+      yAxis: {
+        min: minY,
+        type: "value"
+      },
+      series: [{
+        data: prices,
+        type: "line"
+      }]
+    };
   }
 
 }

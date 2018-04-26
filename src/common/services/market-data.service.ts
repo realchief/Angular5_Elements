@@ -27,4 +27,8 @@ export class MarketDataService {
     getSpread(symbol): Observable<any> {
       return this.api.get("market-data/spread", {params: {symbol: symbol}});
     }
+
+    getLastWeekPrice(symbol): Observable<any> {
+      return this.api.get("market-data/last-week-price-history", {params: {symbol: symbol}});
+    }
 }

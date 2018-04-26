@@ -42,6 +42,10 @@ export class ClientService {
     return this.api.get("cryptocurrency/orders/withdrawals", {params: {asset: asset}});
   }
 
+  getTransactionHistory() {
+    return this.api.post("fiat/get-balance-detalization", {});
+  }
+
   deleteBankAccount(accId: number) {
     return this.api.delete(`client/bank-accounts/delete/${accId}`);
   }

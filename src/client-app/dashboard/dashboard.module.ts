@@ -6,6 +6,7 @@ import { MatGridListModule, MatListModule, MatToolbarModule, MatDialogModule } f
 import { UserOrdersModule } from "./user-orders/user-orders.module";
 import { HistoryDataModule } from "./history-data/history-data.module";
 import { HeaderModule } from "../shared/components/header/header.module";
+import {NgxEchartsModule} from "ngx-echarts";
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { HeaderModule } from "../shared/components/header/header.module";
         HeaderModule,
         UserOrdersModule,
         HistoryDataModule,
-        BalancePanelModule
+        BalancePanelModule,
+        NgxEchartsModule
     ],
     declarations: [DashboardComponent]
 })
