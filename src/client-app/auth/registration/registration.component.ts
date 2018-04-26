@@ -28,6 +28,7 @@ export class RegistrationComponent implements OnInit {
             "firstName": this.fb.control("", [Validators.required]),
             "lastName": this.fb.control("", [Validators.required]),
             "password": this.fb.control("", [Validators.required]),
+            "isAgreeWithTerms": this.fb.control(false, [Validators.requiredTrue]),
         });
     }
 
