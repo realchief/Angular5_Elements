@@ -10,40 +10,52 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label>First Name(s)</label>
-
-                        <input type="text" class="form-control form-control-lg" placeholder="First Name" formControlName="firstName" />
+                        <input type="text"
+                               class="form-control form-control-lg"
+                               placeholder="First Name"
+                               formControlName="firstName"
+                               [attr.disabled]="onboardingMode ? null : 'readonly'"/>
                     </div>
 
                     <div class="form-group col">
                         <label>Last Name</label>
-
-                        <input type="text" class="form-control form-control-lg" placeholder="Last Name" formControlName="lastName" />
+                        <input type="text"
+                               class="form-control form-control-lg"
+                               placeholder="Last Name"
+                               formControlName="lastName"
+                               [attr.disabled]="onboardingMode ? null : 'readonly'"/>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col">
                         <label>Date of Birth</label>
-
-                        <input type="date" class="form-control form-control-lg" placeholder="DD/MM/YYYY" formControlName="birthday">
+                        <input type="date"
+                               class="form-control form-control-lg"
+                               placeholder="DD/MM/YYYY"
+                               formControlName="birthday"
+                               [attr.disabled]="onboardingMode ? null : 'readonly'">
                     </div>
 
                     <div class="form-group col">
                         <label>Gender</label>
 
-                        <select class="custom-select form-control-lg" formControlName="gender">
-                                <option value="male">Male</option>
-
-                                <option value="female">Female</option>
-                            </select>
+                        <select class="custom-select form-control-lg"
+                                formControlName="gender"
+                                [attr.disabled]="onboardingMode ? null : 'readonly'">
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Place of Birth</label>
 
-                    <select class="custom-select form-control-lg" formControlName="placeOfBirthCountryId">
-                        <option *ngFor="let country of countries" [value]=country.id>{{ country.countryName }}</option>
+                    <select class="custom-select form-control-lg"
+                            formControlName="placeOfBirthCountryId"
+                            [attr.disabled]="onboardingMode ? null : 'readonly'">
+                      <option *ngFor="let country of countries" [value]=country.id>{{ country.countryName }}</option>
                     </select>
                 </div>
 
@@ -94,7 +106,7 @@ Please ensure the information entered above is correct. You can not change it la
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col">
+                    <div class="form-group col" [style.visibility]="isPostalCodeRequired ? 'visible' : 'hidden'">
                         <label>Postal Code/Zip</label>
 
                         <input type="text" class="form-control form-control-lg" placeholder="" formControlName="postalCode" />
