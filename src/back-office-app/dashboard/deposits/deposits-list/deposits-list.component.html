@@ -44,59 +44,35 @@
             </thead>
 
             <tbody>
-                <tr class="bg-white">
-                    <th>
-                        <a href="#">4389439943</a>
-                    </th>
-                    <td>Nov 15, 2017 9:44</td>
-                    <td>$10,000</td>
-                    <td>J8MN39AZ</td>
-                    <td>
-                        <span class="badge badge-warning badge-pill">Pending</span>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="icon-dots-three-horizontal"></i>
-                            </button>
+                <ng-container *ngFor="let order of orders">
+                    <tr class="bg-white">
+                        <th>
+                            <a href="#">{{order.clientId}}</a>
+                        </th>
+                        <td>{{order.createdDate}}</td>
+                        <td>{{order.amount}}</td>
+                        <td>{{order.orderReference}}</td>
+                        <td>
+                            <span class="badge badge-warning badge-pill">Pending</span>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-dots-three-horizontal"></i>
+                                </button>
 
-                            <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" [routerLink]="['/deposits', '1']">View Details</a>
+                                <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" [routerLink]="['/deposits', order.id]">View Details</a>
 
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Contact Client</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Contact Client</a>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="table-divider"></tr>
-                <tr class="bg-white">
-                    <th>
-                        <a href="#">4389439943</a>
-                    </th>
-                    <td>Nov 15, 2017 9:44</td>
-                    <td>$10,000</td>
-                    <td>J8MN39AZ</td>
-                    <td>
-                        <span class="badge badge-warning badge-pill">Pending</span>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="icon-dots-three-horizontal"></i>
-                            </button>
-
-                            <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" [routerLink]="['/deposits', '2']">View Details</a>
-
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Contact Client</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                    <tr class="table-divider"></tr>
+                </ng-container>
             </tbody>
         </table>
     </div>
