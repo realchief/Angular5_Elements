@@ -43,7 +43,7 @@
             <div class="card">
                 <div class="card-header">Photo ID</div>
 
-                <div><span class="text-success">Permitted</span>
+                <div class="card-body"><span class="text-success">Permitted</span>
 
                     <ul class="text-success">
                         <li>Passport</li>
@@ -61,7 +61,13 @@
                     <button class="btn btn-primary" (click)="passportInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Open File</button>
                     <input hidden type="file" #passportInput (change)="getPassportFromFile($event)" accept="application/pdf, image/png, image/jpeg" />
                     <button class="btn btn-primary" [disabled]="!(passport && passport.base64)" (click)="uploadDocument(passport)"><i class="icon-upload-to-cloud">&nbsp;</i>Start Uploading</button>
+                  <div class="progress" *ngIf="isUploadingPhotoId">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                  </div>
                 </div>
+              <div class="card-footer" *ngIf="hasPassport">
+                <span class="text-success upload-success"><i class="fa fa-check-circle"></i> Photo ID uploaded!</span>
+              </div>
             </div>
         </div>
 
@@ -69,7 +75,7 @@
             <div class="card">
                 <div class="card-header">Proof of Address</div>
 
-                <div><span class="text-success">Permitted</span>
+                <div class="card-body"><span class="text-success">Permitted</span>
 
                     <ul class="text-success">
                         <li>Full Page Scan of Utility Bill
@@ -84,7 +90,13 @@
                     <button class="btn btn-primary" (click)="addressProofInput.click()"><i class="icon-upload-to-cloud">&nbsp;</i>Open File</button>
                     <input hidden type="file" #addressProofInput (change)="getAddressProof($event)" accept="application/pdf, image/png, image/jpeg" />
                     <button class="btn btn-primary" [disabled]="!(addressProof && addressProof.base64)" (click)="uploadDocument(addressProof)"><i class="icon-upload-to-cloud">&nbsp;</i>Start Uploading</button>
+                  <div class="progress" *ngIf="isUploadingFile">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                  </div>
                 </div>
+              <div class="card-footer" *ngIf="hasAddressProof">
+                <span class="text-success upload-success"><i class="fa fa-check-circle"></i> Proof of Address uploaded!</span>
+              </div>
             </div>
         </div>
     </div>

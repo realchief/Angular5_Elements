@@ -22,14 +22,17 @@ export class UploadDocumentsComponent implements OnInit, OnDestroy {
     addressProof: FileUpload = null;
     passport: FileUpload = null;
     showWebcam = false;
+    isUploadingFile = false;
+    isUploadingPhotoId = false;
     private ngUnsub = new Subject();
     private trigger: Subject<void> = new Subject<void>();
 
-    constructor(private cd: ChangeDetectorRef,
-        private api: ApiService,
-        private validService: ClientValidationService,
-        private router: Router,
-        private authDataStorage: AuthDataStorage,) { }
+    constructor(
+      private cd: ChangeDetectorRef,
+      private api: ApiService,
+      private validService: ClientValidationService,
+      private router: Router,
+      private authDataStorage: AuthDataStorage) { }
 
     ngOnInit() {
 
@@ -51,7 +54,7 @@ export class UploadDocumentsComponent implements OnInit, OnDestroy {
             this.addressProof.documentType = "utility_bill_(other)";
             this.addressProof.contentType = file.type;
             this.addressProof.fileName = file.name;
-            this.addressProof.base64 = btoa(reader.result);
+            this.isUploadingFile = false;
             this.cd.detectChanges();
         };
         if (file && files) {
@@ -91,16 +94,23 @@ export class UploadDocumentsComponent implements OnInit, OnDestroy {
             return;
         }
 
+        if (document.documentType === "passport") {
+          this.isUploadingPhotoId = true;
+        } else {
+          this.isUploadingFile = true;
+        }
         this.api.post("onboarding/document", document)
             .pipe(takeUntil(this.ngUnsub))
             .subscribe(x => {
                 if (document.documentType === "passport") {
                     this.hasPassport = true;
+                    this.isUploadingPhotoId = false;
                 } else {
                     this.hasAddressProof = true;
+                    this.isUploadingFile = false;
                 }
                 this.cd.detectChanges();
-            }, err => alert(err));
+            }, err => { alert(err); this.isUploadingFile = false; this.isUploadingPhotoId = false; this.cd.markForCheck(); });
     }
 
     onStartCheck() {
