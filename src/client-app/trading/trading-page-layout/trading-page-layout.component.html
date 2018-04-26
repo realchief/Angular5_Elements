@@ -1,0 +1,101 @@
+<app-header></app-header>
+<div class="main-container">
+  <section class="bg-gradient text-white">
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12">
+          <div class="space-lg text-center text-md-left">
+            <h1 class="no-wrap">Buy Bitcoin</h1>
+          </div>
+        </div>
+        <!--end of col-->
+      </div>
+      <!--end of row-->
+    </div>
+    <!--end of container-->
+  </section>
+  <section class="bg-white space-sm">
+    <div class="container"></div>
+  </section>
+
+  <section class="">
+    <div class="container">
+      <app-trade-form></app-trade-form>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="container">
+      <h2>Recent BTC/USD Order History</h2>
+      <hr class="short">
+      <!--			<div class="alert alert-info" role="alert">You have no completed exchange orders.</div>-->
+      <table class="table table-hover align-items-center table-borderless">
+        <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Type</th>
+          <th scope="col">Asset</th>
+          <th scope="col">Fulfilled</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="bg-white">
+          <th>Today</th>
+          <td>Limit Buy</td>
+          <td><span class="badge badge-warning badge-pill">BTC</span></td>
+          <td>
+            <div class="progress" style="height: 2px;">
+              <div class="progress-bar" role="progressbar" style="width: 17%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div></div>
+          </td>
+          <td>5.04729572</td>
+          <td>$45,072.35</td>
+        </tr>
+        <tr class="table-divider"></tr>
+        <tr class="bg-white">
+          <th>Today</th>
+          <td>Limit Sell</td>
+          <td><span class="badge badge-info badge-pill">ETH</span></td>
+          <td>
+            <div class="progress" style="height: 2px;">
+              <div class="progress-bar" role="progressbar" style="width: 71%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div></div>
+          </td>
+          <td>5.04729572</td>
+          <td>$45,072.35</td>
+        </tr>
+        <tr class="table-divider"></tr>
+        <tr class="bg-white">
+          <th>Today</th>
+          <td>Limit Buy</td>
+          <td><span class="badge badge-warning badge-pill">BTC</span></td>
+          <td>
+            <div class="progress" style="height: 2px;">
+              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
+          </td>
+          <td>5.04729572</td>
+          <td>$45,072.35</td>
+        </tr>
+        <tr class="table-divider"></tr>
+        <tr class="bg-white">
+          <th>Today</th>
+          <td>Limit Buy</td>
+          <td><span class="badge badge-info badge-pill">ETH</span></td>
+          <td>
+            <div class="progress" style="height: 2px;">
+              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
+          </td>
+          <td>5.04729572</td>
+          <td>$45,072.35</td>
+        </tr>
+        </tbody>
+      </table>
+      <a href="#">View all ›</a>
+      <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width:95%;"></div>
+    </div>
+  </section>
+
+
+
+  <app-footer></app-footer>
+</div>

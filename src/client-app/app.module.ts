@@ -17,6 +17,7 @@ import {SettingsModule} from "./settings/settings.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {DepositsModule} from "./deposit/deposits.module";
 import {WithdrawalModule} from "./withdrawal/withdrawal.module";
+import {TradingModule} from "./trading/trading.module";
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import {WithdrawalModule} from "./withdrawal/withdrawal.module";
         SettingsModule,
         DepositsModule,
         WithdrawalModule,
+        TradingModule,
         NgbModule.forRoot()
     ],
     providers: [DecimalPipe, DatePipe],
