@@ -1,8 +1,10 @@
+import { ClientOrderStatus } from "../../../common/enums/client-order-status";
+
 export interface ClientBankOrder {
     id: string,
     amount: number,
     asset: string,
-    status: number,
+    status: ClientOrderStatus,
     createdDate: string,
     reconciliationDate: string,
     type: number,

@@ -17,13 +17,13 @@
             <div class="col">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
-                        <span class="text-muted text-small">Results 1 - 8 of 8</span>
+                        <span class="text-muted text-small">Results 1 - {{orders.length}} of {{orders.length}}</span>
                     </div>
                     <form class="d-flex align-items-center">
                         <span class="mr-2 text-muted text-small text-nowrap">Sort by:</span>
-                        <select class="custom-select">
-                            <option value="old-new" selected="">Newest</option>
-                            <option value="new-old">Oldest</option>
+                        <select class="custom-select" (change)="sortingChanged($event.target.value)">
+                            <option value="newest-first" selected="">Newest</option>
+                            <option value="oldest-first">Oldest</option>
                             <option value="status">Status</option>
                         </select>
                     </form>
@@ -49,11 +49,11 @@
                         <th>
                             <a href="#">{{order.clientId}}</a>
                         </th>
-                        <td>{{order.createdDate}}</td>
+                        <td>{{order.createdDate | date: 'short'}}</td>
                         <td>{{order.amount}}</td>
                         <td>{{order.orderReference}}</td>
                         <td>
-                            <span class="badge badge-warning badge-pill">Pending</span>
+                            <span class="badge badge-pill" [ngClass]="getStatusBadgeClass(order.status)">{{ClientOrderStatus[order.status]}}</span>
                         </td>
                         <td>
                             <div class="dropdown">
