@@ -69,8 +69,9 @@ export class AddBankComponent implements OnInit, OnDestroy {
           takeUntil(this.ngUnsub)
         )
         .subscribe(clientInfo => {
+          const accountName = this.onboardingMode ? "Default" : "";
           this.form = this.fb.group({
-            "name": this.fb.control("Default account", Validators.required),
+            "name": this.fb.control(accountName, Validators.required),
             "accountHolder": this.fb.control(`${clientInfo.firstName} ${clientInfo.lastName}`, Validators.required),
             "accountNumber": this.fb.control("", Validators.required),
             "swiftCode": this.fb.control("", Validators.required),
