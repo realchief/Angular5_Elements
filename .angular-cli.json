@@ -58,8 +58,9 @@
             "testTsconfig": "tsconfig.spec.json",
             "prefix": "app",
             "styles": [
-                "styles/core.scss",
-                "../node_modules/socicon/css/socicon.css"
+                "styles/backoffice-core.scss",
+                "../node_modules/socicon/css/socicon.css",
+                "assets/css/entypo-min.css"
             ],
             "stylePreprocessorOptions": {
                 "includePaths": [

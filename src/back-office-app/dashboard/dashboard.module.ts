@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { DashboardComponent } from "./dashboard.component";
-import {AccountsModule} from "./accounts/accounts.module";
-import {MatButtonModule, MatGridListModule} from "@angular/material";
+import { AccountsModule } from "./accounts/accounts.module";
+import { MatButtonModule, MatGridListModule } from "@angular/material";
+import { DepositsModule } from "./deposits/deposits.module";
 import {ClientsManagementModule} from "./clients-management/clients-management.module";
 import {AppRoutingModule} from "../app-routing/app-routing.module";
 
@@ -12,6 +13,7 @@ import {AppRoutingModule} from "../app-routing/app-routing.module";
     MatButtonModule,
     MatGridListModule,
     AccountsModule,
+    DepositsModule,
     ClientsManagementModule,
     AppRoutingModule
   ],
