@@ -1,12 +1,9 @@
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 export class SymbolService {
-    symbol = "BTC";
+    symbol = new BehaviorSubject<string>("BTC_USD");
 
-    setSymbol(data: string) {
-      this.symbol = data;
-    }
-
-    getSymbol(): any {
-        return this.symbol;
+    setSymbol(symbol: string) {
+      this.symbol.next(symbol);
     }
   }

@@ -4,13 +4,15 @@ import { HeaderComponent } from "./header.component";
 import { SharedModule } from "../../shared.module";
 import { CreateOrderDialogModule } from "../../../dialog/create-order-dialog/create-order-dialog.module";
 import { CurrencySelectorModule } from "../currency-selector/currency-selector.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
     imports: [
         SharedModule,
         DropdownModule,
         CreateOrderDialogModule,
-        CurrencySelectorModule
+        CurrencySelectorModule,
+        RouterModule
     ],
     declarations: [HeaderComponent],
     exports: [HeaderComponent]

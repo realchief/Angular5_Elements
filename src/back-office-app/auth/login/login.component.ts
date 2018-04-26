@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     this.api
-      .post("auth/token", this.form.value)
+      .post("auth/login", this.form.value)
       .pipe(
         takeUntil(this.ngUnsub)
       )
