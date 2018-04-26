@@ -35,7 +35,7 @@ const MODULES = [
         ApiService,
         AuthGuard,
         ClientService,
-        VerifyGuard,
+        VerifyGuard,    
         BankService,
         BankOrderService,
         CryptoAddressService,
