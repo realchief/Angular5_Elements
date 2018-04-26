@@ -6,7 +6,6 @@ import { MarketDataService } from "../../../../common/services/market-data.servi
 import { SymbolService } from "../../../shared/services/symbol.service";
 import "rxjs/add/observable/interval";
 import { TransactionRouter } from "../../../shared/transaction-router";
-import { Observable } from 'rxjs';
 
 @Component({
     selector: "app-order-history-chart-widget",
@@ -20,14 +19,17 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
     marketChartData = new MarketChartData();
     lastPrice: number;
     priceRange = new PriceRange();
+    isGrow: boolean;
+    priceDiff: number;
+    priceDiffPercentage: number;
     currentSymbol: string;
+    spread: any = {};
 
     constructor(
         private marketDataService: MarketDataService,
         private cd: ChangeDetectorRef,
         private txRouter: TransactionRouter,
         private symbolService: SymbolService) {
-            this.currentSymbol = this.symbolService.symbol;
         }
 
     ngAfterViewInit() {
@@ -35,31 +37,9 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
     }
 
     ngOnInit() {
-        this.getHistoryWidgetChartData();
-        this.marketDataService
-            .getLastPrice(this.currentSymbol)
-            .pipe(takeUntil(this.ngUnsub))
-            .subscribe(data => {
-                this.lastPrice = data;
-                this.cd.markForCheck();
-            });
-        this.marketDataService
-            .getMarketRange(this.currentSymbol)
-            .pipe(takeUntil(this.ngUnsub))
-            .subscribe(data => {
-                if (data.min == null || data.max == null) {
-                    this.priceRange = {
-                        "min": 0,
-                        "max": 0
-                    };
-                } else {
-                    this.priceRange = data;
-                }
-                this.cd.markForCheck();
-            });
-        var refreshChart = setInterval(() => {
-            this.getHistoryWidgetChartData()
-        }, 5000);
+      this.symbolService.symbol.subscribe(s => this.currentSymbol = s);
+      this.loadData();
+      const refreshChart = setInterval(() => this.loadData(), 5000);
     }
 
     getHistoryWidgetChartData() {
@@ -124,7 +104,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 height: '35%'
             }],
             xAxis : [
-                { 
+                {
                     position: 'bottom',
                     gridIndex: 1,
                     type : 'category',
@@ -141,7 +121,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                     data: xAxisData,
                     position: 'bottom'
                 }
-            ], 
+            ],
             yAxis: [{
                 gridIndex: 1,
                 type: "value",
@@ -161,7 +141,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 axisTick: {
                     show: false,
                 }
-                
+
             },
             {
                 position: 'right',
@@ -192,7 +172,7 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
                 },
                 itemStyle: {
                     color: "#4dd0e1",
-                    barBorderRadius: [0, 0, 4, 4] 
+                    barBorderRadius: [0, 0, 4, 4]
                 },
                 animationDelay: function (idx) {
                     return idx * 10;
@@ -224,6 +204,50 @@ export class OrderHistoryChartWidgetComponent implements OnInit, AfterViewInit, 
 
     ngOnDestroy() {
 
+    }
+
+    private loadData() {
+      this.getHistoryWidgetChartData();
+      this.marketDataService
+        .getLastPrice(this.currentSymbol)
+        .pipe(takeUntil(this.ngUnsub))
+        .subscribe(data => {
+          this.lastPrice = data;
+          this.cd.markForCheck();
+        });
+      this.marketDataService
+        .getMarketRange(this.currentSymbol)
+        .pipe(takeUntil(this.ngUnsub))
+        .subscribe(data => {
+          if (data.min == null || data.max == null) {
+            this.priceRange = {
+              "min": 0,
+              "max": 0
+            };
+          } else {
+            this.priceRange = data;
+          }
+          this.cd.markForCheck();
+        });
+      this.marketDataService
+        .get24hDiff(this.currentSymbol)
+        .pipe(takeUntil(this.ngUnsub))
+        .subscribe(diff => {
+          this.isGrow = diff.now > diff.dayAgo;
+          this.priceDiff = Math.abs(diff.now - diff.dayAgo);
+          this.priceDiffPercentage = 0;
+          if (diff.dayAgo > 0 && diff.dayAgo > 0) {
+            this.priceDiffPercentage = diff.now / diff.dayAgo - 1;
+          }
+          this.cd.markForCheck();
+        });
+      this.marketDataService
+        .getSpread(this.currentSymbol)
+        .pipe(takeUntil(this.ngUnsub))
+        .subscribe(spread => {
+          this.spread = spread;
+          this.cd.markForCheck();
+        });
     }
 
 }

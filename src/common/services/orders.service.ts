@@ -10,4 +10,12 @@ export class OrderService {
   getLastOrders(): Observable<OrderModel[]> {
     return this.api.get("orders/get-last");
   }
+
+  placeOrder(order): Observable<any> {
+    return this.api.post("orders/create", order);
+  }
+
+  getOrders(): Observable<OrderModel[]> {
+    return this.api.get("orders/list-tmp");
+  }
 }
